@@ -66,7 +66,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.InvestingApp">
+  <component name="RunManager" selected="Application.MainFrame">
     <configuration type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="models.Portfolio" />
       <module name="semesterProject" />
@@ -86,8 +86,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InvestingApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="InvestingApp" />
+    <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ui.MainFrame" />
       <module name="semesterProject" />
       <extension name="coverage">
         <pattern>
@@ -107,11 +107,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.InvestingApp" />
+      <item itemvalue="Application.MainFrame" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.InvestingApp" />
+        <item itemvalue="Application.MainFrame" />
       </list>
     </recent_temporary>
   </component>
