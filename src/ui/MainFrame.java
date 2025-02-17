@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 class BackgroundPanel extends JPanel {
-    private Image backgroundImage;
+    private final Image backgroundImage;
 
     public BackgroundPanel(String imagePath) {
         backgroundImage = new ImageIcon(imagePath).getImage(); // Load image
