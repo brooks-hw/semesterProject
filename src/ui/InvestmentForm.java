@@ -1,7 +1,7 @@
 package ui;
 
-public class InvestmentForm {
-    public static void main(String[] args) {
+import javax.swing.*;
 
-    }
+public class InvestmentForm extends JPanel {
+
 }

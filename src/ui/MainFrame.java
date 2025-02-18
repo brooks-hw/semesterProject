@@ -1,22 +1,9 @@
+//NOTE: FORMATTED & ELEMENTS CREATED USING AI: CHATGPT
+
 package ui;
 
 import javax.swing.*;
 import java.awt.*;
-
-class BackgroundPanel extends JPanel {
-    private final Image backgroundImage;
-
-    public BackgroundPanel(String imagePath) {
-        backgroundImage = new ImageIcon(imagePath).getImage(); // Load image
-        setLayout(null); // Allow manual positioning if needed
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); // Scale image to fit panel
-    }
-}
 
 public class MainFrame {
     private static JFrame frame;
@@ -39,17 +26,19 @@ public class MainFrame {
         frame.setLocationRelativeTo(null); // Center window
 
         // Background panel with image
-        BackgroundPanel bgPanel = new BackgroundPanel("images/image2.jpg"); // Load from parent directory
-        bgPanel.setLayout(new BorderLayout()); // Allow child components
+        BackgroundPanel backgroundImagePanel = new BackgroundPanel("images/image2.jpg"); // Load from parent directory
+        backgroundImagePanel.setLayout(new BorderLayout()); // Allow child components
 
         // Add menu on top of background
-        bgPanel.add(menu(), BorderLayout.CENTER);
+        backgroundImagePanel.add(startMenu(), BorderLayout.CENTER);
 
-        frame.setContentPane(bgPanel);
+        frame.setContentPane(backgroundImagePanel);
         frame.setVisible(true);
     }
 
-    public static JPanel menu() {
+    public static JPanel startMenu() {
+
+        //FORMATING LEFT JUSTIFIED
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); // Vertical layout
         panel.setBorder(BorderFactory.createEmptyBorder(150, 0, 0, 0)); // Adjusts vertical positioning
@@ -58,8 +47,8 @@ public class MainFrame {
         JPanel leftAlignPanel = createLeftAlignPanel();
 
         // Add components to the left-aligned panel
-        leftAlignPanel.add(createTitle("investment"));
-        leftAlignPanel.add(createTitle("buddy"));
+        leftAlignPanel.add(createTitle("Investment"));
+        leftAlignPanel.add(createTitle("Buddy"));
         leftAlignPanel.add(Box.createVerticalStrut(20)); // Space between title and separator
         leftAlignPanel.add(createSeparator());
         leftAlignPanel.add(Box.createVerticalStrut(20)); // Space between separator and button
@@ -94,7 +83,7 @@ public class MainFrame {
     // Create separator line
     private static JSeparator createSeparator() {
         JSeparator separator = new JSeparator();
-        separator.setMaximumSize(new Dimension(325, 5)); // Limit width to align better
+        separator.setMaximumSize(new Dimension(325, 8)); // Limit width to align better
         separator.setAlignmentX(Component.LEFT_ALIGNMENT);
         separator.setBackground(SEPARATOR_COLOR);
         return separator;
