@@ -1,16 +1,8 @@
-/*
-Core functionality (app should be able to):
-- Load the user's portfolio
-- Save the user's portfolio after changes are made
-- Add/Remove investments from the current portfolio
-- Update stock prices periodically using StockAPIClient
-- Display portfolio information and statistics
- */
-
 import data.InvestmentDataStorage;
 import data.StockAPIClient;
 import models.Portfolio;
-import models.Stock;
+
+import java.util.Scanner;
 
 // This class should handle the event loop
 public class InvestingApp {
@@ -25,19 +17,40 @@ public class InvestingApp {
     void savePortfolio() {}
 
 
-    void addInvestment(Stock stock, double shares, double price) {}
-    void removeInvestment(String stockSymbol) {}
+    void addInvestment() {}
+    void removeInvestment() {}
     void updateStockPrices() {}
     void displayPortfolio() {}
 
 
     // Main event loop
-    void run() {}
+    void run() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Which option would you like");
+        displayMenu();
+
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 0: break;
+            case 1: addInvestment();
+            case 2: removeInvestment();
+            case 3: displayPortfolio();
+        }
+    }
 
     // Function to unload assets and exit
     void cleanup() {}
 
-    public static void main(String[] args) {
+    void displayMenu() {
+        System.out.println("1. Add an investment");
+        System.out.println("2. Remove an investment");
+        System.out.println("3. Display portfolio");
+        System.out.println("Enter: ");
+
+    }
+
+    public void main(String[] args) {
 
     }
 }
