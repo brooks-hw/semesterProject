@@ -13,8 +13,8 @@ public class InvestmentDataStorage {
 
     public static void writeToFile(String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("userData.csv"))) {
-            writer.write("Fuck you prick\n");
-            writer.write("bullshit ass shit");
+            writer.write("Test data1\n");
+            writer.write("Test data2\n");
         }
         catch (IOException e) {
             throw new RuntimeException(e);
