@@ -1,37 +1,58 @@
 package models;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Investment {
 
     private Stock stock;
-    private double numShares;
-    private double priceBought;
-    private double totalCost;
-    private LocalDate dateBought;
+    private double numShares;       //How many shares did the user buy
+    private double priceBought;     //At what price were the shares bought at
+    private double totalCost;       //What was the original totalCost of the investment
+    private LocalDate dateBought;   //On what day was the investment purchased
+    private LocalTime timeBought;   //At what time was the investment purchased
 
-    private double currentValue;
-    private double percentChange;
-    private double profit;
+    private double currentValue;    //What is the investment currently worth (DYNAMIC)
+    private double percentChange;   //What is the percent change on the investment (DYNAMIC)
+    private double profit;          //How much profit has the user made? (DYNAMIC)
 
-    public Investment() {}
+    // blank constructor
+    public Investment() {
 
-    // constructor
-    public Investment(Stock stock, double numShares, double priceBought, LocalDate dateBought) {
+    }
+
+    // @Purpose: Constructor for Investments that are created during runtime
+    public Investment (Stock stock, double numShares, double priceBought, LocalDate dateBought, LocalTime timeBought) {
         this.stock = stock;
         this.numShares = numShares;
         this.priceBought = priceBought;
         this.dateBought = dateBought;
+        this.timeBought = timeBought;
         this.totalCost = numShares * priceBought;
-        this.currentValue = totalCost;  // initial value is equal to the cost paid for investment
+        this.currentValue = totalCost;    // currentValue initially starts at the price paid
         this.percentChange = 0;   // initially no changes made
         this.profit = 0;   // profit starts at 0 and updates over time
+    }
+
+    // @Purpose: Constructor for Investments that are loaded from userData.csv
+    public Investment(Stock stock, double numShares, double priceBought, double totalCost, LocalDate dateBought, LocalTime timeBought, double currentValue, double percentChange, double profit) {
+        this.stock = stock;
+        this.numShares = numShares;
+        this.priceBought = priceBought;
+        this.dateBought = dateBought;
+        this.timeBought = timeBought;
+        this.totalCost = totalCost;
+        this.currentValue = currentValue;
+        this.percentChange = percentChange;
+        this.profit = profit;
     }
 
     public double getTotalCost() {
         return this.totalCost;
     }
 
+    //TODO: Change this to reflect the actual current value of the stock given by the StockAPIClient, account for date and time bought
+    // WHEN: after StockAPIClient is functional
     public double getCurrentValue() {
         return this.currentValue;
     }
@@ -40,6 +61,8 @@ public class Investment {
         return this.percentChange;
     }
 
+    //TODO: Update this to base the profit on the current value given by getCurrentValue()
+    // WHEN: after getCurrentValue() method has been properly finished
     public double getProfit() {
         return this.profit;
     }
@@ -50,8 +73,19 @@ public class Investment {
         this.percentChange = ((currentValue - totalCost) / totalCost) * 100;    //update percentage to reflect change
     }
 
+    /*
+    //TODO: call getCurrentValue() when printing stock info instead of just printing it
+    // WHEN: after getCurrentValue() method has been properly finished
     public void printInfo() {
         System.out.println("Stock: " + stock.getSymbol() + ", Num Shares Owned: " + numShares + ", Price bought at: " + priceBought + ", Current Value: " + currentValue );
+    }
+     */
+
+    public void printInfo() {
+        System.out.println("Stock Name: " + stock.getName() + ", Stock Symbol: " + stock.getSymbol() + ", Stock's Current Price: " + stock.getPrice());
+        System.out.println("Shares Bought: " + numShares + ", Price Bought at: " + priceBought + ", Total Initial Cost: " + totalCost);
+        System.out.println("Date Bought: " + dateBought + ", Time Bought: " + timeBought);
+        System.out.println("Current Investment Value: " + currentValue + ", Total Profit: " + profit + ", Percent Change: " + percentChange + "\n");
     }
 
     public static void main(String[] args) {

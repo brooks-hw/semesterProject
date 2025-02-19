@@ -36,7 +36,10 @@ public class InvestingApp {
     void addInvestment() {}
     void removeInvestment() {}
     void updateStockPrices() {}
-    void displayPortfolio() {}
+
+    void displayPortfolio() {
+        portfolio.displayPortfolio();
+    }
 
 
     // Main event loop
@@ -69,6 +72,6 @@ public class InvestingApp {
     public static void main(String[] args) {
         InvestingApp investingApp = new InvestingApp();
         investingApp.loadPortfolio();
-
+        investingApp.displayPortfolio();
     }
 }
