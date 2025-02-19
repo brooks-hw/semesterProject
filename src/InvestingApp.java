@@ -8,11 +8,27 @@ import java.util.Scanner;
 public class InvestingApp {
 
     Portfolio portfolio;       //represents user portfolio
-    InvestmentDataStorage dataStore;      //object to deal with loading/storing data
+    // InvestmentDataStorage dataStore;      //object to deal with loading/storing data
     StockAPIClient stockClient;     //client to deal with stock price functionality
 
-    // Load portfolio from storage
-    void loadPortfolio() {}
+
+    // @Purpose: Constructor, instantiates necessary objects
+    public InvestingApp() {
+        this.portfolio = new Portfolio();
+        // this.dataStore = new InvestmentDataStorage();
+        this.stockClient = new StockAPIClient();
+    }
+
+    // @Purpose: Load portfolio from storage
+    void loadPortfolio() {
+        try {
+            //Initialize the user's portfolio from the userData.csv file
+            InvestmentDataStorage.initPortfolio(this.portfolio);
+        }
+        catch (Exception e) {
+            System.err.println("Error loading portfolio: " + e.getMessage());
+        }
+    }
 
     void savePortfolio() {}
 
@@ -50,7 +66,9 @@ public class InvestingApp {
 
     }
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
+        InvestingApp investingApp = new InvestingApp();
+        investingApp.loadPortfolio();
 
     }
 }

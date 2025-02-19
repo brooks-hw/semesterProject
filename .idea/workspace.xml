@@ -74,7 +74,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/laptr/IdeaProjects/semesterProject",
+    "last_opened_file_path": "C:/Users/Brooks/Desktop/semesterProject",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -89,7 +89,7 @@
       <recent name="C:\Users\laptr\IdeaProjects\semesterProject\" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.InvestmentDataStorage">
+  <component name="RunManager" selected="Application.InvestingApp">
     <configuration type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="models.Portfolio" />
       <module name="semesterProject" />
@@ -100,8 +100,17 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="InvestmentDataStorage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="data.InvestmentDataStorage" />
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InvestingApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InvestingApp" />
       <module name="semesterProject" />
       <extension name="coverage">
         <pattern>
@@ -133,22 +142,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.StockPanel" />
-      <item itemvalue="Application.InvestmentDataStorage" />
+      <item itemvalue="Application.InvestingApp" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.InvestmentDataStorage" />
+        <item itemvalue="Application.InvestingApp" />
         <item itemvalue="Application.StockPanel" />
       </list>
     </recent_temporary>

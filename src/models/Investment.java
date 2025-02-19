@@ -14,6 +14,8 @@ public class Investment {
     private double percentChange;
     private double profit;
 
+    public Investment() {}
+
     // constructor
     public Investment(Stock stock, double numShares, double priceBought, LocalDate dateBought) {
         this.stock = stock;
