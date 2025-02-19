@@ -41,7 +41,6 @@ public class InvestmentDataStorage {
     public static Investment createInvestment(String line) {
         int numVars = 6;       //There are 10 variables that hold information about the investment
 
-
         // Create array of parts, each are separated by a comma
         String[] parts = line.split(",");
 
