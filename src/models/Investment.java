@@ -78,7 +78,15 @@ public class Investment {
     //TODO: Change this to reflect the actual current value of the stock given by the StockAPIClient, account for date and time bought
     // WHEN: after StockAPIClient is functional
     public double getCurrentValue() {
-        return this.currentValue;
+        // Get the latest price from StockAPIClient
+        double latestPrice = data.StockAPIClient.getStockPrice(stock.getName(), stock.getSymbol());
+
+        // Update the stock's price
+        stock.setPrice(latestPrice);
+
+        // Compute the current value based on updated stock price and number of shares
+        return latestPrice * numShares;
+
     }
 
     public double getPercentChange () {
