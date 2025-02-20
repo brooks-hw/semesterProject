@@ -30,8 +30,14 @@ public class InvestingApp {
         }
     }
 
-    void savePortfolio() {}
-
+    void savePortfolio() {
+        try {
+            InvestmentDataStorage.savePortfolio(this.portfolio);
+        }
+        catch (Exception e) {
+            System.err.println("Error loading portfolio: " + e.getMessage());
+        }
+    }
 
     void addInvestment() {}
     void removeInvestment() {}
@@ -73,5 +79,6 @@ public class InvestingApp {
         InvestingApp investingApp = new InvestingApp();
         investingApp.loadPortfolio();
         investingApp.displayPortfolio();
+        investingApp.savePortfolio();
     }
 }

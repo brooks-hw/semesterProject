@@ -7,6 +7,7 @@ import models.Stock;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public class InvestmentDataStorage {
 
@@ -72,6 +73,31 @@ public class InvestmentDataStorage {
     // @Purpose: Creates a new Stock object to be added to investment
     public static Stock createStock(String name, String symbol, double price) {
         return new Stock(name, symbol, price);
+    }
+
+    //DATA FORMAT (in userData.csv) 1: String name, 2: String symbol, 3: double numShares, 4: double priceBought, 5: LocalDate dateBought, 6: LocalTime timeBought
+    // @Purpose: take all the current investments in the portfolio and write them to userData.csv
+    public static void savePortfolio(Portfolio portfolio) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("userData.csv"))) {
+
+            List<Investment> investments = portfolio.getInvestments();
+            for (int i = 0; i < investments.size(); ++i) {
+                Investment investment = investments.get(i);
+                String line = (investment.getName() + "," + investment.getSymbol() + "," + investment.getNumShares() + "," + investment.getPriceBought() + ","
+                    + investment.getDateBought() + "," + investment.getTimeBought());
+
+                //Add a newline character to each line of data except the last
+                if (i != investments.size() - 1) {
+                    line += "\n";
+                }
+                writer.write(line);
+            }
+
+            System.out.println("I was here");
+        }
+        catch (IOException e) {
+            throw new IOException("Error reading userData.csv: " + e.getMessage());
+        }
     }
 
     /*

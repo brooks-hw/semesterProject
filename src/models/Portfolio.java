@@ -25,4 +25,8 @@ public class Portfolio {
             current.printInfo();
         }
     }
+
+    public List<Investment> getInvestments() {
+        return this.investments;
+    }
 }

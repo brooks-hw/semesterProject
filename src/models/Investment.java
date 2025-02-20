@@ -47,6 +47,30 @@ public class Investment {
         this.profit = profit;
     }
 
+    public String getName() {
+        return this.stock.getName();
+    }
+
+    public String getSymbol() {
+        return this.stock.getSymbol();
+    }
+
+    public double getNumShares() {
+        return this.numShares;
+    }
+
+    public double getPriceBought() {
+        return this.priceBought;
+    }
+
+    public LocalDate getDateBought() {
+        return this.dateBought;
+    }
+
+    public LocalTime getTimeBought() {
+        return this.timeBought;
+    }
+
     public double getTotalCost() {
         return this.totalCost;
     }
