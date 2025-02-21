@@ -49,7 +49,7 @@ public class InvestmentDataStorage {
             //Information about the stock
             String name = parts[0];
             String symbol = parts[1];
-            double price = StockAPIClient.getStockPrice(name, symbol);
+            double price = StockAPIClient.getStockPrice(symbol);
             Stock stock = createStock(name, symbol, price);
 
             //Remaining info about the investment

@@ -79,7 +79,7 @@ public class Investment {
     // WHEN: after StockAPIClient is functional
     public double getCurrentValue() {
         //get latest price from StockAPIClient
-        double latestPrice = data.StockAPIClient.getStockPrice(stock.getName(), stock.getSymbol());
+        double latestPrice = data.StockAPIClient.getStockPrice(stock.getSymbol());
 
         //update stock's price
         stock.setPrice(latestPrice);

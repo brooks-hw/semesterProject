@@ -6,6 +6,7 @@ import models.Stock;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Scanner;
 
 // This class should handle the event loop
@@ -30,7 +31,7 @@ public class InvestingApp {
             InvestmentDataStorage.initPortfolio(this.portfolio);
         }
         catch (Exception e) {
-            System.err.println("Error loading portfolio: " + e.getMessage());
+            System.err.println("Error loading portfolio data: " + e.getMessage());
         }
     }
 
@@ -39,25 +40,69 @@ public class InvestingApp {
             InvestmentDataStorage.savePortfolio(this.portfolio);
         }
         catch (Exception e) {
-            System.err.println("Error loading portfolio: " + e.getMessage());
+            System.err.println("Error saving portfolio data: " + e.getMessage());
         }
     }
 
+    // @Purpose: add an investment to the user's portfolio, does so via the stock symbol
     void addInvestment() {
-        System.out.println("Add investment\n");
-        Stock newStock = new Stock("Oracle", "ORCL", 179.9);
-        Investment newInvestment = new Investment(newStock, 100, newStock.getPrice(), LocalDate.now(), LocalTime.now());
+        Scanner scanner = new Scanner(System.in);
 
-        //Add the newly created investment to the user's portfolio
+        //Retrieve the name and currentPrice of the stock based on its symbol
+        // TODO: this logic will stay the same even when integrated with the UI
+        //  we only need to update how we retrieve the symbol
+        System.out.println("Add investment\n\nWhat is the symbol of the stock to purchase?\nEnter: ");
+        String symbol = scanner.nextLine();
+        String name = StockAPIClient.nameFromSym(symbol);
+        double currentPrice = StockAPIClient.getStockPrice(symbol);
+
+        //Inform user of the trading price and prompt how many shares to purchase
+        System.out.println("Stock: " + name + " is currently trading at: " + currentPrice);
+        System.out.println("How many shares would you like to purchase?\nEnter: ");
+        double numShares = scanner.nextDouble();
+
+        //Create a new Stock and subsequent Investment with the gathered information
+        Stock newStock = new Stock(name, symbol, currentPrice);
+        Investment newInvestment = new Investment(newStock, numShares, newStock.getPrice(), LocalDate.now(), LocalTime.now());
+
+        //Add the Investment to the user's portfolio
         this.portfolio.addInvestment(newInvestment);
     }
-    void removeInvestment() {
-        System.out.println("Remove investment\n");
-    }
-    void updateStockPrices() {}
 
+    void updateStockPrices(List<Investment> investments) {
+        for (int i = 0; i < investments.size(); ++i) {
+            //Get current investment object
+            Investment investment = investments.get(i);
+
+            //Use StockAPIClient to get the most up-to-date price
+            String symbol = investment.getSymbol();
+            double updatedPrice = StockAPIClient.getStockPrice(symbol);
+
+            investment.updateStockPrice(updatedPrice);
+        }
+    }
+
+    // @Purpose: remove an investment from the user's portfolio
+    // TODO: This logic also stays the same regardless of how the UI is implemented
+    //          we only need to update how the symbol is retrieved
+    void removeInvestment() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Remove investment\nWhat is the symbol of the stock you want to remove?\n");
+        String symbol = scanner.nextLine();
+
+        this.portfolio.removeInvestment(symbol);
+
+    }
+
+    //Purpose: display all the investments in the user's current portfolio
+    // TODO: add error handling for updateStockPrices()
     void displayPortfolio() {
         System.out.println("Display Portfolio\n");
+
+        //Ensure all stock prices are up-to-date before displaying to the user
+        updateStockPrices(this.portfolio.getInvestments());
+
         portfolio.displayPortfolio();
     }
 

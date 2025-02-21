@@ -14,8 +14,20 @@ public class Portfolio {
         this.investments.add(investment);
     }
 
-    public void removeInvestment(Investment investment) {
-        this.investments.remove(investment);
+    public void removeInvestment(String symbol) {
+        for (int i = 0; i < investments.size(); ++i) {
+            Investment investment = investments.get(i);
+            System.out.println("SYMBOL: " + investment.getSymbol());
+
+            if (investment.getSymbol().equals(symbol)) {
+                investments.remove(investment);
+                System.out.println("Investment successfully removed\n");
+                return;
+            }
+        }
+
+        //If function reaches this point, the investment does not exist
+        System.out.println("Error locating inputted investment\n");
     }
 
     public void displayPortfolio() {
