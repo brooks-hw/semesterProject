@@ -77,8 +77,6 @@ public class InvestingApp {
 
     public static void main(String[] args) {
         InvestingApp investingApp = new InvestingApp();
-        investingApp.loadPortfolio();
-        investingApp.displayPortfolio();
-        investingApp.savePortfolio();
+        investingApp.run();
     }
 }
