@@ -1,7 +1,11 @@
 import data.InvestmentDataStorage;
 import data.StockAPIClient;
+import models.Investment;
 import models.Portfolio;
+import models.Stock;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 // This class should handle the event loop
@@ -39,11 +43,21 @@ public class InvestingApp {
         }
     }
 
-    void addInvestment() {}
-    void removeInvestment() {}
+    void addInvestment() {
+        System.out.println("Add investment\n");
+        Stock newStock = new Stock("Oracle", "ORCL", 179.9);
+        Investment newInvestment = new Investment(newStock, 100, newStock.getPrice(), LocalDate.now(), LocalTime.now());
+
+        //Add the newly created investment to the user's portfolio
+        this.portfolio.addInvestment(newInvestment);
+    }
+    void removeInvestment() {
+        System.out.println("Remove investment\n");
+    }
     void updateStockPrices() {}
 
     void displayPortfolio() {
+        System.out.println("Display Portfolio\n");
         portfolio.displayPortfolio();
     }
 
@@ -51,16 +65,34 @@ public class InvestingApp {
     // Main event loop
     void run() {
         Scanner scanner = new Scanner(System.in);
+        boolean isRunning = true;
 
-        System.out.println("Which option would you like");
-        displayMenu();
+        while(isRunning) {
+            System.out.println("Which option would you like");
+            System.out.println("----------------------------");
+            displayMenu();
 
-        int choice = scanner.nextInt();
-        switch (choice) {
-            case 0: break;
-            case 1: addInvestment();
-            case 2: removeInvestment();
-            case 3: displayPortfolio();
+            int choice = scanner.nextInt();
+            switch (choice) {
+                //Option to exit program
+                case 0: {
+                    System.out.println("Exiting program...");
+                    isRunning = false;
+                    break;
+                }
+                case 1: {
+                    addInvestment();
+                    break;
+                }
+                case 2: {
+                    removeInvestment();
+                    break;
+                }
+                case 3: {
+                    displayPortfolio();
+                    break;
+                }
+            }
         }
     }
 
@@ -71,12 +103,22 @@ public class InvestingApp {
         System.out.println("1. Add an investment");
         System.out.println("2. Remove an investment");
         System.out.println("3. Display portfolio");
+        System.out.println("0. Exit the program");
         System.out.println("Enter: ");
 
     }
 
     public static void main(String[] args) {
+        //Create an instance of the app to run
         InvestingApp investingApp = new InvestingApp();
+
+        //Load the user's portfolio into given app instance
+        investingApp.loadPortfolio();
+
+        //Run the event loop of the program
         investingApp.run();
+
+        //Save the contents of the current portfolio before exiting
+        investingApp.savePortfolio();
     }
 }

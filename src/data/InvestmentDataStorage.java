@@ -93,7 +93,6 @@ public class InvestmentDataStorage {
                 writer.write(line);
             }
 
-            System.out.println("I was here");
         }
         catch (IOException e) {
             throw new IOException("Error reading userData.csv: " + e.getMessage());
