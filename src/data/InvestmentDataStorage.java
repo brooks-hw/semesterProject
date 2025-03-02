@@ -40,34 +40,55 @@ public class InvestmentDataStorage {
     // DATA FORMAT (in userData.csv) 1: String name, 2: String symbol, 3: double numShares, 4: double priceBought, 5: LocalDate dateBought, 6: LocalTime timeBought
     // @Purpose: Creates a new Investment object to be added to portfolio
     public static Investment createInvestment(String line) {
-        int numVars = 6;       //There are 10 variables that hold information about the investment
+        int numVars = 6;       //There are 6 variables that hold information about the investment
 
         // Create array of parts, each are separated by a comma
         String[] parts = line.split(",");
 
-        if (parts.length == numVars) {    //Ensure data is properly formatted
-            //Information about the stock
-            String name = parts[0];
-            String symbol = parts[1];
-            double price = StockAPIClient.getStockPrice(symbol);
-            Stock stock = createStock(name, symbol, price);
-
-            //Remaining info about the investment
-            double numShares = Double.parseDouble(parts[2]);
-            double priceBought = Double.parseDouble(parts[3]);
-            double totalCost = numShares * priceBought;
-            LocalDate dateBought = LocalDate.parse(parts[4]);
-            LocalTime timeBought = LocalTime.parse(parts[5]);
-            double currentValue = price * numShares;
-            double percentChange = ((currentValue - priceBought) / priceBought) * 100;
-            double profit = currentValue - totalCost;
-
-            //Use constructor for loaded investments
-            return new Investment(stock, numShares, priceBought, totalCost, dateBought, timeBought, currentValue, percentChange, profit);
+        //Ensure data is properly formatted
+        if (parts.length != 6) {
+            System.err.println("Invalid data format: " + line);
+            return null;
         }
 
-        //If the investment is formatted incorrectly, a nullptr is returned to signify error
-        return null;
+        try {
+                //Information about the stock
+                String name = parts[0];
+                String symbol = parts[1];
+                double price = StockAPIClient.getStockPrice(symbol);
+                Stock stock = createStock(name, symbol, price);
+
+                //Remaining info about the investment
+                double numShares = Double.parseDouble(parts[2]);
+                double priceBought = Double.parseDouble(parts[3]);
+                double totalCost = numShares * priceBought;
+                LocalDate dateBought = LocalDate.parse(parts[4]);
+                LocalTime timeBought = LocalTime.parse(parts[5]);
+                double currentValue = price * numShares;
+                double percentChange = ((currentValue - priceBought) / priceBought) * 100;
+                double profit = currentValue - totalCost;
+
+                //Use constructor for loaded investments
+                return new Investment(stock, numShares, priceBought, totalCost, dateBought, timeBought, currentValue, percentChange, profit);
+        } catch (Exception e) {
+            System.err.println("Error processing line: " + line);
+            //If the investment is formatted incorrectly, a nullptr is returned to signify error
+            return null;
+        }
+        //Catches invalid numbers in numShares and priceBought fields.
+        //Prints an error message with the exact invalid line.
+        //Prevents program crashes from NumberFormatException.
+        //Keeps everything else unchanged for simplicity.
+    }
+
+    // @Purpose: Convert a String into a double while handling invalid number formats.
+    private static double parseDouble(String value, String line) {
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid number format in: " + line);
+            return -1; // Return -1 to indicate an error
+        }
     }
 
     // @Purpose: Creates a new Stock object to be added to investment
