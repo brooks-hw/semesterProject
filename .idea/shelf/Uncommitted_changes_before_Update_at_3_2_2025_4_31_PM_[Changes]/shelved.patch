@@ -1,0 +1,515 @@
+Index: src/ui/InvestmentForm.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ui;\r\n\r\nimport javax.swing.*;\r\n\r\npublic class InvestmentForm extends JPanel {\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ui/InvestmentForm.java b/src/ui/InvestmentForm.java
+--- a/src/ui/InvestmentForm.java	(revision d68aeb0a382be3c45e298f3e80e44721a5c24465)
++++ b/src/ui/InvestmentForm.java	(date 1740350858031)
+@@ -1,7 +1,15 @@
+ package ui;
+ 
+ import javax.swing.*;
++import java.awt.*;
+ 
+ public class InvestmentForm extends JPanel {
++    public InvestmentForm() {
++        setLayout(new BorderLayout());
+ 
++        JLabel label = new JLabel("Investment Form", SwingConstants.CENTER);
++        label.setFont(new Font("Arial", Font.BOLD, 40));
++
++        add(label, BorderLayout.CENTER);
++    }
+ }
+Index: src/ui/MainFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//NOTE: FORMATTED & ELEMENTS CREATED USING AI: CHATGPT\r\n\r\npackage ui;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\n\r\npublic class MainFrame {\r\n    private static JFrame frame;\r\n\r\n    // Constants for colors\r\n    private static final Color TITLE_COLOR = new Color(240, 240, 240); // Light Gray\r\n    private static final Color SEPARATOR_COLOR = new Color(192, 192, 192); // Silver\r\n    private static final Color BUTTON_COLOR = new Color(184, 134, 11); // Dark Gold\r\n    private static final Color BUTTON_TEXT_COLOR = Color.WHITE;\r\n\r\n    public static void main(String[] args) {\r\n        createWindow();\r\n    }\r\n\r\n    public static void createWindow() {\r\n        frame = new JFrame(\"Investment Buddy\");\r\n        frame.setSize(900, 600);\r\n        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n        frame.setResizable(false);\r\n        frame.setLocationRelativeTo(null); // Center window\r\n\r\n        // Background panel with image\r\n        BackgroundPanel backgroundImagePanel = new BackgroundPanel(\"images/image2.jpg\"); // Load from parent directory\r\n        backgroundImagePanel.setLayout(new BorderLayout()); // Allow child components\r\n\r\n        // Add menu on top of background\r\n        backgroundImagePanel.add(startMenu(), BorderLayout.CENTER);\r\n\r\n        frame.setContentPane(backgroundImagePanel);\r\n        frame.setVisible(true);\r\n    }\r\n\r\n    public static JPanel startMenu() {\r\n\r\n        //FORMATING LEFT JUSTIFIED\r\n        JPanel panel = new JPanel();\r\n        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); // Vertical layout\r\n        panel.setBorder(BorderFactory.createEmptyBorder(150, 0, 0, 0)); // Adjusts vertical positioning\r\n\r\n        // Left-aligned panel\r\n        JPanel leftAlignPanel = createLeftAlignPanel();\r\n\r\n        // Add components to the left-aligned panel\r\n        leftAlignPanel.add(createTitle(\"Investment\"));\r\n        leftAlignPanel.add(createTitle(\"Buddy\"));\r\n        leftAlignPanel.add(Box.createVerticalStrut(20)); // Space between title and separator\r\n        leftAlignPanel.add(createSeparator());\r\n        leftAlignPanel.add(Box.createVerticalStrut(20)); // Space between separator and button\r\n        leftAlignPanel.add(createStartButton());\r\n\r\n        // Set transparency for background\r\n        leftAlignPanel.setOpaque(false);\r\n\r\n        panel.add(leftAlignPanel);\r\n        panel.setOpaque(false);\r\n        return panel;\r\n    }\r\n\r\n    // Create left-aligned panel with margin\r\n    private static JPanel createLeftAlignPanel() {\r\n        JPanel panel = new JPanel();\r\n        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));\r\n        panel.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0)); // Moves content 40px from left\r\n        panel.setAlignmentX(Component.LEFT_ALIGNMENT); // Ensure full left alignment\r\n        return panel;\r\n    }\r\n\r\n    // Create title label with provided text\r\n    private static JLabel createTitle(String text) {\r\n        JLabel title = new JLabel(text);\r\n        title.setFont(new Font(\"Arial\", Font.BOLD, 60));\r\n        title.setAlignmentX(Component.LEFT_ALIGNMENT);\r\n        title.setForeground(TITLE_COLOR);\r\n        return title;\r\n    }\r\n\r\n    // Create separator line\r\n    private static JSeparator createSeparator() {\r\n        JSeparator separator = new JSeparator();\r\n        separator.setMaximumSize(new Dimension(325, 8)); // Limit width to align better\r\n        separator.setAlignmentX(Component.LEFT_ALIGNMENT);\r\n        separator.setBackground(SEPARATOR_COLOR);\r\n        return separator;\r\n    }\r\n\r\n    // Create start button\r\n    private static JButton createStartButton() {\r\n        JButton startButton = new JButton(\"  start  \");\r\n        startButton.setFont(new Font(\"Arial\", Font.PLAIN, 60));\r\n        startButton.setAlignmentX(Component.LEFT_ALIGNMENT);\r\n        startButton.setBackground(BUTTON_COLOR);\r\n        startButton.setForeground(BUTTON_TEXT_COLOR);\r\n        startButton.setFocusPainted(false);\r\n        return startButton;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ui/MainFrame.java b/src/ui/MainFrame.java
+--- a/src/ui/MainFrame.java	(revision d68aeb0a382be3c45e298f3e80e44721a5c24465)
++++ b/src/ui/MainFrame.java	(date 1740350858051)
+@@ -7,6 +7,8 @@
+ 
+ public class MainFrame {
+     private static JFrame frame;
++    private static CardLayout cardLayout = new CardLayout();
++    private static JPanel cardPanel;
+ 
+     // Constants for colors
+     private static final Color TITLE_COLOR = new Color(240, 240, 240); // Light Gray
+@@ -26,13 +28,31 @@
+         frame.setLocationRelativeTo(null); // Center window
+ 
+         // Background panel with image
+-        BackgroundPanel backgroundImagePanel = new BackgroundPanel("images/image2.jpg"); // Load from parent directory
++        BackgroundPanel backgroundImagePanel = new BackgroundPanel("images/image2.jpg"); // Load image
+         backgroundImagePanel.setLayout(new BorderLayout()); // Allow child components
+ 
+-        // Add menu on top of background
+-        backgroundImagePanel.add(startMenu(), BorderLayout.CENTER);
++        // Create card panel for switching slides
++        JPanel cardPanel = new JPanel(new CardLayout());
++        cardPanel.setOpaque(false); // Make sure it doesn't block the background
++
++        // Create and add both slides
++        JPanel startMenu = startMenu();
++        startMenu.setOpaque(false); // Ensure transparency
++
++        InvestmentForm investmentForm = new InvestmentForm();
++        investmentForm.setOpaque(false); // Ensure transparency
++
++        cardPanel.add(startMenu, "StartMenu");
++        cardPanel.add(investmentForm, "InvestmentForm");
+ 
++        // Add card panel on top of the background
++        backgroundImagePanel.add(cardPanel, BorderLayout.CENTER);
++
++        // Set the frame content and refresh UI
+         frame.setContentPane(backgroundImagePanel);
++        frame.revalidate();
++        frame.repaint();
++
+         frame.setVisible(true);
+     }
+ 
+@@ -97,6 +117,13 @@
+         startButton.setBackground(BUTTON_COLOR);
+         startButton.setForeground(BUTTON_TEXT_COLOR);
+         startButton.setFocusPainted(false);
++
++        startButton.addActionListener(e -> {
++            // Get the CardLayout instance from the cardPanel
++            CardLayout cardLayout = (CardLayout) ((JPanel) frame.getContentPane().getComponent(0)).getLayout();
++            cardLayout.show((JPanel) frame.getContentPane().getComponent(0), "InvestmentForm");
++        });
++
+         return startButton;
+     }
+ }
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2_20_2025_10_22_AM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2_20_2025_10_22_AM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2_20_2025_10_22_AM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2_20_2025_10_22_AM_[Changes]/shelved.patch	(revision d68aeb0a382be3c45e298f3e80e44721a5c24465)
++++ /dev/null	(revision d68aeb0a382be3c45e298f3e80e44721a5c24465)
+@@ -1,129 +0,0 @@
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"53047e9c-b38a-4944-a451-16c0a27346eb\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/models/Portfolio.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/models/Portfolio.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"CompilerWorkspaceConfiguration\">\r\n    <option name=\"CLEAR_OUTPUT_DIRECTORY\" value=\"false\" />\r\n    <option name=\"MAKE_PROJECT_ON_SAVE\" value=\"true\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"FindBugs-IDEA-Workspace\">\r\n    <analyzeAfterCompile>true</analyzeAfterCompile>\r\n    <toolWindowToFront>false</toolWindowToFront>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2sy3bRuOGrPl64NRAh3uN4SMxVe\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"abbreviatePackageNames\" value=\"true\" />\r\n    <option name=\"autoscrollFromSource\" value=\"true\" />\r\n    <option name=\"autoscrollToSource\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showExcludedFiles\" value=\"false\" />\r\n    <option name=\"showModules\" value=\"false\" />\r\n    <option name=\"sortByType\" value=\"true\" />\r\n    <option name=\"sortKey\" value=\"BY_TYPE\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.Portfolio.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Stock.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/Brooks/Desktop/semesterProject&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Application.MainFrame\">\r\n    <configuration type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"models.Portfolio\" />\r\n      <module name=\"semesterProject\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/src\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"TestNG\">\r\n      <option name=\"TEST_OBJECT\" value=\"CLASS\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"%MODULE_WORKING_DIR%\" />\r\n      <properties />\r\n      <listeners />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"MainFrame\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"ui.MainFrame\" />\r\n      <module name=\"semesterProject\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"models.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"JUnit\" factoryName=\"JUnit\">\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"%MODULE_WORKING_DIR%\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.MainFrame\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.MainFrame\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"53047e9c-b38a-4944-a451-16c0a27346eb\" name=\"Changes\" comment=\"\" />\r\n      <created>1739498488815</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1739498488815</updated>\r\n      <workItem from=\"1739498490182\" duration=\"135000\" />\r\n      <workItem from=\"1739499393272\" duration=\"654000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision a5bec2e0de29ae12736755abd72d1f10a564279a)
+-+++ b/.idea/workspace.xml	(date 1740075618563)
+-@@ -5,9 +5,8 @@
+-   </component>
+-   <component name="ChangeListManager">
+-     <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="">
+--      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/src/models/Portfolio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Portfolio.java" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-@@ -32,6 +31,18 @@
+-   <component name="Git.Settings">
+-     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-   </component>
+-+  <component name="GitHubPullRequestSearchHistory">{
+-+  &quot;lastFilter&quot;: {
+-+    &quot;state&quot;: &quot;OPEN&quot;,
+-+    &quot;assignee&quot;: &quot;mubarkk&quot;
+-+  }
+-+}</component>
+-+  <component name="GithubPullRequestsUISettings">{
+-+  &quot;selectedUrlAndAccountId&quot;: {
+-+    &quot;url&quot;: &quot;https://github.com/brooks-hw/semesterProject.git&quot;,
+-+    &quot;accountId&quot;: &quot;36761f7c-a97c-43f9-bf87-d833ea287752&quot;
+-+  }
+-+}</component>
+-   <component name="ProjectColorInfo">{
+-   &quot;associatedIndex&quot;: 6
+- }</component>
+-@@ -48,6 +59,7 @@
+-   </component>
+-   <component name="PropertiesComponent">{
+-   &quot;keyToString&quot;: {
+-+    &quot;Application.MainFrame.executor&quot;: &quot;Run&quot;,
+-     &quot;Application.Portfolio.executor&quot;: &quot;Run&quot;,
+-     &quot;Application.Stock.executor&quot;: &quot;Run&quot;,
+-     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-@@ -62,6 +74,9 @@
+-     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+-+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+-+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+-     &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
+-     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+-   }
+-@@ -76,15 +91,6 @@
+-     <configuration default="true" type="Application" factoryName="Application">
+-       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-       <method v="2" />
+--    </configuration>
+--    <configuration default="true" type="TestNG">
+--      <option name="TEST_OBJECT" value="CLASS" />
+--      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+--      <properties />
+--      <listeners />
+--      <method v="2">
+--        <option name="Make" enabled="true" />
+--      </method>
+-     </configuration>
+-     <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-       <option name="MAIN_CLASS_NAME" value="ui.MainFrame" />
+-@@ -102,6 +108,15 @@
+-     <configuration default="true" type="JUnit" factoryName="JUnit">
+-       <option name="TEST_OBJECT" value="class" />
+-       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+-+      <method v="2">
+-+        <option name="Make" enabled="true" />
+-+      </method>
+-+    </configuration>
+-+    <configuration default="true" type="TestNG">
+-+      <option name="TEST_OBJECT" value="CLASS" />
+-+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+-+      <properties />
+-+      <listeners />
+-       <method v="2">
+-         <option name="Make" enabled="true" />
+-       </method>
+-@@ -118,8 +133,8 @@
+-   <component name="SharedIndexes">
+-     <attachedChunks>
+-       <set>
+--        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
+--        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
+-+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
+-+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+-       </set>
+-     </attachedChunks>
+-   </component>
+-@@ -133,6 +148,8 @@
+-       <updated>1739498488815</updated>
+-       <workItem from="1739498490182" duration="135000" />
+-       <workItem from="1739499393272" duration="654000" />
+-+      <workItem from="1739758418716" duration="455000" />
+-+      <workItem from="1740075220418" duration="395000" />
+-     </task>
+-     <servers />
+-   </component>
+-Index: .idea/misc.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CheckStyle-IDEA-workspace\">\r\n    <option name=\"configuration\">\r\n      <map>\r\n        <entry key=\"last-active-plugin-version\" value=\"5.22.1\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"CodeInsightWorkspaceSettings\">\r\n    <option name=\"optimizeImportsOnTheFly\" value=\"true\" />\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n  <component name=\"SaveActionSettings\">\r\n    <option name=\"actions\">\r\n      <set>\r\n        <option value=\"activate\" />\r\n        <option value=\"organizeImports\" />\r\n        <option value=\"reformat\" />\r\n      </set>\r\n    </option>\r\n    <option name=\"configurationPath\" value=\"\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/misc.xml b/.idea/misc.xml
+---- a/.idea/misc.xml	(revision a5bec2e0de29ae12736755abd72d1f10a564279a)
+-+++ b/.idea/misc.xml	(date 1739758474025)
+-@@ -10,7 +10,7 @@
+-   <component name="CodeInsightWorkspaceSettings">
+-     <option name="optimizeImportsOnTheFly" value="true" />
+-   </component>
+--  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+-+  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="23" project-jdk-type="JavaSDK">
+-     <output url="file://$PROJECT_DIR$/out" />
+-   </component>
+-   <component name="SaveActionSettings">
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2_20_2025_10_22_AM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2_20_2025_10_22_AM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2_20_2025_10_22_AM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2_20_2025_10_22_AM__Changes_.xml	(revision d68aeb0a382be3c45e298f3e80e44721a5c24465)
++++ /dev/null	(revision d68aeb0a382be3c45e298f3e80e44721a5c24465)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2_20_2025_10_22_AM_[Changes]" date="1740075763141" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_20_2025_10_22_AM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2/20/2025 10:22 AM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"53047e9c-b38a-4944-a451-16c0a27346eb\" name=\"Changes\" comment=\"worked on getCurrentValue()\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/InvestingApp.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/InvestingApp.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/userData.csv\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/userData.csv\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"CompilerWorkspaceConfiguration\">\r\n    <option name=\"CLEAR_OUTPUT_DIRECTORY\" value=\"false\" />\r\n    <option name=\"MAKE_PROJECT_ON_SAVE\" value=\"true\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"FindBugs-IDEA-Workspace\">\r\n    <analyzeAfterCompile>true</analyzeAfterCompile>\r\n    <toolWindowToFront>false</toolWindowToFront>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2sy3bRuOGrPl64NRAh3uN4SMxVe\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"abbreviatePackageNames\" value=\"true\" />\r\n    <option name=\"autoscrollFromSource\" value=\"true\" />\r\n    <option name=\"autoscrollToSource\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showExcludedFiles\" value=\"false\" />\r\n    <option name=\"showModules\" value=\"false\" />\r\n    <option name=\"sortByType\" value=\"true\" />\r\n    <option name=\"sortKey\" value=\"BY_TYPE\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.InvestingApp.executor\": \"Run\",\r\n    \"Application.MainFrame.executor\": \"Run\",\r\n    \"Application.Portfolio.executor\": \"Run\",\r\n    \"Application.Stock.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"master\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/Brooks/Desktop/semesterProject\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"project.structure.last.edited\": \"Project\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\",\r\n    \"settings.editor.selected.configurable\": \"project.propCompiler\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"Application.InvestingApp\">\r\n    <configuration type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"models.Portfolio\" />\r\n      <module name=\"semesterProject\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/src\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"TestNG\">\r\n      <option name=\"TEST_OBJECT\" value=\"CLASS\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"%MODULE_WORKING_DIR%\" />\r\n      <properties />\r\n      <listeners />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"InvestingApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"InvestingApp\" />\r\n      <module name=\"semesterProject\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"models.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"JUnit\" factoryName=\"JUnit\">\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"%MODULE_WORKING_DIR%\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.InvestingApp\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.InvestingApp\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"53047e9c-b38a-4944-a451-16c0a27346eb\" name=\"Changes\" comment=\"\" />\r\n      <created>1739498488815</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1739498488815</updated>\r\n      <workItem from=\"1739498490182\" duration=\"135000\" />\r\n      <workItem from=\"1739499393272\" duration=\"654000\" />\r\n      <workItem from=\"1740104223384\" duration=\"564000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"worked on getCurrentValue()\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1740082419238</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1740082419238</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"worked on getCurrentValue()\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"worked on getCurrentValue()\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d68aeb0a382be3c45e298f3e80e44721a5c24465)
++++ b/.idea/workspace.xml	(date 1740961812812)
+@@ -4,11 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="worked on getCurrentValue()">
+-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
++    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="added images + mainFrame Updates">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/InvestingApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InvestingApp.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/userData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/userData.csv" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/ui/InvestmentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InvestmentForm.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/ui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/MainFrame.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -32,6 +31,21 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++  </component>
++  <component name="GitHubPullRequestSearchHistory">{
++  &quot;lastFilter&quot;: {
++    &quot;state&quot;: &quot;OPEN&quot;,
++    &quot;assignee&quot;: &quot;ryanhaugen&quot;
++  }
++}</component>
++  <component name="GithubPullRequestsUISettings">{
++  &quot;selectedUrlAndAccountId&quot;: {
++    &quot;url&quot;: &quot;https://github.com/brooks-hw/semesterProject&quot;,
++    &quot;accountId&quot;: &quot;3ef7ee13-2dde-4d9c-b77f-37ab9b536454&quot;
++  }
++}</component>
++  <component name="ProblemsViewState">
++    <option name="selectedTabId" value="CurrentFile" />
+   </component>
+   <component name="ProjectColorInfo">{
+   &quot;associatedIndex&quot;: 6
+@@ -47,32 +61,35 @@
+     <option name="sortByType" value="true" />
+     <option name="sortKey" value="BY_TYPE" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Application.InvestingApp.executor": "Run",
+-    "Application.MainFrame.executor": "Run",
+-    "Application.Portfolio.executor": "Run",
+-    "Application.Stock.executor": "Run",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "RunOnceActivity.git.unshallow": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "git-widget-placeholder": "master",
+-    "ignore.virus.scanning.warn.message": "true",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/Brooks/Desktop/semesterProject",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "project.structure.last.edited": "Project",
+-    "project.structure.proportion": "0.0",
+-    "project.structure.side.proportion": "0.0",
+-    "settings.editor.selected.configurable": "project.propCompiler",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Application.InvestmentDataStorage.executor&quot;: &quot;Run&quot;,
++    &quot;Application.MainFrame.executor&quot;: &quot;Run&quot;,
++    &quot;Application.Portfolio.executor&quot;: &quot;Run&quot;,
++    &quot;Application.Stock.executor&quot;: &quot;Run&quot;,
++    &quot;Application.StockPanel.executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
++    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/laptr/IdeaProjects/semesterProject&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
+-  <component name="RunManager" selected="Application.InvestingApp">
++}</component>
++  <component name="RecentsManager">
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Users\laptr\IdeaProjects\semesterProject\" />
++    </key>
++  </component>
++  <component name="RunManager" selected="Application.MainFrame">
+     <configuration type="Application" factoryName="Application">
+       <option name="MAIN_CLASS_NAME" value="models.Portfolio" />
+       <module name="semesterProject" />
+@@ -83,21 +100,38 @@
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+       <method v="2" />
+     </configuration>
+-    <configuration default="true" type="TestNG">
+-      <option name="TEST_OBJECT" value="CLASS" />
+-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+-      <properties />
+-      <listeners />
++    <configuration name="InvestmentDataStorage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="data.InvestmentDataStorage" />
++      <module name="semesterProject" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="models.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="ui.MainFrame" />
++      <module name="semesterProject" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="ui.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="InvestingApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="InvestingApp" />
++    <configuration name="StockPanel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="ui.StockPanel" />
+       <module name="semesterProject" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="models.*" />
++          <option name="PATTERN" value="ui.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
+@@ -112,20 +146,33 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++    <configuration default="true" type="TestNG">
++      <option name="TEST_OBJECT" value="CLASS" />
++      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
++      <properties />
++      <listeners />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <list>
+-      <item itemvalue="Application.InvestingApp" />
++      <item itemvalue="Application.MainFrame" />
++      <item itemvalue="Application.StockPanel" />
++      <item itemvalue="Application.InvestmentDataStorage" />
+     </list>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Application.InvestingApp" />
++        <item itemvalue="Application.MainFrame" />
++        <item itemvalue="Application.InvestmentDataStorage" />
++        <item itemvalue="Application.StockPanel" />
+       </list>
+     </recent_temporary>
+   </component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
+-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
++        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.153" />
++        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.153" />
+       </set>
+     </attachedChunks>
+   </component>
+@@ -139,24 +186,70 @@
+       <updated>1739498488815</updated>
+       <workItem from="1739498490182" duration="135000" />
+       <workItem from="1739499393272" duration="654000" />
+-      <workItem from="1740104223384" duration="564000" />
++      <workItem from="1739812500046" duration="10156000" />
++      <workItem from="1740350847078" duration="4411000" />
+     </task>
+-    <task id="LOCAL-00001" summary="worked on getCurrentValue()">
++    <task id="LOCAL-00001" summary="removed images dir">
+       <option name="closed" value="true" />
+-      <created>1740082419238</created>
++      <created>1739760467173</created>
+       <option name="number" value="00001" />
+       <option name="presentableId" value="LOCAL-00001" />
+       <option name="project" value="LOCAL" />
+-      <updated>1740082419238</updated>
++      <updated>1739760467173</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="removed files">
++      <option name="closed" value="true" />
++      <created>1739760970219</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1739760970219</updated>
++    </task>
++    <task id="LOCAL-00003" summary="added images + mainFrame Updates">
++      <option name="closed" value="true" />
++      <created>1739777173738</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1739777173738</updated>
++    </task>
++    <task id="LOCAL-00004" summary="added images + mainFrame Updates">
++      <option name="closed" value="true" />
++      <created>1739777270205</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1739777270205</updated>
++    </task>
++    <task id="LOCAL-00005" summary="added images + mainFrame Updates">
++      <option name="closed" value="true" />
++      <created>1739777360874</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1739777360874</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="worked on getCurrentValue()" />
+-    <option name="LAST_COMMIT_MESSAGE" value="worked on getCurrentValue()" />
++    <MESSAGE value="removed images dir" />
++    <MESSAGE value="removed files" />
++    <MESSAGE value="added images + mainFrame Updates" />
++    <option name="LAST_COMMIT_MESSAGE" value="added images + mainFrame Updates" />
+   </component>
+ </project>
+\ No newline at end of file
