@@ -7,6 +7,8 @@ import java.awt.*;
 
 public class MainFrame {
     private static JFrame frame;
+    private static CardLayout cardLayout = new CardLayout();
+    private static JPanel cardPanel;
 
     // Constants for colors
     private static final Color TITLE_COLOR = new Color(240, 240, 240); // Light Gray
@@ -26,13 +28,31 @@ public class MainFrame {
         frame.setLocationRelativeTo(null); // Center window
 
         // Background panel with image
-        BackgroundPanel backgroundImagePanel = new BackgroundPanel("images/image2.jpg"); // Load from parent directory
+        BackgroundPanel backgroundImagePanel = new BackgroundPanel("images/image2.jpg"); // Load image
         backgroundImagePanel.setLayout(new BorderLayout()); // Allow child components
 
-        // Add menu on top of background
-        backgroundImagePanel.add(startMenu(), BorderLayout.CENTER);
+        // Create card panel for switching slides
+        JPanel cardPanel = new JPanel(new CardLayout());
+        cardPanel.setOpaque(false); // Make sure it doesn't block the background
 
+        // Create and add both slides
+        JPanel startMenu = startMenu();
+        startMenu.setOpaque(false); // Ensure transparency
+
+        InvestmentForm investmentForm = new InvestmentForm();
+        investmentForm.setOpaque(false); // Ensure transparency
+
+        cardPanel.add(startMenu, "StartMenu");
+        cardPanel.add(investmentForm, "InvestmentForm");
+
+        // Add card panel on top of the background
+        backgroundImagePanel.add(cardPanel, BorderLayout.CENTER);
+
+        // Set the frame content and refresh UI
         frame.setContentPane(backgroundImagePanel);
+        frame.revalidate();
+        frame.repaint();
+
         frame.setVisible(true);
     }
 
@@ -97,6 +117,13 @@ public class MainFrame {
         startButton.setBackground(BUTTON_COLOR);
         startButton.setForeground(BUTTON_TEXT_COLOR);
         startButton.setFocusPainted(false);
+
+        startButton.addActionListener(e -> {
+            // Get the CardLayout instance from the cardPanel
+            CardLayout cardLayout = (CardLayout) ((JPanel) frame.getContentPane().getComponent(0)).getLayout();
+            cardLayout.show((JPanel) frame.getContentPane().getComponent(0), "InvestmentForm");
+        });
+
         return startButton;
     }
 }
