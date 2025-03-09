@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="worked on getCurrentValue()">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="cardLayout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InvestingApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InvestingApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/userData.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/InvestmentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InvestmentForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +31,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ryanhaugen"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/brooks-hw/semesterProject",
+    "accountId": "3ef7ee13-2dde-4d9c-b77f-37ab9b536454"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -139,8 +149,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.153" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.153" />
       </set>
     </attachedChunks>
   </component>
@@ -155,6 +165,7 @@
       <workItem from="1739498490182" duration="135000" />
       <workItem from="1739499393272" duration="654000" />
       <workItem from="1740104223384" duration="564000" />
+      <workItem from="1741546710836" duration="10239000" />
     </task>
     <task id="LOCAL-00001" summary="worked on getCurrentValue()">
       <option name="closed" value="true" />
@@ -164,7 +175,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740082419238</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="worked on getCurrentValue()">
+      <option name="closed" value="true" />
+      <created>1740962020975</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1740962020975</updated>
+    </task>
+    <task id="LOCAL-00003" summary="cardLayout">
+      <option name="closed" value="true" />
+      <created>1740962036383</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1740962036383</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +199,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="worked on getCurrentValue()" />
-    <option name="LAST_COMMIT_MESSAGE" value="worked on getCurrentValue()" />
+    <MESSAGE value="cardLayout" />
+    <option name="LAST_COMMIT_MESSAGE" value="cardLayout" />
   </component>
 </project>
