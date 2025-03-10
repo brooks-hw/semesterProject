@@ -1,62 +1,80 @@
-//MODIFIED USING AI
+//mostly ai generated
 
 package ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 public class InvestmentForm extends JPanel {
-    public InvestmentForm() {
+    private CardLayout cardLayout;
+    private JPanel questionPanel;
+    private List<String> questions;
+    private List<String[]> optionsList;
+    private int totalQuestions;
+    private int currentQuestionIndex = 0;
+    private JLabel smallHeader;
+
+    public InvestmentForm(List<String> questions, List<String[]> optionsList) {
+        this.questions = questions;
+        this.optionsList = optionsList;
+        this.totalQuestions = questions.size();
 
         setLayout(new BorderLayout());
+        setOpaque(false);
 
-        // Create the small header for the top left corner
-        JLabel smallHeader = new JLabel("Risk Profile Analysis: Q1", SwingConstants.LEFT);
-        smallHeader.setFont(new Font("Arial", Font.PLAIN, 18)); // Smaller font for the header
+        // Small Header (Top Left Corner)
+        smallHeader = new JLabel(getHeaderText(), SwingConstants.LEFT);
+        smallHeader.setFont(new Font("Arial", Font.PLAIN, 18));
         smallHeader.setForeground(Color.GRAY);
 
-        // Header Panel
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         headerPanel.setOpaque(false);
         headerPanel.add(smallHeader);
+        add(headerPanel, BorderLayout.NORTH);
 
-        // Wrapper panel for centering content
-        JPanel centerWrapper = new JPanel();
-        centerWrapper.setLayout(new BoxLayout(centerWrapper, BoxLayout.Y_AXIS));
-        centerWrapper.setOpaque(false);
+        // Question Panel (CardLayout for switching questions)
+        cardLayout = new CardLayout();
+        questionPanel = new JPanel(cardLayout);
+        questionPanel.setOpaque(false);
 
-        // Create a panel for the question label
+        for (int i = 0; i < totalQuestions; i++) {
+            questionPanel.add(createQuestionCard(i), "Q" + i);
+        }
+
+        add(questionPanel, BorderLayout.CENTER);
+    }
+
+    private String getHeaderText() {
+        return "Risk Profile Analysis: Question " + (currentQuestionIndex + 1);
+    }
+
+    private JPanel createQuestionCard(int questionIndex) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setOpaque(false);
+
+        // Question Label
+        JLabel questionLabel = new JLabel(questions.get(questionIndex), SwingConstants.CENTER);
+        questionLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        questionLabel.setForeground(Color.WHITE);
+
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         labelPanel.setOpaque(false);
+        labelPanel.add(questionLabel);
 
-        // Main question label
-        JLabel mainLabel = new JLabel("How would you react if your investments dropped by 20%?", SwingConstants.CENTER);
-        mainLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        mainLabel.setForeground(Color.WHITE);
+        panel.add(Box.createVerticalStrut(50));
+        panel.add(labelPanel);
+        panel.add(Box.createVerticalStrut(50));
 
-        labelPanel.add(mainLabel);
-
-        // Add spacing (1 inch, 72 pixels) before buttons
-        centerWrapper.add(Box.createVerticalStrut(72));
-        centerWrapper.add(labelPanel);
-
-        // Create a panel for the buttons
+        // Options Buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setOpaque(false);
 
-        // Add vertical spacing (1 inch, 72 pixels) before buttons
-        buttonPanel.add(Box.createVerticalStrut(72));
-
-        // Create option buttons
-        String[] options = {
-                "Sell all my investments.",
-                "Sell some investments.",
-                "Hold onto my investments.",
-                "Buy more investments."
-        };
-
-        for (String option : options) {
+        for (String option : optionsList.get(questionIndex)) {
             JButton button = new JButton(option);
             button.setFont(new Font("Arial", Font.BOLD, 30));
             button.setBackground(new Color(184, 134, 11));
@@ -65,7 +83,13 @@ public class InvestmentForm extends JPanel {
             button.setAlignmentX(Component.CENTER_ALIGNMENT);
             button.setPreferredSize(new Dimension(500, 70));
 
-            // Wrapper panel to center each button
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    nextQuestion();
+                }
+            });
+
             JPanel buttonWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
             buttonWrapper.setOpaque(false);
             buttonWrapper.add(button);
@@ -74,11 +98,18 @@ public class InvestmentForm extends JPanel {
             buttonPanel.add(Box.createVerticalStrut(20));
         }
 
-        // Add label and buttons into centerWrapper
-        centerWrapper.add(buttonPanel);
+        panel.add(buttonPanel);
+        return panel;
+    }
 
-        // Add everything to the main layout
-        add(headerPanel, BorderLayout.NORTH);
-        add(centerWrapper, BorderLayout.CENTER);
+    private void nextQuestion() {
+        if (currentQuestionIndex < totalQuestions - 1) {
+            currentQuestionIndex++;
+            smallHeader.setText(getHeaderText());
+            cardLayout.show(questionPanel, "Q" + currentQuestionIndex);
+
+            revalidate();
+            repaint();
+        }
     }
 }
