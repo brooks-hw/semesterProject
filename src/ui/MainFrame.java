@@ -67,10 +67,14 @@ public class MainFrame {
         InvestmentForm investmentForm = new InvestmentForm(questions, optionsList);
         mainCardPanel.add(investmentForm, "InvestmentForm");
 
+        LoginPage loginPage = new LoginPage();
+        mainCardPanel.add(loginPage, "LoginPage");
+
         backgroundImagePanel.add(mainCardPanel, BorderLayout.CENTER);
         frame.setContentPane(backgroundImagePanel);
         frame.setVisible(true);
     }
+
 
     public static JPanel startMenu() {
         JPanel panel = new JPanel();
@@ -124,7 +128,7 @@ public class MainFrame {
         startButton.setFocusPainted(false);
 
         startButton.addActionListener(e -> {
-            mainCardLayout.show(mainCardPanel, "InvestmentForm");
+            mainCardLayout.show(mainCardPanel, "LoginPage");
         });
 
         return startButton;
