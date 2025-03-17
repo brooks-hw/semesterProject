@@ -67,8 +67,11 @@ public class MainFrame {
         InvestmentForm investmentForm = new InvestmentForm(questions, optionsList);
         mainCardPanel.add(investmentForm, "InvestmentForm");
 
-        LoginPage loginPage = new LoginPage();
+        LoginPage loginPage = new LoginPage(mainCardLayout, mainCardPanel);
         mainCardPanel.add(loginPage, "LoginPage");
+
+        HomePage homePage = new HomePage();
+        mainCardPanel.add(homePage, "HomePage");
 
         backgroundImagePanel.add(mainCardPanel, BorderLayout.CENTER);
         frame.setContentPane(backgroundImagePanel);

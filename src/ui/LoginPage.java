@@ -10,11 +10,15 @@ import java.util.List;
 
 public class LoginPage extends JPanel{
     private CardLayout cardLayout;
+    private JPanel mainCardPanel ;
     private JPanel loginPanel;
     public ArrayList<String> usernames;
     public ArrayList<String> passwords;
 
-    public LoginPage() {
+    public LoginPage(CardLayout layout, JPanel panel) {
+        this.cardLayout = layout;
+        this.mainCardPanel  = panel;
+
         // for questionnaire
         // Add InvestmentForm with multiple questions
         List<String> questions = Arrays.asList(
@@ -51,7 +55,7 @@ public class LoginPage extends JPanel{
         setLayout(new BorderLayout());
         setOpaque(false);
 
-        cardLayout = new CardLayout();
+        loginPanel = new JPanel(cardLayout);
         loginPanel = new JPanel(cardLayout);
         loginPanel.setOpaque(false);
 
@@ -595,6 +599,13 @@ public class LoginPage extends JPanel{
         home.setFocusPainted(false);
         home.setAlignmentX(Component.CENTER_ALIGNMENT);
         home.setPreferredSize(new Dimension(220, 45));
+
+        home.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainCardPanel, "HomePage");
+            }
+        });
 
         buttonPanel.add(Box.createHorizontalStrut(150));
         buttonPanel.add(home);
