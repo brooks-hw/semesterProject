@@ -10,15 +10,11 @@ import java.util.List;
 
 public class LoginPage extends JPanel{
     private CardLayout cardLayout;
-    private JPanel mainCardPanel ;
     private JPanel loginPanel;
     public ArrayList<String> usernames;
     public ArrayList<String> passwords;
 
-    public LoginPage(CardLayout layout, JPanel panel) {
-        this.cardLayout = layout;
-        this.mainCardPanel  = panel;
-
+    public LoginPage() {
         // for questionnaire
         // Add InvestmentForm with multiple questions
         List<String> questions = Arrays.asList(
@@ -48,6 +44,7 @@ public class LoginPage extends JPanel{
         );
 
         InvestmentForm investmentForm = new InvestmentForm(questions, optionsList);
+        HomePage homePage = new HomePage();
 
         usernames = new ArrayList<>();
         passwords = new ArrayList<>();
@@ -55,7 +52,7 @@ public class LoginPage extends JPanel{
         setLayout(new BorderLayout());
         setOpaque(false);
 
-        loginPanel = new JPanel(cardLayout);
+        cardLayout = new CardLayout();
         loginPanel = new JPanel(cardLayout);
         loginPanel.setOpaque(false);
 
@@ -66,6 +63,7 @@ public class LoginPage extends JPanel{
         loginPanel.add(promptPage(), "prompt");
         loginPanel.add(createPage(), "create");
         loginPanel.add(investmentForm, "InvestmentForm");
+        loginPanel.add(homePage, "homePage");
         loginPanel.add(login2Page(), "login2");
         loginPanel.add(create2Page(), "create2");
     }
@@ -186,6 +184,8 @@ public class LoginPage extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                username.setText("");
+                password.setText("");
                 cardLayout.show(loginPanel, "create");
             }
         });
@@ -324,6 +324,8 @@ public class LoginPage extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                username.setText("");
+                password.setText("");
                 cardLayout.show(loginPanel, "create");
             }
         });
@@ -418,6 +420,13 @@ public class LoginPage extends JPanel{
                 String user = username.getText();
                 int size = usernames.size();
                 boolean found = false;
+                if(user.isEmpty())
+                {
+                    found = true;
+                    username.setText("");
+                    password.setText("");
+                    cardLayout.show(loginPanel, "create2");
+                }
                 for(int i = 0; i < size; i++)
                 {
                     if(usernames.get(i).equals(user))
@@ -521,6 +530,12 @@ public class LoginPage extends JPanel{
                 String user = username.getText();
                 int size = usernames.size();
                 boolean found = false;
+                if(user.isEmpty())
+                {
+                    found = true;
+                    username.setText("");
+                    password.setText("");
+                }
                 for(int i = 0; i < size; i++)
                 {
                     if(usernames.get(i).equals(user))
@@ -557,7 +572,7 @@ public class LoginPage extends JPanel{
         prompt.setBackground(new Color(14, 42, 83));
 
         //question label
-        JLabel promptLabel = new JLabel("<html><div style='text-align: center;'>Would you like to complete the questionaire or go to your homepage?<html>", JLabel.CENTER);
+        JLabel promptLabel = new JLabel("<html><div style='text-align: center;'>Would you like to complete the questionnaire or go to your homepage?<html>", JLabel.CENTER);
         promptLabel.setFont(new Font("Book Antiqua", Font.BOLD, 35));
         promptLabel.setForeground(Color.WHITE);
 
@@ -603,7 +618,7 @@ public class LoginPage extends JPanel{
         home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainCardPanel, "HomePage");
+                cardLayout.show(loginPanel, "homePage");
             }
         });
 
