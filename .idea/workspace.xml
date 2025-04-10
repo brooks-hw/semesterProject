@@ -85,7 +85,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.MainFrame">
+  <component name="RunManager" selected="Application.APITest">
     <configuration type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="models.Portfolio" />
       <module name="semesterProject" />
@@ -96,8 +96,17 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.MainFrame" />
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="APITest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="data.APITest" />
       <module name="semesterProject" />
       <extension name="coverage">
         <pattern>
@@ -116,21 +125,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="Application.MainFrame" />
+      <item itemvalue="Application.APITest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.APITest" />
       </list>
     </recent_temporary>
   </component>
@@ -172,6 +172,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="worked on getCurrentValue()" />
     <option name="LAST_COMMIT_MESSAGE" value="worked on getCurrentValue()" />
-    <option name="LAST_CHUNK_COMMIT_MESSAGE" value="worked on getCurrentValue()" />
   </component>
 </project>
