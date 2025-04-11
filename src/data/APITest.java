@@ -1,5 +1,7 @@
 package data;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -10,7 +12,7 @@ public class APITest {
     private static final String API_KEY = "LF33F4KXJFDIH9VT"; // <-- replace with your key
 
     public static void main(String[] args) {
-        String symbol = "AAPL"; // example: Apple
+        String symbol = "TSLA"; // example: Apple
         String function = "TIME_SERIES_DAILY"; // daily time series
         String outputSize = "compact"; // "compact" = last 100 data points, "full" = full history
 
@@ -35,6 +37,20 @@ public class APITest {
                     response.append(inputLine);
                 }
                 in.close();
+
+                String jsonResponse = response.toString();
+                JSONObject json = new JSONObject(jsonResponse);
+
+                // Get the "Time Series (Daily)" object
+                JSONObject timeSeries = json.getJSONObject("Time Series (Daily)");
+
+                // Iterate through the dates
+                for (String date : timeSeries.keySet()) {
+                    JSONObject dayData = timeSeries.getJSONObject(date);
+                    double open = dayData.getDouble("1. open");
+                    double close = dayData.getDouble("4. close");
+                    System.out.println(date + ": Open=" + open + ", Close=" + close);
+                }
 
                 // Print raw JSON data
                 System.out.println(response.toString());
