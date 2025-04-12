@@ -154,6 +154,9 @@ public class InvestingApp {
     }
 
     public static void main(String[] args) {
+
+
+        /*
         //Create an instance of the app to run
         InvestingApp investingApp = new InvestingApp();
 
@@ -165,5 +168,6 @@ public class InvestingApp {
 
         //Save the contents of the current portfolio before exiting
         investingApp.savePortfolio();
+         */
     }
 }
