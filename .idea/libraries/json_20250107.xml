@@ -2,8 +2,8 @@
   <library name="json-20250107">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/json-20250107.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../jfreechart-1.5.3.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../jcommon-1.0.24.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jfreechart-1.0.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jcommon-1.0.23.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

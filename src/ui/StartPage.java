@@ -15,7 +15,6 @@ public class StartPage extends JPanel {
         this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
         this.screenManager = screenManager;
 
-
         JPanel leftAlignPanel = createLeftAlignPanel();
         leftAlignPanel.add(createTitle("Investment"));
         leftAlignPanel.add(createTitle("Buddy"));
