@@ -1,5 +1,3 @@
-//mostly ai generated
-
 package ui;
 
 import javax.swing.*;
@@ -40,9 +38,17 @@ public class InvestmentForm extends JPanel {
         questionPanel = new JPanel(cardLayout);
         questionPanel.setOpaque(false);
 
+        // Create question cards
         for (int i = 0; i < totalQuestions; i++) {
             questionPanel.add(createQuestionCard(i), "Q" + i);
         }
+
+        // Create congratulations card last
+        questionPanel.add(new FormCongratulations(), "Q" + totalQuestions);
+
+        // Show first question by default
+        cardLayout.show(questionPanel, "Q0");
+        smallHeader.setText(getHeaderText());
 
         add(questionPanel, BorderLayout.CENTER);
     }
@@ -103,11 +109,14 @@ public class InvestmentForm extends JPanel {
     }
 
     private void nextQuestion() {
-        if (currentQuestionIndex < totalQuestions - 1) {
+        if (currentQuestionIndex < totalQuestions) {
             currentQuestionIndex++;
-            smallHeader.setText(getHeaderText());
+            if (currentQuestionIndex < totalQuestions) {
+                smallHeader.setText(getHeaderText());
+            } else {
+                smallHeader.setText("Risk Profile Analysis: Complete!");
+            }
             cardLayout.show(questionPanel, "Q" + currentQuestionIndex);
-
             revalidate();
             repaint();
         }

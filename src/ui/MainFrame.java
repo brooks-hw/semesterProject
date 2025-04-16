@@ -1,53 +1,21 @@
+//mostly ai generated
 
 package ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
-public class MainFrame implements iScreenManager {
-    private static JFrame mainFrame;
-    private static JPanel panelManager;
-
-    public void switchTo(String screenName) {
-        LayoutManager layout = panelManager.getLayout();
-
-        // Cast to CardLayout in order to switch panels
-        CardLayout cardLayout = (CardLayout) layout;
-        cardLayout.show(panelManager, screenName);
-
-        // Print to console panel we're switching to for debugging purposes
-        System.out.println(screenName);
-    }
-
-    // Instantiate member variables
-    MainFrame() {
-        mainFrame = new JFrame("Investment Buddy");
-        mainFrame.setSize(900, 600);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setResizable(false);
-        mainFrame.setLocationRelativeTo(null);
-
-        panelManager = new JPanel(new CardLayout());
-
-        JPanel startPage = new StartPage(this);
-        startPage.setOpaque(false);
-        panelManager.add(startPage, "Start Page");
-
-        // Add Login Page
-        JPanel loginPage = new LoginPage();
-        loginPage.setOpaque(false);
-        panelManager.add(loginPage, "Login Page");
-
-
-        mainFrame.add(panelManager);
-        mainFrame.setContentPane(panelManager);
-        mainFrame.setVisible(true);
-    }
+public class MainFrame {
+    private static JFrame frame;
+    private static CardLayout mainCardLayout;
+    private static JPanel mainCardPanel;
 
     public static void main(String[] args) {
-        MainFrame frame = new MainFrame();
+        createWindow();
     }
-    /*
+
     public static void createWindow() {
         frame = new JFrame("Investment Buddy");
         frame.setSize(900, 600);
@@ -105,9 +73,70 @@ public class MainFrame implements iScreenManager {
         HomePage homePage = new HomePage();
         mainCardPanel.add(homePage, "HomePage");
 
+        FormCongratulations formCongratulations = new FormCongratulations();
+        mainCardPanel.add(formCongratulations, "FormCongratulations");
+
         backgroundImagePanel.add(mainCardPanel, BorderLayout.CENTER);
         frame.setContentPane(backgroundImagePanel);
         frame.setVisible(true);
     }
-    */
+
+
+    public static JPanel startMenu() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(150, 0, 0, 0));
+
+        JPanel leftAlignPanel = createLeftAlignPanel();
+        leftAlignPanel.add(createTitle("Investment"));
+        leftAlignPanel.add(createTitle("Buddy"));
+        leftAlignPanel.add(Box.createVerticalStrut(20));
+        leftAlignPanel.add(createSeparator());
+        leftAlignPanel.add(Box.createVerticalStrut(20));
+        leftAlignPanel.add(createStartButton());
+
+        leftAlignPanel.setOpaque(false);
+        panel.add(leftAlignPanel);
+        panel.setOpaque(false);
+        return panel;
+    }
+
+    private static JPanel createLeftAlignPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0));
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        return panel;
+    }
+
+    private static JLabel createTitle(String text) {
+        JLabel title = new JLabel(text);
+        title.setFont(new Font("Arial", Font.BOLD, 60));
+        title.setAlignmentX(Component.LEFT_ALIGNMENT);
+        title.setForeground(Color.WHITE);
+        return title;
+    }
+
+    private static JSeparator createSeparator() {
+        JSeparator separator = new JSeparator();
+        separator.setMaximumSize(new Dimension(325, 8));
+        separator.setAlignmentX(Component.LEFT_ALIGNMENT);
+        separator.setBackground(new Color(192, 192, 192));
+        return separator;
+    }
+
+    private static JButton createStartButton() {
+        JButton startButton = new JButton("  start  ");
+        startButton.setFont(new Font("Arial", Font.PLAIN, 60));
+        startButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        startButton.setBackground(new Color(184, 134, 11));
+        startButton.setForeground(Color.WHITE);
+        startButton.setFocusPainted(false);
+
+        startButton.addActionListener(e -> {
+            mainCardLayout.show(mainCardPanel, "LoginPage");
+        });
+
+        return startButton;
+    }
 }
