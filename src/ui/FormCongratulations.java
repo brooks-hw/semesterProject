@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FormCongratulations extends JPanel {
-    public FormCongratulations() {
+    public FormCongratulations(CardLayout mainLayout, JPanel mainPanel) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setOpaque(false);
 
@@ -33,17 +33,17 @@ public class FormCongratulations extends JPanel {
         buttonPanel.setOpaque(false);
 
         JButton results = new JButton("View Results");
-        results.setFont(new Font("Arial", Font.BOLD, 25));
+        results.setFont(new Font("Arial", Font.BOLD, 36));
         results.setBackground(new Color(184, 134, 11));
         results.setForeground(Color.WHITE);
         results.setFocusPainted(false);
         results.setAlignmentX(Component.CENTER_ALIGNMENT);
-        results.setPreferredSize(new Dimension(220, 45));
+        results.setPreferredSize(new Dimension(270, 45));
 
         results.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //cardLayout.show(loginPanel, "InvestmentForm");
+                mainLayout.show(mainPanel, "ResultsPage");
             }
         });
 
@@ -51,17 +51,17 @@ public class FormCongratulations extends JPanel {
         buttonPanel.add(results);
 
         JButton home = new JButton("Homepage");
-        home.setFont(new Font("Arial", Font.BOLD, 25));
+        home.setFont(new Font("Arial", Font.BOLD, 36));
         home.setBackground(new Color(184, 134, 11));
         home.setForeground(Color.WHITE);
         home.setFocusPainted(false);
         home.setAlignmentX(Component.CENTER_ALIGNMENT);
-        home.setPreferredSize(new Dimension(220, 45));
+        home.setPreferredSize(new Dimension(270, 45));
 
         home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //cardLayout.show(loginPanel, "homePage");
+                mainLayout.show(mainPanel, "HomePage");
             }
         });
 

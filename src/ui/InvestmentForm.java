@@ -44,7 +44,7 @@ public class InvestmentForm extends JPanel {
         }
 
         // Create congratulations card last
-        questionPanel.add(new FormCongratulations(), "Q" + totalQuestions);
+        questionPanel.add(new FormCongratulations(MainFrame.getMainCardLayout(), MainFrame.getMainCardPanel()), "Q" + totalQuestions);
 
         // Show first question by default
         cardLayout.show(questionPanel, "Q0");

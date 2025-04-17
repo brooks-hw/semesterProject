@@ -73,12 +73,23 @@ public class MainFrame {
         HomePage homePage = new HomePage();
         mainCardPanel.add(homePage, "HomePage");
 
-        FormCongratulations formCongratulations = new FormCongratulations();
+        FormCongratulations formCongratulations = new FormCongratulations(mainCardLayout, mainCardPanel);
         mainCardPanel.add(formCongratulations, "FormCongratulations");
+
+        ResultsPage resultsPage = new ResultsPage();
+        mainCardPanel.add(new ResultsPage(), "ResultsPage");
 
         backgroundImagePanel.add(mainCardPanel, BorderLayout.CENTER);
         frame.setContentPane(backgroundImagePanel);
         frame.setVisible(true);
+    }
+
+    public static CardLayout getMainCardLayout() {
+        return mainCardLayout;
+    }
+
+    public static JPanel getMainCardPanel() {
+        return mainCardPanel;
     }
 
 

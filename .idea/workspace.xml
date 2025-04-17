@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="added Congratulations page">
+    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="buttons added to Congratulations page (unfunctional)">
+      <change afterPath="$PROJECT_DIR$/src/ui/ResultsPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/FormCongratulations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/FormCongratulations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/InvestmentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InvestmentForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/MainFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +155,7 @@
       <workItem from="1740697035632" duration="2558000" />
       <workItem from="1744595952444" duration="1472000" />
       <workItem from="1744832599225" duration="10373000" />
-      <workItem from="1744858483335" duration="2636000" />
+      <workItem from="1744858483335" duration="5312000" />
     </task>
     <task id="LOCAL-00001" summary="worked on getCurrentValue()">
       <option name="closed" value="true" />
@@ -170,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744843434247</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="buttons added to Congratulations page (unfunctional)">
+      <option name="closed" value="true" />
+      <created>1744861951582</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744861951582</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,7 +190,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="worked on getCurrentValue()" />
     <MESSAGE value="added Congratulations page" />
-    <option name="LAST_COMMIT_MESSAGE" value="added Congratulations page" />
+    <MESSAGE value="buttons added to Congratulations page (unfunctional)" />
+    <option name="LAST_COMMIT_MESSAGE" value="buttons added to Congratulations page (unfunctional)" />
     <option name="LAST_CHUNK_COMMIT_MESSAGE" value="worked on getCurrentValue()" />
   </component>
 </project>
