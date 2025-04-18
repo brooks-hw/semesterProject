@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Arrays;
+
 
 public class InvestmentForm extends JPanel {
     private CardLayout cardLayout;
@@ -14,11 +16,40 @@ public class InvestmentForm extends JPanel {
     private int totalQuestions;
     private int currentQuestionIndex = 0;
     private JLabel smallHeader;
+    private iScreenManager screenManager;
+    private Image backgroundImage;
 
-    public InvestmentForm(List<String> questions, List<String[]> optionsList) {
-        this.questions = questions;
-        this.optionsList = optionsList;
+    public InvestmentForm(iScreenManager screenManager) {
+        // Hardcode questions and options here
+        this.questions = Arrays.asList(
+                "How would you react if your investments dropped by 20%?",
+                "How long are you willing to invest for?",
+                "How do you feel about high-risk investments?",
+                "What is your main investment goal?",
+                "How much experience do you have with investing?",
+                "What is your tolerance for losing money?",
+                "What type of investments do you prefer?",
+                "How do you feel about new & unfamiliar industries?",
+                "How involved do you want to be in managing investments?",
+                "What type of investor do you consider yourself to be?"
+        );
+
+        this.optionsList = Arrays.asList(
+                new String[]{"Sell all my investments", "Sell some investments", "Hold onto my investments", "Buy more investments"},
+                new String[]{"Less than a year", "1-5 years", "5-10 years", "More than 10 years"},
+                new String[]{"Avoid them completely", "Take small risks", "Comfortable with high risks", "Seek high returns"},
+                new String[]{"Wealth accumulation", "Retirement savings", "Short-term profit", "Steady income"},
+                new String[]{"None, I am a beginner", "A little, but I'm still learning", "Moderate experience", "Extensive experience"},
+                new String[]{"I can't afford to lose any money", "I can tolerate minor losses", "I can handle moderate losses", "I'm comfortable losing money"},
+                new String[]{"Safe investments like bonds", "Balanced, some stocks & bonds", "Mostly stocks, with some risk", "High-growth assets like crypto"},
+                new String[]{"Prefer known industries", "Willing to consider", "Open to experimenting", "Enjoy taking risks"},
+                new String[]{"I want no involvement", "I monitor my investments", "I actively manage it", "I want to make all decisions"},
+                new String[]{"A conservative investor", "A balanced investor", "An aggressive investor", "A speculative investor"}
+        );
+
         this.totalQuestions = questions.size();
+        this.screenManager = screenManager;
+        this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
 
         setLayout(new BorderLayout());
         setOpaque(false);
@@ -43,8 +74,8 @@ public class InvestmentForm extends JPanel {
             questionPanel.add(createQuestionCard(i), "Q" + i);
         }
 
-        // Create congratulations card last
-        questionPanel.add(new FormCongratulations(MainFrame.getMainCardLayout(), MainFrame.getMainCardPanel()), "Q" + totalQuestions);
+        // Add final card (congratulations page)
+        questionPanel.add(new FormCongratulations(screenManager), "Q" + totalQuestions);
 
         // Show first question by default
         cardLayout.show(questionPanel, "Q0");
@@ -113,12 +144,19 @@ public class InvestmentForm extends JPanel {
             currentQuestionIndex++;
             if (currentQuestionIndex < totalQuestions) {
                 smallHeader.setText(getHeaderText());
+                cardLayout.show(questionPanel, "Q" + currentQuestionIndex);
             } else {
                 smallHeader.setText("Risk Profile Analysis: Complete!");
+                screenManager.switchTo("Congratulations");
             }
-            cardLayout.show(questionPanel, "Q" + currentQuestionIndex);
             revalidate();
             repaint();
         }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }

@@ -5,45 +5,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class LoginPage extends JPanel{
     private CardLayout cardLayout;
     private JPanel loginPanel;
     public ArrayList<String> usernames;
     public ArrayList<String> passwords;
+    private iScreenManager screenManager;
 
-    public LoginPage() {
+    public LoginPage(iScreenManager screenManager) {
+        this.screenManager = screenManager;
         // for questionnaire
         // Add InvestmentForm with multiple questions
-        List<String> questions = Arrays.asList(
-                "How would you react if your investments dropped by 20%?",
-                "How long are you willing to invest for?",
-                "How do you feel about high-risk investments?",
-                "What is your main investment goal?",
-                "How much experience do you have with investing?",
-                "What is your tolerance for losing money?",
-                "What type of investments do you prefer?",
-                "How do you feel about new & unfamiliar industries?",
-                "How involved do you want to be in managing investments?",
-                "What type of investor do you consider yourself to be?"
-        );
 
-        List<String[]> optionsList = Arrays.asList(
-                new String[]{"Sell all my investments", "Sell some investments", "Hold onto my investments", "Buy more investments"},
-                new String[]{"Less than a year", "1-5 years", "5-10 years", "More than 10 years"},
-                new String[]{"Avoid them completely", "Take small risks", "Comfortable with high risks", "Seek high returns"},
-                new String[]{"Wealth accumulation", "Retirement savings", "Short-term profit", "Steady income"},
-                new String[]{"None, I am a beginner", "A little, but I'm still learning", "Moderate experience", "Extensive experience"},
-                new String[]{"I can't afford to lose any money", "I can tolerate minor losses", "I can handle moderate losses", "I'm comfortable losing money"},
-                new String[]{"Safe investments like bonds", "Balanced, some stocks & bonds", "Mostly stocks, with some risk", "High-growth assets like crypto"},
-                new String[]{"Prefer known industries", "Willing to consider", "Open to experimenting", "Enjoy taking risks"},
-                new String[]{"I want no involvement", "I monitor my investments", "I actively manage it", "I want to make all decisions"},
-                new String[]{"A conservative investor", "A balanced investor", "An aggressive investor", "A speculative investor"}
-        );
-
-        InvestmentForm investmentForm = new InvestmentForm(questions, optionsList);
+        InvestmentForm investmentForm = new InvestmentForm(screenManager);
         HomePage homePage = new HomePage();
 
         usernames = new ArrayList<>();

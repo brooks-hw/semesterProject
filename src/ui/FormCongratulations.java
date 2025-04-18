@@ -6,7 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FormCongratulations extends JPanel {
-    public FormCongratulations(CardLayout mainLayout, JPanel mainPanel) {
+    private iScreenManager screenManager;
+    private Image backgroundImage;
+
+    public FormCongratulations(iScreenManager screenManager) {
+        this.screenManager = screenManager;
+        this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setOpaque(false);
 
@@ -43,7 +49,7 @@ public class FormCongratulations extends JPanel {
         results.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainLayout.show(mainPanel, "ResultsPage");
+                screenManager.switchTo("Results Page");
             }
         });
 
@@ -61,7 +67,7 @@ public class FormCongratulations extends JPanel {
         home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainLayout.show(mainPanel, "HomePage");
+                screenManager.switchTo("Home Page");
             }
         });
 
@@ -71,5 +77,11 @@ public class FormCongratulations extends JPanel {
 
 
         add(buttonPanel);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }

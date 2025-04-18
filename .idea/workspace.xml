@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="buttons added to Congratulations page (unfunctional)">
-      <change afterPath="$PROJECT_DIR$/src/ui/ResultsPage.java" afterDir="false" />
+    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="added functionality to buttons on FormCongratulations + ResultsPage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/FormCongratulations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/FormCongratulations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/InvestmentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InvestmentForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/LoginPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/ResultsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ResultsPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +47,9 @@
     &quot;accountId&quot;: &quot;3ef7ee13-2dde-4d9c-b77f-37ab9b536454&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -155,7 +159,9 @@
       <workItem from="1740697035632" duration="2558000" />
       <workItem from="1744595952444" duration="1472000" />
       <workItem from="1744832599225" duration="10373000" />
-      <workItem from="1744858483335" duration="5312000" />
+      <workItem from="1744858483335" duration="5755000" />
+      <workItem from="1744916628031" duration="5247000" />
+      <workItem from="1744940097973" duration="7642000" />
     </task>
     <task id="LOCAL-00001" summary="worked on getCurrentValue()">
       <option name="closed" value="true" />
@@ -181,17 +187,37 @@
       <option name="project" value="LOCAL" />
       <updated>1744861951582</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added functionality to buttons on FormCongratulations + ResultsPage">
+      <option name="closed" value="true" />
+      <created>1744864811079</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744864811079</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="worked on getCurrentValue()" />
     <MESSAGE value="added Congratulations page" />
     <MESSAGE value="buttons added to Congratulations page (unfunctional)" />
-    <option name="LAST_COMMIT_MESSAGE" value="buttons added to Congratulations page (unfunctional)" />
+    <MESSAGE value="added functionality to buttons on FormCongratulations + ResultsPage" />
+    <option name="LAST_COMMIT_MESSAGE" value="added functionality to buttons on FormCongratulations + ResultsPage" />
     <option name="LAST_CHUNK_COMMIT_MESSAGE" value="worked on getCurrentValue()" />
   </component>
 </project>
