@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class APITest {
 
-    private static final String API_KEY = "LF33F4KXJFDIH9VT"; // <-- replace with your key
+    private static final String API_KEY = "LF33F4KXJFDIH9VT";
 
     public static void main(String[] args) {
         String symbol = "AMZN"; // example: Apple

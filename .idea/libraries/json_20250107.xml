@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="json-20250107">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/json-20250107.jar!/" />
-      <root url="jar://$PROJECT_DIR$/jfreechart-1.0.19.jar!/" />
-      <root url="jar://$PROJECT_DIR$/jcommon-1.0.23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jcommon-1.0.23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jfreechart-1.0.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-20250107.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
