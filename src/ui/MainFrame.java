@@ -1,8 +1,10 @@
 
 
 package ui;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MainFrame implements iScreenManager {
     private static JFrame mainFrame;
@@ -28,14 +30,17 @@ public class MainFrame implements iScreenManager {
         mainFrame.setLocationRelativeTo(null);
 
         panelManager = new JPanel(new CardLayout());
+        panelManager.setOpaque(true);
+        panelManager.setBackground(new Color(14, 42, 83));
 
         JPanel startPage = new StartPage(this);
         startPage.setOpaque(false);
         panelManager.add(startPage, "Start Page");
 
-        // Add Login Page
+        ArrayList<String> usernames = new ArrayList<>();
+        ArrayList<String> passwords = new ArrayList<>();
+
         LoginPage loginPage = new LoginPage(this);
-        loginPage.setOpaque(false);
         panelManager.add(loginPage, "Login Page");
 
         JPanel congratsPage = new FormCongratulations(this); // 'this' refers to MainFrame implementing iScreenManager
