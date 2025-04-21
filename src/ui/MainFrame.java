@@ -42,7 +42,7 @@ public class MainFrame implements iScreenManager {
         loginPage.setOpaque(false);
         panelManager.add(congratsPage, "Congratulations");
 
-        JPanel homePage = new HomePage();
+        JPanel homePage = new HomePage(this);  // 'this' is screen manager
         homePage.setOpaque(false);
         panelManager.add(homePage, "Home Page");
 

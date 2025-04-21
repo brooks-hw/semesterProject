@@ -19,7 +19,7 @@ public class LoginPage extends JPanel{
         // Add InvestmentForm with multiple questions
 
         InvestmentForm investmentForm = new InvestmentForm(screenManager);
-        HomePage homePage = new HomePage();
+        HomePage homePage = new HomePage(screenManager);
 
         usernames = new ArrayList<>();
         passwords = new ArrayList<>();
