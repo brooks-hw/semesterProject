@@ -1,5 +1,7 @@
 package ui;
 
+import models.User;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -60,6 +62,8 @@ public class LoginPage extends JPanel {
         add(Box.createVerticalStrut(50));
 
         add(createButton("TO homepage", this::handleHomepage));
+
+
     }
 
     private JPanel createField(String labelText, JTextField field) {
@@ -113,7 +117,11 @@ public class LoginPage extends JPanel {
         if (found) {
             errorLabel.setVisible(false);
             clearFields();
-            screenManager.switchTo("Home Page");  // or "homePage", etc.
+
+            // Create User and store it in MainFrame
+            ((MainFrame) screenManager).setCurrentUser(new User(user, pass));
+
+            screenManager.switchTo("Home Page");
         } else {
             errorLabel.setVisible(true);
         }

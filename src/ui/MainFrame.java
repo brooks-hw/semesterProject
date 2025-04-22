@@ -1,12 +1,15 @@
-
-
 package ui;
+
+import models.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class MainFrame implements iScreenManager {
+
+    private User currentUser;
+
     private static JFrame mainFrame;
     private static JPanel panelManager;
 
@@ -62,6 +65,14 @@ public class MainFrame implements iScreenManager {
         mainFrame.add(panelManager);
         mainFrame.setContentPane(panelManager);
         mainFrame.setVisible(true);
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     public static void main(String[] args) {
