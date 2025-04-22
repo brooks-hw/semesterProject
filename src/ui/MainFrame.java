@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class MainFrame implements iScreenManager {
 
     private User currentUser;
+    private HomePage homePage;
 
     private static JFrame mainFrame;
     private static JPanel panelManager;
@@ -43,14 +44,14 @@ public class MainFrame implements iScreenManager {
         ArrayList<String> usernames = new ArrayList<>();
         ArrayList<String> passwords = new ArrayList<>();
 
-        LoginPage loginPage = new LoginPage(this);
+        LoginPage loginPage = new LoginPage();
         panelManager.add(loginPage, "Login Page");
 
         JPanel congratsPage = new FormCongratulations(this); // 'this' refers to MainFrame implementing iScreenManager
         loginPage.setOpaque(false);
         panelManager.add(congratsPage, "Congratulations");
 
-        JPanel homePage = new HomePage(this);  // 'this' is screen manager
+        homePage = new HomePage(this);  // 'this' is screen manager
         homePage.setOpaque(false);
         panelManager.add(homePage, "Home Page");
 
@@ -65,6 +66,8 @@ public class MainFrame implements iScreenManager {
         mainFrame.add(panelManager);
         mainFrame.setContentPane(panelManager);
         mainFrame.setVisible(true);
+
+
     }
 
     public void setCurrentUser(User user) {
@@ -73,6 +76,10 @@ public class MainFrame implements iScreenManager {
 
     public User getCurrentUser() {
         return currentUser;
+    }
+
+    public HomePage getHomePage() {
+        return homePage;
     }
 
     public static void main(String[] args) {
