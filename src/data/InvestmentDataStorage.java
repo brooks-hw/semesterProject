@@ -11,9 +11,12 @@ import java.util.List;
 
 public class InvestmentDataStorage {
 
+    StockAPIClient APIClient;
+
     public static void main(String[] args) {
         System.out.println("Hello");
     }
+
 
     //@Purpose: Reads and load each of the user's investments into the portfolio
     public static void initPortfolio(Portfolio portfolio) throws IOException {
@@ -55,7 +58,7 @@ public class InvestmentDataStorage {
                 //Information about the stock
                 String name = parts[0];
                 String symbol = parts[1];
-                double price = StockAPIClient.getStockPrice(symbol);
+                double price = data.StockAPIClient.getStockPrice(symbol);
                 Stock stock = createStock(name, symbol, price);
 
                 //Remaining info about the investment

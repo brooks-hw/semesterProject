@@ -12,7 +12,7 @@ public class APITest {
     private static final String API_KEY = "LF33F4KXJFDIH9VT";
 
     public static void main(String[] args) {
-        String symbol = "AMZN"; // example: Apple
+        String symbol = "MSFT"; // example: Apple
         String function = "TIME_SERIES_DAILY"; // daily time series
         String outputSize = "compact"; // "compact" = last 100 data points, "full" = full history
 

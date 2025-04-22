@@ -1,9 +1,13 @@
 package models;
 
+import data.StockAPIClient;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Investment {
+
+    private StockAPIClient APIClient;
 
     private Stock stock;
     private double numShares;       //How many shares did the user buy
@@ -79,7 +83,7 @@ public class Investment {
     // WHEN: after StockAPIClient is functional
     public double getCurrentValue() {
         //get latest price from StockAPIClient
-        double latestPrice = data.StockAPIClient.getStockPrice(stock.getSymbol());
+        double latestPrice = APIClient.getStockPrice(stock.getSymbol());
 
         //update stock's price
         stock.setPrice(latestPrice);

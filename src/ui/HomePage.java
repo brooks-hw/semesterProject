@@ -31,23 +31,14 @@ public class HomePage extends JPanel {
     // Set up HomePage with correct data after user is authenticated (in LoginPage)
     public void setup(User user) {
         this.user = user;
-        setLayout(new BorderLayout());
 
-        add(createTickerPanel(), BorderLayout.NORTH);
+        setLayout(new BorderLayout());
+        TickerPanel tickerPanel = new TickerPanel();
+        add(tickerPanel, BorderLayout.NORTH);
         add(createChartPanel(), BorderLayout.CENTER);
         add(createRightPanel(), BorderLayout.EAST);
 
         System.out.println(user.getUsername() + " " +  user.getPassword());
-    }
-
-    private JPanel createTickerPanel() {
-        JPanel tickerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        tickerPanel.setBackground(Color.BLACK);
-        JLabel tickerLabel = new JLabel("AAPL 145.23 ^   TSLA 234.50 v   GOOG 2890.10 ^");
-        tickerLabel.setForeground(Color.GREEN);
-        tickerPanel.add(tickerLabel);
-        tickerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        return tickerPanel;
     }
 
     private JPanel createChartPanel() {
