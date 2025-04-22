@@ -14,6 +14,8 @@ public class MainFrame implements iScreenManager {
     private static JFrame mainFrame;
     private static JPanel panelManager;
 
+    public LoginPage loginPage;
+
     public void switchTo(String screenName) {
         LayoutManager layout = panelManager.getLayout();
 
@@ -44,7 +46,7 @@ public class MainFrame implements iScreenManager {
         ArrayList<String> usernames = new ArrayList<>();
         ArrayList<String> passwords = new ArrayList<>();
 
-        LoginPage loginPage = new LoginPage();
+        loginPage = new LoginPage(this);
         panelManager.add(loginPage, "Login Page");
 
         JPanel congratsPage = new FormCongratulations(this); // 'this' refers to MainFrame implementing iScreenManager
