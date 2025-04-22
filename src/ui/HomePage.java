@@ -144,6 +144,10 @@ public class HomePage extends JPanel {
         JButton addButton = new JButton("Add Stock");
         JButton removeButton = new JButton("Remove Stock");
 
+        addButton.addActionListener(e -> {
+            screenManager.switchTo("Add Investment");
+        });
+
         addButton.setBackground(new Color(255, 140, 0));
         addButton.setForeground(Color.BLACK);
         removeButton.setBackground(new Color(255, 140, 0));

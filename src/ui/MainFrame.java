@@ -57,6 +57,10 @@ public class MainFrame implements iScreenManager {
         homePage.setOpaque(false);
         panelManager.add(homePage, "Home Page");
 
+        AddInvestmentPage addInvestmentPage = new AddInvestmentPage(this);
+        addInvestmentPage.setOpaque(false);
+        panelManager.add(addInvestmentPage, "Add Investment");
+
         JPanel investmentForm = new InvestmentForm(this);
         investmentForm.setOpaque(false);
         panelManager.add(investmentForm, "Investment Form");
