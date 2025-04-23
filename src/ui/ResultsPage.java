@@ -4,6 +4,8 @@ import org.jfree.chart.ChartPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ResultsPage extends JPanel {
     private iScreenManager screenManager;
@@ -28,6 +30,24 @@ public class ResultsPage extends JPanel {
         pieChartPanel.setBackground(new Color(0, 0, 0, 0)); // Transparent background
 
         add(pieChartPanel, BorderLayout.CENTER);
+
+        JButton loginButton = new JButton("HOMEPAGE");
+        loginButton.setFont(new Font("Ariel", Font.BOLD, 20));
+        loginButton.setBackground(new Color(137, 207, 240));
+        loginButton.setForeground(Color.WHITE);
+        loginButton.setFocusPainted(false);
+        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginButton.setPreferredSize(new Dimension(188, 33));
+        add(loginButton, BorderLayout.SOUTH);
+
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ((MainFrame) screenManager).loginPage.returnLogin();
+                screenManager.switchTo("Home Page");
+            }
+        });
+
     }
 
     @Override
