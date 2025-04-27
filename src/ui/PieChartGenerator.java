@@ -4,8 +4,10 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.plot.PiePlot;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PieChartGenerator {
     public JPanel createPieChart(String title){
@@ -20,11 +22,19 @@ public class PieChartGenerator {
         JFreeChart pieChart = ChartFactory.createPieChart(
                 title,
                 dataset,
-                true, true, false);
+                false, true, false);
 
         // Create Panel and return
         ChartPanel chartPanel = new ChartPanel(pieChart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(560, 370));
+        chartPanel.setPreferredSize(new java.awt.Dimension(400, 450));
+        pieChart.setBackgroundPaint(new Color(0, 0, 0, 0));
+        pieChart.getPlot().setBackgroundPaint(new Color(0, 0, 0, 0));
+        pieChart.getPlot().setOutlineVisible(false);
+
+        PiePlot plot = (PiePlot) pieChart.getPlot();
+        plot.setLabelFont(new Font("Arial", Font.BOLD, 15));
+
         return chartPanel;
     }
+
 }
