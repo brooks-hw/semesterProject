@@ -32,6 +32,10 @@ public class HomePage extends JPanel {
     public void setup(User user) {
         this.user = user;
 
+        removeAll(); //removes all components (buttons, panels, charts etc) used to fix TickerPanel
+        revalidate(); //forced recalculation of UI
+        repaint();
+
         setLayout(new BorderLayout());
         TickerPanel tickerPanel = new TickerPanel();
         add(tickerPanel, BorderLayout.NORTH);

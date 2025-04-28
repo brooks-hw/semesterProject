@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="ResultsPage template complete">
+    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="Reset variables to Form when re-prompted">
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_20_2025_3_30_PM_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_20_2025_3_30_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/InvestmentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InvestmentForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/PieChartGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/PieChartGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/ResultsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ResultsPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,7 +183,7 @@
       <workItem from="1745779000142" duration="9355000" />
       <workItem from="1745810219470" duration="34000" />
       <workItem from="1745815076146" duration="318000" />
-      <workItem from="1745816239556" duration="1297000" />
+      <workItem from="1745816239556" duration="5103000" />
     </task>
     <task id="LOCAL-00001" summary="worked on getCurrentValue()">
       <option name="closed" value="true" />
@@ -208,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745800063165</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Reset variables to Form when re-prompted">
+      <option name="closed" value="true" />
+      <created>1745817702057</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745817702057</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,7 +227,8 @@
     <MESSAGE value="worked on getCurrentValue()" />
     <MESSAGE value="minor modifications to ResultsPage.java &amp; PieChartGenerator.java" />
     <MESSAGE value="ResultsPage template complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="ResultsPage template complete" />
+    <MESSAGE value="Reset variables to Form when re-prompted" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reset variables to Form when re-prompted" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

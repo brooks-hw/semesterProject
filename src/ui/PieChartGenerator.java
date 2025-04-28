@@ -32,7 +32,9 @@ public class PieChartGenerator {
         pieChart.getPlot().setOutlineVisible(false);
 
         PiePlot plot = (PiePlot) pieChart.getPlot();
-        plot.setLabelFont(new Font("Arial", Font.BOLD, 15));
+        plot.setLabelFont(new Font("Arial", Font.PLAIN, 18));
+        plot.setLabelBackgroundPaint(new Color(255, 140, 0));
+        plot.setLabelPaint(Color.BLACK);
 
         return chartPanel;
     }

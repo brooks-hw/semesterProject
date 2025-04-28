@@ -42,7 +42,7 @@ public class ResultsPage extends JPanel {
 
         JLabel balancedInvestor = new JLabel("balanced investor");
         balancedInvestor.setFont(new Font("Arial", Font.BOLD, 32));
-        balancedInvestor.setForeground(new Color(184, 134, 11));
+        balancedInvestor.setForeground(Color.GREEN);
 
         resultTextPanel.add(resultText);
         resultTextPanel.add(balancedInvestor);
@@ -58,7 +58,7 @@ public class ResultsPage extends JPanel {
                         + "</div></html>"
         );
         descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        descriptionLabel.setForeground(Color.WHITE);
+        descriptionLabel.setForeground(Color.LIGHT_GRAY);
         descriptionLabel.setHorizontalAlignment(SwingConstants.CENTER);
         descriptionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(descriptionLabel);
@@ -98,7 +98,7 @@ public class ResultsPage extends JPanel {
         // Homepage button (right)
         JButton homepageButton = new JButton("Homepage");
         homepageButton.setFont(new Font("Arial", Font.BOLD, 18));
-        homepageButton.setBackground(new Color(184, 134, 11));
+        homepageButton.setBackground(new Color(255, 140, 0));
         homepageButton.setForeground(Color.BLACK);
         homepageButton.setFocusPainted(false);
         homepageButton.setPreferredSize(new Dimension(150, 40));
