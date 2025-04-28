@@ -16,6 +16,8 @@ public class InvestmentForm extends JPanel {
     private int totalQuestions;
     private int currentQuestionIndex = 0;
     private JLabel smallHeader;
+    private int totalScore = 0;
+    private List<Integer> answers;
     private iScreenManager screenManager;
     private Image backgroundImage;
 
@@ -35,19 +37,20 @@ public class InvestmentForm extends JPanel {
         );
 
         this.optionsList = Arrays.asList(
-                new String[]{"Sell all my investments", "Sell some investments", "Hold onto my investments", "Buy more investments"},
-                new String[]{"Less than a year", "1-5 years", "5-10 years", "More than 10 years"},
-                new String[]{"Avoid them completely", "Take small risks", "Comfortable with high risks", "Seek high returns"},
-                new String[]{"Wealth accumulation", "Retirement savings", "Short-term profit", "Steady income"},
-                new String[]{"None, I am a beginner", "A little, but I'm still learning", "Moderate experience", "Extensive experience"},
-                new String[]{"I can't afford to lose any money", "I can tolerate minor losses", "I can handle moderate losses", "I'm comfortable losing money"},
-                new String[]{"Safe investments like bonds", "Balanced, some stocks & bonds", "Mostly stocks, with some risk", "High-growth assets like crypto"},
-                new String[]{"Prefer known industries", "Willing to consider", "Open to experimenting", "Enjoy taking risks"},
-                new String[]{"I want no involvement", "I monitor my investments", "I actively manage it", "I want to make all decisions"},
-                new String[]{"A conservative investor", "A balanced investor", "An aggressive investor", "A speculative investor"}
+                new String[]{"Buy more investments", "Hold onto my investments", "Sell some investments", "Sell all my investments"},
+                new String[]{"More than 10 years", "5-10 years", "1-5 years", "Less than a year"},
+                new String[]{"Seek high returns", "Comfortable with high risks", "Take small risks", "Avoid them completely"},
+                new String[]{"Short-term profit", "Wealth accumulation", "Steady income", "Retirement savings"},
+                new String[]{"Extensive experience", "Moderate experience", "A little, but I'm still learning", "None, I am a beginner"},
+                new String[]{"I'm comfortable losing money", "I can handle moderate losses", "I can tolerate minor losses", "I can't afford to lose any money"},
+                new String[]{"High-growth assets like crypto", "Mostly stocks, with some risk", "Balanced, some stocks & bonds", "Safe investments like bonds"},
+                new String[]{"Enjoy taking risks", "Open to experimenting", "Willing to consider", "Prefer known industries"},
+                new String[]{"I want to make all decisions", "I actively manage it", "I monitor my investments", "I want no involvement"},
+                new String[]{"A speculative investor", "An aggressive investor", "A balanced investor", "A conservative investor"}
         );
 
         this.totalQuestions = questions.size();
+        this.answers = Arrays.asList(new Integer[totalQuestions]);
         this.screenManager = screenManager;
         this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
 
@@ -111,7 +114,10 @@ public class InvestmentForm extends JPanel {
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setOpaque(false);
 
-        for (String option : optionsList.get(questionIndex)) {
+        for (int i = 0; i < optionsList.get(questionIndex).length; i++) {
+            String option = optionsList.get(questionIndex)[i];
+            int optionIndex = i;
+
             JButton button = new JButton(option);
             button.setFont(new Font("Arial", Font.BOLD, 30));
             button.setBackground(new Color(184, 134, 11));
@@ -123,6 +129,7 @@ public class InvestmentForm extends JPanel {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    recordAnswer(optionIndex);
                     nextQuestion();
                 }
             });
@@ -146,6 +153,7 @@ public class InvestmentForm extends JPanel {
                 smallHeader.setText(getHeaderText());
                 cardLayout.show(questionPanel, "Q" + currentQuestionIndex);
             } else {
+                System.out.println(totalScore);
                 smallHeader.setText("Risk Profile Analysis: Complete!");
                 screenManager.switchTo("Congratulations");
             }
@@ -154,12 +162,20 @@ public class InvestmentForm extends JPanel {
         }
     }
 
+    private void recordAnswer(int optionIndex) {
+        answers.set(currentQuestionIndex, optionIndex);
+        totalScore += (3 - optionIndex); // 3 points for most aggressive, 0 for most conservative
+    }
+
     public void resetForm() {
         currentQuestionIndex = 0;
+        totalScore = 0;
+        answers = Arrays.asList(new Integer[totalQuestions]);
         smallHeader.setText(getHeaderText());
         cardLayout.show(questionPanel, "Q0");
         revalidate();
         repaint();
+        totalScore = 0;
     }
 
     @Override
