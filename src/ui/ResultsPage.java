@@ -42,7 +42,7 @@ public class ResultsPage extends JPanel {
 
         JLabel balancedInvestor = new JLabel("balanced investor");
         balancedInvestor.setFont(new Font("Arial", Font.BOLD, 32));
-        balancedInvestor.setForeground(Color.YELLOW);
+        balancedInvestor.setForeground(new Color(184, 134, 11));
 
         resultTextPanel.add(resultText);
         resultTextPanel.add(balancedInvestor);
@@ -98,7 +98,7 @@ public class ResultsPage extends JPanel {
         // Homepage button (right)
         JButton homepageButton = new JButton("Homepage");
         homepageButton.setFont(new Font("Arial", Font.BOLD, 18));
-        homepageButton.setBackground(Color.GREEN);
+        homepageButton.setBackground(new Color(184, 134, 11));
         homepageButton.setForeground(Color.BLACK);
         homepageButton.setFocusPainted(false);
         homepageButton.setPreferredSize(new Dimension(150, 40));
@@ -133,6 +133,7 @@ public class ResultsPage extends JPanel {
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ((MainFrame) screenManager).loginPage.returnLogin();
                 screenManager.switchTo("Login Page");
             }
         });

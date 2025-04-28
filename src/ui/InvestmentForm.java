@@ -154,6 +154,22 @@ public class InvestmentForm extends JPanel {
         }
     }
 
+    public void resetForm() {
+        currentQuestionIndex = 0;
+        smallHeader.setText(getHeaderText());
+        cardLayout.show(questionPanel, "Q0");
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void setVisible(boolean aFlag) {
+        super.setVisible(aFlag);
+        if (aFlag) {
+            resetForm();
+        }
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

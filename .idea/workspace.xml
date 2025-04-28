@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="minor modifications to ResultsPage.java &amp; PieChartGenerator.java">
+    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="ResultsPage template complete">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_20_2025_3_30_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_20_2025_3_30_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/InvestmentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InvestmentForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/ResultsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ResultsPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +52,9 @@
     &quot;accountId&quot;: &quot;3ef7ee13-2dde-4d9c-b77f-37ab9b536454&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -173,7 +179,10 @@
       <workItem from="1740697035632" duration="2558000" />
       <workItem from="1745351087429" duration="5289000" />
       <workItem from="1745730518057" duration="9593000" />
-      <workItem from="1745779000142" duration="6450000" />
+      <workItem from="1745779000142" duration="9355000" />
+      <workItem from="1745810219470" duration="34000" />
+      <workItem from="1745815076146" duration="318000" />
+      <workItem from="1745816239556" duration="1297000" />
     </task>
     <task id="LOCAL-00001" summary="worked on getCurrentValue()">
       <option name="closed" value="true" />
@@ -191,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745741206220</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ResultsPage template complete">
+      <option name="closed" value="true" />
+      <created>1745800063165</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745800063165</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,7 +217,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="worked on getCurrentValue()" />
     <MESSAGE value="minor modifications to ResultsPage.java &amp; PieChartGenerator.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor modifications to ResultsPage.java &amp; PieChartGenerator.java" />
+    <MESSAGE value="ResultsPage template complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="ResultsPage template complete" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
