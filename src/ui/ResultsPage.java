@@ -15,68 +15,143 @@ public class ResultsPage extends JPanel {
         this.screenManager = screenManager;
         this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
         setOpaque(false);
-        setLayout(new BorderLayout()); // Use a layout to place components properly
+        setLayout(new BorderLayout());
 
-        // Title label
-        JLabel label = new JLabel(" Your Results:", SwingConstants.LEFT);
-        label.setFont(new Font("Arial", Font.BOLD, 36));
-        label.setForeground(Color.WHITE);
-        add(label, BorderLayout.NORTH);
+        // Main vertical container
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setOpaque(false);
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 40, 5, 40)); // Minimal top-bottom padding
 
-        // Create result text (you are a balanced investor) and add it to the right
-        JPanel resultPanel = new JPanel();
-        resultPanel.setOpaque(false);  // Transparent background
-        resultPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        // Title
+        JLabel titleLabel = new JLabel("Your Results:");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(titleLabel);
 
-        resultPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));// Right-aligned
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Small gap
 
-        // White text part
+        // "You are a balanced investor" line
+        JPanel resultTextPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+        resultTextPanel.setOpaque(false);
+
         JLabel resultText = new JLabel("You are a ");
-        resultText.setFont(new Font("Arial", Font.BOLD, 34));
-        resultText.setForeground(Color.WHITE); // White color
-        resultPanel.add(resultText);
+        resultText.setFont(new Font("Arial", Font.BOLD, 32));
+        resultText.setForeground(Color.WHITE);
 
-        // Gold text part
         JLabel balancedInvestor = new JLabel("balanced investor");
-        balancedInvestor.setFont(new Font("Arial", Font.BOLD, 34));
-        balancedInvestor.setForeground(Color.YELLOW); // Gold color
-        resultPanel.add(balancedInvestor);
+        balancedInvestor.setFont(new Font("Arial", Font.BOLD, 32));
+        balancedInvestor.setForeground(Color.YELLOW);
 
-        // Add resultPanel to the RIGHT of the layout
-        add(resultPanel, BorderLayout.EAST); // Place result text on the right
+        resultTextPanel.add(resultText);
+        resultTextPanel.add(balancedInvestor);
+        mainPanel.add(resultTextPanel);
 
-        // Create pie chart and add it
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Small gap
+
+        // Description text
+        JLabel descriptionLabel = new JLabel(
+                "<html><div style='text-align: center;'>"
+                        + "A balanced investor will take on a moderate amount of risk<br>"
+                        + "whilst also investing in much safer options as well."
+                        + "</div></html>"
+        );
+        descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        descriptionLabel.setForeground(Color.WHITE);
+        descriptionLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        descriptionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(descriptionLabel);
+
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Moderate gap
+
+        // Pie Chart
         PieChartGenerator chartGenerator = new PieChartGenerator();
         ChartPanel pieChartPanel = (ChartPanel) chartGenerator.createPieChart("");
+        pieChartPanel.setOpaque(false);
+        pieChartPanel.setBackground(new Color(0, 0, 0, 0));
+        pieChartPanel.setPreferredSize(new Dimension(450, 350)); // Chart size
 
-        pieChartPanel.setOpaque(false); // So background shows through
-        pieChartPanel.setBackground(new Color(0, 0, 0, 0)); // Transparent background
+        JPanel pieChartContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        pieChartContainer.setOpaque(false);
+        pieChartContainer.add(pieChartPanel);
 
-        JPanel chartContainer = new JPanel();
-        chartContainer.setLayout(new FlowLayout(FlowLayout.LEFT)); // Align left
-        chartContainer.setOpaque(false); // Make the container transparent
-        chartContainer.add(pieChartPanel); // Add the pie chart to the container
+        mainPanel.add(pieChartContainer);
 
-        // Add the chart container to the center of the layout
-        add(chartContainer, BorderLayout.CENTER); // Center the chart
+        // Center the mainPanel
+        add(mainPanel, BorderLayout.CENTER);
 
-        // Homepage button
-        JButton loginButton = new JButton("HOMEPAGE");
-        loginButton.setFont(new Font("Ariel", Font.BOLD, 20));
-        loginButton.setBackground(new Color(137, 207, 240));
-        loginButton.setForeground(Color.WHITE);
-        loginButton.setFocusPainted(false);
-        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginButton.setPreferredSize(new Dimension(188, 33));
-        add(loginButton, BorderLayout.SOUTH);
+        // Bottom button panel (transparent background)
+        JPanel buttonPanel = new JPanel(new BorderLayout());
+        buttonPanel.setPreferredSize(new Dimension(0, 60));
+        buttonPanel.setOpaque(false); // Transparent background
 
-        loginButton.addActionListener(new ActionListener() {
+        // Logout button (left)
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.setFont(new Font("Arial", Font.BOLD, 18));
+        logoutButton.setBackground(Color.RED);
+        logoutButton.setForeground(Color.BLACK);
+        logoutButton.setFocusPainted(false);
+        logoutButton.setPreferredSize(new Dimension(150, 40));
+        buttonPanel.add(logoutButton, BorderLayout.WEST);
+
+        // Homepage button (right)
+        JButton homepageButton = new JButton("Homepage");
+        homepageButton.setFont(new Font("Arial", Font.BOLD, 18));
+        homepageButton.setBackground(Color.GREEN);
+        homepageButton.setForeground(Color.BLACK);
+        homepageButton.setFocusPainted(false);
+        homepageButton.setPreferredSize(new Dimension(150, 40));
+        buttonPanel.add(homepageButton, BorderLayout.EAST);
+
+        // Center panel with "Retake Questionnaire" and "Import Results"
+        JPanel centerButtonPanel = new JPanel();
+        centerButtonPanel.setOpaque(false);
+        centerButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10)); // 30px gap between buttons
+
+        JButton retakeButton = new JButton("Retake Questionnaire");
+        retakeButton.setFont(new Font("Arial", Font.BOLD, 16));
+        retakeButton.setBackground(new Color(137, 207, 240));
+        retakeButton.setForeground(Color.BLACK);
+        retakeButton.setFocusPainted(false);
+
+        JButton importButton = new JButton("Import Results");
+        importButton.setFont(new Font("Arial", Font.BOLD, 16));
+        importButton.setBackground(new Color(137, 207, 240));
+        importButton.setForeground(Color.BLACK);
+        importButton.setFocusPainted(false);
+
+        centerButtonPanel.add(retakeButton);
+        centerButtonPanel.add(importButton);
+
+        buttonPanel.add(centerButtonPanel, BorderLayout.CENTER);
+
+        // Add button panel to bottom
+        add(buttonPanel, BorderLayout.SOUTH);
+
+        // Action Listeners
+        logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ((MainFrame) screenManager).loginPage.returnLogin();
+                screenManager.switchTo("Login Page");
+            }
+        });
+
+        homepageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 screenManager.switchTo("Home Page");
             }
         });
+
+        retakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                screenManager.switchTo("Investment Form");
+            }
+        });
+
+        // Retake and Import buttons currently unfunctional (can add listeners later)
     }
 
     @Override
