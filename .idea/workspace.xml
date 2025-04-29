@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="minor adjustments + bugfix">
+    <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="added scoring system to form">
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_20_2025_3_30_PM_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_20_2025_3_30_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/InvestmentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InvestmentForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/PieChartGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/PieChartGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/ResultsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ResultsPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +187,7 @@
       <workItem from="1745810219470" duration="34000" />
       <workItem from="1745815076146" duration="318000" />
       <workItem from="1745816239556" duration="7369000" />
-      <workItem from="1745868220306" duration="2094000" />
+      <workItem from="1745868220306" duration="13748000" />
     </task>
     <task id="LOCAL-00001" summary="worked on getCurrentValue()">
       <option name="closed" value="true" />
@@ -224,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745821895265</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added scoring system to form">
+      <option name="closed" value="true" />
+      <created>1745872719753</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745872719753</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,7 +249,8 @@
     <MESSAGE value="ResultsPage template complete" />
     <MESSAGE value="Reset variables to Form when re-prompted" />
     <MESSAGE value="minor adjustments + bugfix" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor adjustments + bugfix" />
+    <MESSAGE value="added scoring system to form" />
+    <option name="LAST_COMMIT_MESSAGE" value="added scoring system to form" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

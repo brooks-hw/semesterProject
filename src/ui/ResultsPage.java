@@ -1,6 +1,7 @@
 package ui;
 
 import org.jfree.chart.ChartPanel;
+import models.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,9 @@ public class ResultsPage extends JPanel {
 
     public ResultsPage(iScreenManager screenManager) {
         this.screenManager = screenManager;
+        User user = User.getInstance(); // Get the singleton User
+        String riskProfile = user.getRiskProfile(); // Fetch risk profile
+        int totalScore = user.getTotalScore();      // Fetch total score
         this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
         setOpaque(false);
         setLayout(new BorderLayout());
@@ -40,7 +44,7 @@ public class ResultsPage extends JPanel {
         resultText.setFont(new Font("Arial", Font.BOLD, 32));
         resultText.setForeground(Color.WHITE);
 
-        JLabel balancedInvestor = new JLabel("balanced investor");
+        JLabel balancedInvestor = new JLabel(riskProfile);
         balancedInvestor.setFont(new Font("Arial", Font.BOLD, 32));
         balancedInvestor.setForeground(Color.GREEN);
 
@@ -50,12 +54,26 @@ public class ResultsPage extends JPanel {
 
         mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Small gap
 
+        String descriptionText = "";
+        switch (riskProfile) {
+            case "Conservative Investor":
+                descriptionText = "A conservative investor prioritizes low-risk, steady returns.";
+                break;
+            case "Balanced Investor":
+                descriptionText = "A balanced investor takes moderate risks for balanced growth.";
+                break;
+            case "Aggressive Investor":
+                descriptionText = "An aggressive investor seeks high returns and accepts higher risks.";
+                break;
+            case "Speculative Investor":
+                descriptionText = "A speculative investor embraces very high risks for potentially very high rewards.";
+                break;
+            default:
+                descriptionText = "Investor profile not identified.";
+        }
         // Description text
         JLabel descriptionLabel = new JLabel(
-                "<html><div style='text-align: center;'>"
-                        + "A balanced investor will take on a moderate amount of risk<br>"
-                        + "whilst also investing in much safer options as well."
-                        + "</div></html>"
+                "<html><div style='text-align: center;'>" + descriptionText + "</div></html>"
         );
         descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         descriptionLabel.setForeground(Color.LIGHT_GRAY);
@@ -133,6 +151,7 @@ public class ResultsPage extends JPanel {
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                User.logOutInstance();
                 ((MainFrame) screenManager).loginPage.returnLogin();
                 screenManager.switchTo("Login Page");
             }

@@ -21,6 +21,13 @@ public class MainFrame implements iScreenManager {
 
         // Cast to CardLayout in order to switch panels
         CardLayout cardLayout = (CardLayout) layout;
+
+        if (screenName.equals("Results Page")) {
+            // Recreate a fresh ResultsPage based on latest User info
+            JPanel resultsPage = new ResultsPage(this);
+            panelManager.add(resultsPage, "Results Page");
+        }
+
         cardLayout.show(panelManager, screenName);
 
         // Print to console panel we're switching to for debugging purposes
@@ -64,10 +71,6 @@ public class MainFrame implements iScreenManager {
         JPanel investmentForm = new InvestmentForm(this);
         investmentForm.setOpaque(false);
         panelManager.add(investmentForm, "Investment Form");
-
-        JPanel resultsPage = new ResultsPage(this);
-        resultsPage.setOpaque(false);
-        panelManager.add(resultsPage, "Results Page");
 
         mainFrame.add(panelManager);
         mainFrame.setContentPane(panelManager);

@@ -148,7 +148,8 @@ public class LoginPage extends JPanel{
                         if(passwords.get(i).equals(pass))
                         {
                             String name = names.get(i);
-                            User newUser = new User(name, pass);
+                            //User newUser = new User(name, pass);
+                            User newUser = User.getInstance(name, pass);
                             ((MainFrame) screenManager).getHomePage().setup(newUser);
                             errorLabel.setVisible(false);
                             cardLayout.show(loginPanel, "prompt");
@@ -201,7 +202,8 @@ public class LoginPage extends JPanel{
             {
                 String user = "John Doe";
                 String pass = "test";
-                User newUser = new User(user, pass);
+                //User newUser = new User(user, pass);
+                User newUser = User.getInstance(user, pass);
                 ((MainFrame) screenManager).getHomePage().setup(newUser);
                 errorLabel.setVisible(false);
                 cardLayout.show(loginPanel, "prompt");

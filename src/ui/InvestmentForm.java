@@ -1,5 +1,7 @@
 package ui;
 
+import models.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -153,7 +155,9 @@ public class InvestmentForm extends JPanel {
                 smallHeader.setText(getHeaderText());
                 cardLayout.show(questionPanel, "Q" + currentQuestionIndex);
             } else {
-                System.out.println(totalScore);
+                User user = User.getInstance();
+                user.setTotalScore(totalScore);
+                user.setRiskProfile(calculateRiskProfile(totalScore));
                 smallHeader.setText("Risk Profile Analysis: Complete!");
                 screenManager.switchTo("Congratulations");
             }
@@ -176,6 +180,18 @@ public class InvestmentForm extends JPanel {
         revalidate();
         repaint();
         totalScore = 0;
+    }
+
+    private String calculateRiskProfile(int score) {
+        if (score <= 8) {
+            return "Conservative Investor";
+        } else if (score <= 16) {
+            return "Balanced Investor";
+        } else if (score <= 23) {
+            return "Aggressive Investor";
+        } else {
+            return "Speculative Investor";
+        }
     }
 
     @Override
