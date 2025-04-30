@@ -7,6 +7,8 @@ public class User {
     private String password;
     private String name;
     private Portfolio portfolio;
+    private double balance;
+
     private int totalScore;
     private String riskProfile;
 
@@ -16,6 +18,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.portfolio = new Portfolio();
+        this.balance = 0.0;
         this.totalScore = 0;
         this.riskProfile = "";
     }
@@ -56,6 +59,10 @@ public class User {
 
     public int getTotalScore() {
         return totalScore;
+    }
+
+    public double getBalance() {
+        return this.balance;
     }
 
     public String getRiskProfile() {

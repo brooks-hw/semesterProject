@@ -33,11 +33,5 @@ public class Stock {
         System.out.println("Name: " + name + " Symbol: " + symbol + " Price: " + price + "\n");
     }
 
-    public static void main(String[] args) {
-        Stock tesla = new Stock("Tesla Inc.", "TSLA", 173.95);
-        Stock zayas = new Stock("Zayas inc.", "ZYAS", 343.24);
 
-        tesla.printInfo();
-        zayas.printInfo();
-    }
 }

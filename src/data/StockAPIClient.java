@@ -1,90 +1,66 @@
 package data;
 
+import models.PriceEntry;
+import models.StockData;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StockAPIClient {
 
-    private static final String API_KEY = "";
-    private static final String BASE_URL = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE";
+    private Map<String, StockData> stockDataMap;
 
-    public static double getStockPrice(String symbol) {
+    public StockAPIClient() {
+        this.stockDataMap = loadStockDataFromJson("data/stock_data.json");
+    }
+
+    public StockData getStockData(String symbol) {
+        return stockDataMap.get(symbol);
+    }
+
+    public Map<String, StockData> loadStockDataFromJson(String filepath) {
+        Map<String, StockData> map = new HashMap<>();
+
         try {
-            JSONObject quote = fetchQuote(symbol);
-            return Double.parseDouble(quote.getString("05. price"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
+            String content = new String(Files.readAllBytes(Paths.get(filepath)));
+            JSONObject root = new JSONObject(content);
+
+            for (String ticker : root.keySet()) {
+                JSONObject stockObj = root.getJSONObject(ticker);
+
+                String name = stockObj.getString("name");
+
+                List<PriceEntry> recentPrices = parsePriceArray(stockObj.getJSONArray("recent_prices"));
+                List<PriceEntry> historicalPrices = parsePriceArray(stockObj.getJSONArray("historical_prices"));
+
+                StockData stockData = new StockData(name, recentPrices, historicalPrices);
+                map.put(ticker, stockData);
+            }
+
+        } catch (IOException e) {
+            System.err.println("Error loading stock data: " + e.getMessage());
         }
+
+        return map;
     }
 
-    public static boolean getStockChange(String symbol) {
-        try {
-            JSONObject quote = fetchQuote(symbol);
-            double price = Double.parseDouble(quote.getString("05. price"));
-            double previousClose = Double.parseDouble(quote.getString("08. previous close"));
-            return price >= previousClose;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false; // default to down if error
-        }
-    }
-    private static JSONObject fetchQuote(String symbol) throws Exception {
-        String urlStr = BASE_URL + "&symbol=" + symbol + "&apikey=" + API_KEY;
-        URL url = new URL(urlStr);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
+    private List<PriceEntry> parsePriceArray(JSONArray array) {
+        List<PriceEntry> list = new ArrayList<>();
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        StringBuilder response = new StringBuilder();
-        String inputLine;
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-
-        JSONObject json = new JSONObject(response.toString());
-        if (json.has("Global Quote")) {
-            return json.getJSONObject("Global Quote");
-        } else {
-            throw new Exception("Invalid API response: " + json.toString());
-        }
-    }
-
-
-
-
-    // TODO: integrate with actual API for real lookups
-    public static String nameFromSym(String symbol) {
-
-        // NOTE: all this code is temporary for debugging
-        char firstChar = symbol.charAt(0);
-        firstChar += 32;    //add 32 to the char to make it lowercase
-
-        if (firstChar >= 'a' && firstChar <= 'g') {
-            return "stockName1";
-        }
-        else if (firstChar >= 'h' && firstChar <= 'n') {
-            return "stockName2";
-        }
-        else if (firstChar >= 'o' && firstChar <= 's') {
-            return "stockName3";
-        }
-        else {
-            return "stockName4";
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject obj = array.getJSONObject(i);
+            String date = obj.getString("date");
+            double price = obj.getDouble("price");
+            list.add(new PriceEntry(date, price));
         }
 
-        // pseudocode to lookup the stock name from symbol
-        // String stockName = APIKey.getStockName(symbol);
-        // return stockName;
-    }
-
-    public static void main(String[] args) {
-
+        return list;
     }
 }

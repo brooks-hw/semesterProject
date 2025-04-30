@@ -39,13 +39,13 @@ public class HomePage extends JPanel {
         setLayout(new BorderLayout());
         TickerPanel tickerPanel = new TickerPanel();
         add(tickerPanel, BorderLayout.NORTH);
-        add(createChartPanel(), BorderLayout.CENTER);
+        add(createChartPanel(user), BorderLayout.CENTER);
         add(createRightPanel(), BorderLayout.EAST);
 
         System.out.println(user.getUsername() + " " +  user.getPassword());
     }
 
-    private JPanel createChartPanel() {
+    private JPanel createChartPanel(User user) {
         JPanel leftPanel = new JPanel(new BorderLayout());
 
         // === 1. User Info Box (Top of chart panel) ===
@@ -58,7 +58,7 @@ public class HomePage extends JPanel {
         nameLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
         nameLabel.setForeground(Color.WHITE);
 
-        JLabel investmentLabel = new JLabel("Total Invested: $25,430.75");
+        JLabel investmentLabel = new JLabel("Total Invested: $" + user.getBalance());
         investmentLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
         investmentLabel.setForeground(Color.WHITE);
 
@@ -119,7 +119,7 @@ public class HomePage extends JPanel {
         rightPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         // Table Column Names
-        String[] columnNames = {"NAME", "HOLDING", "PRICE", "GAIN"};
+        String[] columnNames = {"NAME", "TYPE", "HOLDING", "PRICE", "GAIN"};
         Object[][] data = {};
         tableModel = new DefaultTableModel(data, columnNames);
         JTable stockTable = new JTable(tableModel);
@@ -135,10 +135,10 @@ public class HomePage extends JPanel {
         rightPanel.add(scrollPane, BorderLayout.CENTER);
 
         // Dummy data
-        tableModel.addRow(new Object[]{"AAPL", 10, 145.23, 3.5});
-        tableModel.addRow(new Object[]{"TSA", 10, 135.23, 3.5});
-        tableModel.addRow(new Object[]{"AMZN", 101, 142.23, 3.5});
-        tableModel.addRow(new Object[]{"NVDA", 10, 145.23, 90.5});
+        tableModel.addRow(new Object[]{"AAPL", "Stock", 10, 145.23, 3.5});
+        tableModel.addRow(new Object[]{"TSA", "Crypto", 10, 135.23, 3.5});
+        tableModel.addRow(new Object[]{"AMZN", "Bond", 101, 142.23, 3.5});
+        tableModel.addRow(new Object[]{"NVDA", "Cash", 10, 145.23, 90.5});
 
         // Buttons
         JPanel userButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));

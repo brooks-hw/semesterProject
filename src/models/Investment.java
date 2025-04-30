@@ -83,7 +83,7 @@ public class Investment {
     // WHEN: after StockAPIClient is functional
     public double getCurrentValue() {
         //get latest price from StockAPIClient
-        double latestPrice = APIClient.getStockPrice(stock.getSymbol());
+        double latestPrice = 120;
 
         //update stock's price
         stock.setPrice(latestPrice);
@@ -92,13 +92,6 @@ public class Investment {
         return latestPrice * numShares;
 
     }
-
-    public double getPercentChange () {
-        return this.percentChange;
-    }
-
-    //TODO: Update this to base the profit on the current value given by getCurrentValue()
-    // WHEN: after getCurrentValue() method has been properly finished
     public double getProfit() {
         //profit is the difference between current value and total cost
         return getCurrentValue() - totalCost;
@@ -125,7 +118,5 @@ public class Investment {
         System.out.println("Current Investment Value: " + currentValue + ", Total Profit: " + profit + ", Percent Change: " + percentChange + "\n");
     }
 
-    public static void main(String[] args) {
 
-    }
 }

@@ -419,6 +419,7 @@ public class LoginPage extends JPanel{
         promptLabel.setFont(new Font("Book Antiqua", Font.BOLD, 35));
         promptLabel.setForeground(Color.WHITE);
 
+
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         promptLabel.setPreferredSize(new Dimension(800, 400));
         labelPanel.setOpaque(false);

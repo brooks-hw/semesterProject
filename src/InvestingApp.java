@@ -1,17 +1,7 @@
-import data.InvestmentDataStorage;
-import data.StockAPIClient;
-import models.Investment;
-import models.Portfolio;
-import models.Stock;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
-import java.util.Scanner;
-
 // This class should handle the event loop
 public class InvestingApp {
 
+    /*
     Portfolio portfolio;       //represents user portfolio
     // InvestmentDataStorage dataStore;      //object to deal with loading/storing data
     StockAPIClient stockClient;     //client to deal with stock price functionality
@@ -168,6 +158,6 @@ public class InvestingApp {
 
         //Save the contents of the current portfolio before exiting
         investingApp.savePortfolio();
-         */
-    }
+
+    } */
 }
