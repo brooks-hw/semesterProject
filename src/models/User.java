@@ -5,12 +5,14 @@ public class User {
 
     private String username;
     private String password;
+    private String name;
     private Portfolio portfolio;
     private int totalScore;
     private String riskProfile;
 
     // Private constructor — prevents "new User()" outside this class
-    private User(String username, String password) {
+    private User(String name, String username, String password) {
+        this.name = name;
         this.username = username;
         this.password = password;
         this.portfolio = new Portfolio();
@@ -19,9 +21,9 @@ public class User {
     }
 
     // Public method to get the instance
-    public static User getInstance(String username, String password) {
+    public static User getInstance(String name, String username, String password) {
         if (instance == null) {
-            instance = new User(username, password);
+            instance = new User(name, username, password);
         }
         return instance;
     }
@@ -39,6 +41,10 @@ public class User {
     }
 
     // getters and setters
+
+    public String getName() {
+        return this.name;
+    }
 
     public String getUsername() {
         return this.username;

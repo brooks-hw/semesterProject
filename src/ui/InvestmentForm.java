@@ -6,8 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 
 public class InvestmentForm extends JPanel {
@@ -18,7 +23,7 @@ public class InvestmentForm extends JPanel {
     private int totalQuestions;
     private int currentQuestionIndex = 0;
     private JLabel smallHeader;
-    private int totalScore = 0;
+    private int totalScore = -1;
     private List<Integer> answers;
     private iScreenManager screenManager;
     private Image backgroundImage;
@@ -158,6 +163,11 @@ public class InvestmentForm extends JPanel {
                 User user = User.getInstance();
                 user.setTotalScore(totalScore);
                 user.setRiskProfile(calculateRiskProfile(totalScore));
+                try {
+                    writeData("accData", totalScore, calculateRiskProfile(totalScore));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 smallHeader.setText("Risk Profile Analysis: Complete!");
                 screenManager.switchTo("Congratulations");
             }
@@ -173,7 +183,7 @@ public class InvestmentForm extends JPanel {
 
     public void resetForm() {
         currentQuestionIndex = 0;
-        totalScore = 0;
+        totalScore = -1;
         answers = Arrays.asList(new Integer[totalQuestions]);
         smallHeader.setText(getHeaderText());
         cardLayout.show(questionPanel, "Q0");
@@ -206,5 +216,32 @@ public class InvestmentForm extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
+
+    public static void writeData(String filename, int score, String risk) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(filename + ".csv"));
+        StringBuilder input = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            User user = User.getInstance();
+            if (parts.length >= 3) {
+                if(Objects.equals(user.getUsername(), parts[0]))
+                {
+                    line = parts[0] + "," + parts[1] + "," + parts[2] + "," + score + "," + risk + "\n";
+                    input.append(line);
+                }
+                else
+                {
+                    line = line + "\n";
+                    input.append(line);
+                }
+            }
+        }
+        reader.close();
+
+        FileOutputStream writer = new FileOutputStream(filename + ".csv");
+        writer.write(input.toString().getBytes());
+        writer.close();
     }
 }

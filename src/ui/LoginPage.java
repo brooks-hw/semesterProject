@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LoginPage extends JPanel{
     private CardLayout cardLayout;
@@ -19,6 +20,8 @@ public class LoginPage extends JPanel{
     public ArrayList<String> usernames;
     public ArrayList<String> passwords;
     public ArrayList<String> names;
+    public ArrayList<Integer> scores;
+    public ArrayList<String> risk;
     private final iScreenManager screenManager;
 
 
@@ -33,6 +36,8 @@ public class LoginPage extends JPanel{
         usernames = new ArrayList<>();
         passwords = new ArrayList<>();
         names = new ArrayList<>();
+        scores = new ArrayList<>();
+        risk = new ArrayList<>();
 
         setLayout(new BorderLayout());
         setOpaque(false);
@@ -61,6 +66,24 @@ public class LoginPage extends JPanel{
         login.setLayout(new BoxLayout(login, BoxLayout.Y_AXIS));
         login.setBackground(new Color(14, 42, 83));
 
+
+        JPanel quit = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        quit.setOpaque(false);
+        quit.setBackground(Color.WHITE);
+        JButton quitButton = new JButton("Quit");
+        quitButton.setForeground(Color.WHITE);
+        quitButton.setFocusPainted(false);
+        quitButton.setBackground(new Color(220, 20, 60));
+
+        quitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0); // Terminates the program
+            }
+        });
+
+        quit.add(quitButton);
+        login.add(quit, BorderLayout.EAST);
+
         JPanel labelPanel = new JPanel();
         labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
         labelPanel.setOpaque(false);
@@ -79,7 +102,7 @@ public class LoginPage extends JPanel{
         errorLabel.setForeground(Color.RED);
         errorLabel.setVisible(false);
 
-        login.add(Box.createVerticalStrut(90));
+        login.add(Box.createVerticalStrut(15));
         login.add(labelPanel);
         login.add(Box.createVerticalStrut(25));
         login.add(errorLabel);
@@ -135,12 +158,11 @@ public class LoginPage extends JPanel{
                 String user = username.getText();
                 String pass = password.getText();
                 try {
-                    getData("accData", usernames, passwords, names);
+                    getData("accData", usernames, passwords, names, scores, risk);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
                 int size = usernames.size();
-
                 for(int i = 0; i < size; i++)
                 {
                     if(usernames.get(i).equals(user))
@@ -148,11 +170,19 @@ public class LoginPage extends JPanel{
                         if(passwords.get(i).equals(pass))
                         {
                             String name = names.get(i);
-                            //User newUser = new User(name, pass);
-                            User newUser = User.getInstance(name, pass);
+                            int score = scores.get(i);
+                            String risk1 = risk.get(i);
+                            User newUser = User.getInstance(name, user, pass);
                             ((MainFrame) screenManager).getHomePage().setup(newUser);
                             errorLabel.setVisible(false);
-                            cardLayout.show(loginPanel, "prompt");
+                            if(score == -1 && Objects.equals(risk1, "\0")) {
+                                cardLayout.show(loginPanel, "prompt");
+                            }
+                            else {
+                                newUser.setTotalScore(score);
+                                newUser.setRiskProfile(risk1);
+                                screenManager.switchTo("Home Page");
+                            }
                         }
                     }
                 }
@@ -200,10 +230,10 @@ public class LoginPage extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                String user = "John Doe";
-                String pass = "test";
-                //User newUser = new User(user, pass);
-                User newUser = User.getInstance(user, pass);
+                String name = "John Doe";
+                String user = "test";
+                String pass = "test!";
+                User newUser = User.getInstance(name, user, pass);
                 ((MainFrame) screenManager).getHomePage().setup(newUser);
                 errorLabel.setVisible(false);
                 cardLayout.show(loginPanel, "prompt");
@@ -302,7 +332,7 @@ public class LoginPage extends JPanel{
                 String pass = password.getText();
                 boolean found = false;
                 try {
-                    getData("accData", usernames, passwords, names);
+                    getData("accData", usernames, passwords, names, scores, risk);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -358,7 +388,24 @@ public class LoginPage extends JPanel{
         buttonPanel.add(createButton);
         buttonPanel.add(Box.createVerticalStrut(100));
 
+        JButton backButton = new JButton("BACK");
+        backButton.setFont(new Font("Ariel", Font.BOLD, 15));
+        backButton.setBackground(new Color(14, 42, 83));
+        backButton.setForeground(Color.WHITE);
+        backButton.setFocusPainted(false);
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backButton.setPreferredSize(new Dimension(18, 19));
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                cardLayout.show(loginPanel, "login");
+            }
+        });
+
         create.add(buttonPanel);
+        create.add(backButton);
         return create;
     }
 
@@ -431,22 +478,28 @@ public class LoginPage extends JPanel{
 
     public static void saveData(String filename, String user, String pass, String name) throws IOException {
         FileWriter writer = new FileWriter(filename + ".csv", true);
-        writer.write(user + "," + pass + "," + name + "\n");
+        int quesStat = -1;
+        String risk = "\0";
+        writer.write(user + "," + pass + "," + name + "," + quesStat + "," + risk + "\n");
         writer.close();
     }
 
-    public static void getData(String filename, ArrayList<String> user, ArrayList<String> pass, ArrayList<String> name) throws IOException {
+    public static void getData(String filename, ArrayList<String> user, ArrayList<String> pass, ArrayList<String> name, ArrayList<Integer> score, ArrayList<String> risk) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename + ".csv"));
         String line;
         user.clear();
         pass.clear();
         name.clear();
+        score.clear();
+        risk.clear();
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split(",");
-            if (parts.length >= 3) {
+            if (parts.length >= 5) {
                 user.add(parts[0]);
                 pass.add(parts[1]);
                 name.add(parts[2]);
+                score.add(Integer.parseInt(parts[3]));
+                risk.add(parts[4]);
             }
         }
         reader.close();

@@ -54,7 +54,7 @@ public class HomePage extends JPanel {
         userInfoPanel.setBackground(new Color(245, 245, 245));
         userInfoPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        JLabel nameLabel = new JLabel("Welcome, " + user.getUsername());
+        JLabel nameLabel = new JLabel("Welcome, " + user.getName());
         nameLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
         nameLabel.setForeground(Color.WHITE);
 
@@ -90,6 +90,7 @@ public class HomePage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                User.logOutInstance();
                 ((MainFrame) screenManager).loginPage.returnLogin();
                 screenManager.switchTo("Login Page");
             }
@@ -147,18 +148,26 @@ public class HomePage extends JPanel {
 
         JButton addButton = new JButton("Add Stock");
         JButton removeButton = new JButton("Remove Stock");
+        JButton resultsButton = new JButton("Risk Profile");
 
         addButton.addActionListener(e -> {
             screenManager.switchTo("Add Investment");
+        });
+
+        resultsButton.addActionListener(e -> {
+            screenManager.switchTo("Results Page");
         });
 
         addButton.setBackground(new Color(255, 140, 0));
         addButton.setForeground(Color.BLACK);
         removeButton.setBackground(new Color(255, 140, 0));
         removeButton.setForeground(Color.BLACK);
+        resultsButton.setBackground(new Color(144, 238, 144));
+        removeButton.setForeground(Color.BLACK);
 
         userButtonPanel.add(addButton);
         userButtonPanel.add(removeButton);
+        userButtonPanel.add(resultsButton);
 
         rightPanel.add(userButtonPanel, BorderLayout.SOUTH);
 
