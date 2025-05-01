@@ -53,7 +53,9 @@ public class HomePage extends JPanel {
            PortfolioManager.loadFromTemplate(user);
         }
 
-        user.updateBalance(APIClient);
+        /*
+        //Might need to put this back in the future
+        //user.updateBalance(APIClient);
 
         //for debugging
         for (UserInvestment investment : user.getPortfolio()) {
@@ -62,6 +64,7 @@ public class HomePage extends JPanel {
                     ", Quantity: " + investment.quantity +
                     ", Buy Price: $" + investment.buyPrice);
         }
+         */
 
         removeAll(); //removes all components (buttons, panels, charts etc) used to fix TickerPanel
         revalidate(); //forced recalculation of UI
@@ -158,7 +161,12 @@ public class HomePage extends JPanel {
 
         // Table Column Names
         String[] columnNames = {"NAME", "TYPE", "HOLDING", "PRICE", "GAIN"};
-        tableModel = new DefaultTableModel(columnNames, 0); // initialize with column headers only
+        tableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         JTable stockTable = new JTable(tableModel);
         stockTable.setRowHeight(30);
 
@@ -179,18 +187,21 @@ public class HomePage extends JPanel {
             double buyPrice = inv.buyPrice;
 
             InvestmentData data = APIClient.getInvestmentMap().get(symbol);
-            double latestPrice = buyPrice; // fallback to buyPrice if no data
+            double latestPrice = buyPrice;
 
             if (data != null && data.recentPrices != null && !data.recentPrices.isEmpty()) {
-                // Get the last entry (yesterday’s price)
                 PriceEntry lastEntry = data.recentPrices.get(data.recentPrices.size() - 1);
                 latestPrice = lastEntry.price;
             }
 
             double gain = ((latestPrice - buyPrice) / buyPrice) * 100.0;
-            gain = Math.round(gain * 100.0) / 100.0; // round to 2 decimal places
+            gain = Math.round(gain * 100.0) / 100.0;
 
-            tableModel.addRow(new Object[]{symbol, type, quantity, latestPrice, gain});
+            double displayedQuantity = type.equalsIgnoreCase("Crypto")
+                    ? quantity
+                    : Math.round(quantity * 100.0) / 100.0;
+
+            tableModel.addRow(new Object[]{symbol, type, displayedQuantity, latestPrice, gain});
         }
 
         // Buttons
@@ -204,6 +215,7 @@ public class HomePage extends JPanel {
         JButton resultsButton = new JButton("Risk Profile");
 
         addButton.addActionListener(e -> screenManager.switchTo("Add Investment"));
+        removeButton.addActionListener(e -> ((MainFrame) screenManager).showRemoveInvestmentPage());
         resultsButton.addActionListener(e -> screenManager.switchTo("Results Page"));
 
         addButton.setBackground(new Color(255, 140, 0));

@@ -1,13 +1,14 @@
 package ui;
 
+import data.PortfolioManager;
+import data.StockAPIClient;
 import models.User;
 import models.UserInvestment;
-
-import data.PortfolioManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PortfolioSuggestionPage extends JPanel {
@@ -69,11 +70,15 @@ public class PortfolioSuggestionPage extends JPanel {
         buttonPanel.add(investIndependentlyButton);
 
         useOutlineButton.addActionListener(e -> {
-            // Implement logic to finalize portfolio
-            JOptionPane.showMessageDialog(this, "Portfolio outline selected!");
+            user.setInvestmentAmount(investmentAmount);
+            user.setUsingTemplate(false);
+
+            List<UserInvestment> adjustedPortfolio = generateScaledPortfolio(user, investmentAmount);
+            user.setPortfolio(adjustedPortfolio);
+
+            user.updateBalance(new StockAPIClient()); // ✅ THIS IS CRITICAL
+
             HomePage homePage = ((MainFrame) screenManager).getHomePage();
-            user.setInvestmentAmount(investmentAmount); // ← pass it in!
-            user.setUsingTemplate(true);  // or false
             homePage.setup(user);
             screenManager.switchTo("Home Page");
         });
@@ -88,6 +93,30 @@ public class PortfolioSuggestionPage extends JPanel {
         });
 
         add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    private List<UserInvestment> generateScaledPortfolio(User user, double totalInvestment) {
+        List<UserInvestment> template = switch (user.getRiskProfile()) {
+            case "Conservative Investor" -> PortfolioManager.getConservativeTemplate();
+            case "Balanced Investor" -> PortfolioManager.getBalancedTemplate();
+            case "Aggressive Investor" -> PortfolioManager.getAggressiveTemplate();
+            case "Speculative Investor" -> PortfolioManager.getSpeculativeTemplate();
+            default -> List.of();
+        };
+
+        double portion = 1.0 / template.size(); // Even split
+        List<UserInvestment> scaled = new ArrayList<>();
+
+        for (UserInvestment inv : template) {
+            double allocated = totalInvestment * portion;
+            double shares = allocated / inv.buyPrice;
+
+            // Create new investment with scaled quantity
+            UserInvestment adjusted = new UserInvestment(inv.symbol, inv.type, shares, inv.buyPrice, "");
+            scaled.add(adjusted);
+        }
+
+        return scaled;
     }
 
     private Object[][] getSuggestedPortfolio(User user, double totalInvestment) {

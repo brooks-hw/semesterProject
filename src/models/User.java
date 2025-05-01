@@ -4,7 +4,6 @@ import data.StockAPIClient;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class User {
     private static User instance; // Singleton instance
@@ -51,7 +50,33 @@ public class User {
     }
 
     public void addInvestment(UserInvestment investment) {
+        for (UserInvestment existing : portfolio) {
+            if (existing.symbol.equalsIgnoreCase(investment.symbol)) {
+                // Combine quantities and update price to average buy price
+                double totalQuantity = existing.quantity + investment.quantity;
+                double totalCost = (existing.quantity * existing.buyPrice) + (investment.quantity * investment.buyPrice);
+                existing.quantity = totalQuantity;
+                existing.buyPrice = totalCost / totalQuantity;
+                return;
+            }
+        }
+
+        // If not found, add as new investment
         portfolio.add(investment);
+    }
+
+    public boolean removeInvestment(String symbol, double quantityToRemove) {
+        for (UserInvestment inv : portfolio) {
+            if (inv.symbol.equalsIgnoreCase(symbol)) {
+                if (inv.quantity < quantityToRemove) return false;
+                inv.quantity -= quantityToRemove;
+                if (inv.quantity == 0) {
+                    portfolio.remove(inv);
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<UserInvestment> getPortfolio() {
@@ -59,7 +84,7 @@ public class User {
     }
 
     public void setPortfolio(List<UserInvestment> portfolio) {
-        this.portfolio = portfolio;
+        this.portfolio = new ArrayList<>(portfolio);
     }
 
     // getters and setters
@@ -84,20 +109,13 @@ public class User {
         return this.balance;
     }
 
-    public void updateBalance(StockAPIClient client) {
+    public void updateBalance(StockAPIClient apiClient) {
         double total = 0.0;
-
-        Map<String, InvestmentData> dataMap = client.getInvestmentMap(); // combine stock/crypto/bond data
-
         for (UserInvestment inv : portfolio) {
-            InvestmentData data = dataMap.get(inv.symbol);
-            if (data != null && data.recentPrices != null && !data.recentPrices.isEmpty()) {
-                double latestPrice = data.recentPrices.get(data.recentPrices.size() - 1).price;
-                total += inv.quantity * latestPrice;
-            }
+            double price = inv.buyPrice; // or use API if needed
+            total += inv.quantity * price;
         }
-
-        this.balance = Math.round(total * 100.0) / 100.0; // round to 2 decimals
+        this.balance = Math.round(total * 100.0) / 100.0;
     }
 
     public void setBalance(double amount) {
@@ -132,11 +150,5 @@ public class User {
         return this.usingTemplate;
     }
 
-    public void addInvestment() {
-        // implementation
-    }
 
-    public void removeInvestment() {
-        // implementation
-    }
 }

@@ -27,7 +27,7 @@ public class StockAPIClient {
     //Constructor automatically loads stock data from the default file path.
     public StockAPIClient() {
         this.investmentMap = loadInvestmentData("data/investment_data.json");
-        printInvestmentDataSummary();
+        //printInvestmentDataSummary();
     }
 
     public InvestmentData getDataFromSymbol(String symbol) {

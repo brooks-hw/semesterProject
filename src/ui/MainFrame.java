@@ -60,10 +60,6 @@ public class MainFrame implements iScreenManager {
         homePage.setOpaque(false);
         panelManager.add(homePage, "Home Page");
 
-        AddInvestmentPage addInvestmentPage = new AddInvestmentPage(this);
-        addInvestmentPage.setOpaque(false);
-        panelManager.add(addInvestmentPage, "Add Investment");
-
         JPanel investmentForm = new InvestmentForm(this);
         investmentForm.setOpaque(false);
         panelManager.add(investmentForm, "Investment Form");
@@ -71,6 +67,10 @@ public class MainFrame implements iScreenManager {
         JPanel investmentAmountPage = new InvestmentAmountPage(this);
         investmentAmountPage.setOpaque(false);
         panelManager.add(investmentAmountPage, "Investment Amount Page");
+
+        AddInvestmentPage addInvestmentPage = new AddInvestmentPage(this);
+        addInvestmentPage.setOpaque(false);
+        panelManager.add(addInvestmentPage, "Add Investment");
 
 
         mainFrame.add(panelManager);
@@ -98,6 +98,13 @@ public class MainFrame implements iScreenManager {
         portfolioPage.setOpaque(false);
         panelManager.add(portfolioPage, "Portfolio Suggestion Page");
         cardLayout.show(panelManager, "Portfolio Suggestion Page");
+    }
+
+    public void showRemoveInvestmentPage() {
+        RemoveInvestmentPage page = new RemoveInvestmentPage(this);  // `this` is MainFrame, which is the screen manager
+        page.setOpaque(false);
+        panelManager.add(page, "Remove Investment");
+        switchTo("Remove Investment");
     }
 
     public static void main(String[] args) {

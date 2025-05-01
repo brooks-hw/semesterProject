@@ -1,0 +1,62 @@
+[
+  {
+    "buyPrice": 180,
+    "symbol": "AAPL",
+    "quantity": 5.555555555555555,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 2700,
+    "symbol": "GOOGL",
+    "quantity": 0.37037037037037035,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 320,
+    "symbol": "MSFT",
+    "quantity": 3.125,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 890,
+    "symbol": "AVGO",
+    "quantity": 1.1235955056179776,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 102.5,
+    "symbol": "CORPAA",
+    "quantity": 9.75609756097561,
+    "type": "Bond"
+  },
+  {
+    "buyPrice": 100,
+    "symbol": "US10Y",
+    "quantity": 10,
+    "type": "Bond"
+  },
+  {
+    "buyPrice": 98.75,
+    "symbol": "MUNI",
+    "quantity": 10.126582278481013,
+    "type": "Bond"
+  },
+  {
+    "buyPrice": 94314,
+    "symbol": "BTC",
+    "quantity": 0.010602879742137965,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 1795,
+    "symbol": "ETH",
+    "quantity": 0.5571030640668524,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 100,
+    "symbol": "CASH",
+    "quantity": 10,
+    "type": "Cash"
+  }
+]
