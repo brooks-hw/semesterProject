@@ -1,11 +1,11 @@
 package models;
 
 public class PriceEntry {
-    public String date;
+    public String timestamp;
     public double price;
 
-    public PriceEntry (String date, double price) {
-        this.date = date;
+    public PriceEntry (String timestamp, double price) {
+        this.timestamp = timestamp;
         this.price = price;
     }
 }

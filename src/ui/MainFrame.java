@@ -12,26 +12,21 @@ public class MainFrame implements iScreenManager {
     private HomePage homePage;
 
     private static JFrame mainFrame;
-    private static JPanel panelManager;
+
+    private JPanel panelManager;
+    private CardLayout cardLayout;
 
     public LoginPage loginPage;
 
     public void switchTo(String screenName) {
-        LayoutManager layout = panelManager.getLayout();
-
-        // Cast to CardLayout in order to switch panels
-        CardLayout cardLayout = (CardLayout) layout;
-
         if (screenName.equals("Results Page")) {
-            // Recreate a fresh ResultsPage based on latest User info
             JPanel resultsPage = new ResultsPage(this);
+            resultsPage.setOpaque(false);
             panelManager.add(resultsPage, "Results Page");
         }
 
         cardLayout.show(panelManager, screenName);
-
-        // Print to console panel we're switching to for debugging purposes
-        System.out.println(screenName);
+        System.out.println("Switched to: " + screenName);
     }
 
     // Instantiate member variables
@@ -42,7 +37,8 @@ public class MainFrame implements iScreenManager {
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
 
-        panelManager = new JPanel(new CardLayout());
+        cardLayout = new CardLayout();
+        panelManager = new JPanel(cardLayout);
         panelManager.setOpaque(true);
         panelManager.setBackground(new Color(14, 42, 83));
 
@@ -72,6 +68,11 @@ public class MainFrame implements iScreenManager {
         investmentForm.setOpaque(false);
         panelManager.add(investmentForm, "Investment Form");
 
+        JPanel investmentAmountPage = new InvestmentAmountPage(this);
+        investmentAmountPage.setOpaque(false);
+        panelManager.add(investmentAmountPage, "Investment Amount Page");
+
+
         mainFrame.add(panelManager);
         mainFrame.setContentPane(panelManager);
         mainFrame.setVisible(true);
@@ -89,6 +90,14 @@ public class MainFrame implements iScreenManager {
 
     public HomePage getHomePage() {
         return homePage;
+    }
+
+    @Override
+    public void switchToPortfolioPage(double investmentAmount) {
+        JPanel portfolioPage = new PortfolioSuggestionPage(investmentAmount, this);
+        portfolioPage.setOpaque(false);
+        panelManager.add(portfolioPage, "Portfolio Suggestion Page");
+        cardLayout.show(panelManager, "Portfolio Suggestion Page");
     }
 
     public static void main(String[] args) {

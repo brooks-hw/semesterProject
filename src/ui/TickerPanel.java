@@ -1,7 +1,7 @@
 package ui;
 
 import data.StockAPIClient;
-import models.StockData;
+import models.InvestmentData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,9 +18,10 @@ public class TickerPanel extends JPanel {
     private final int scrollSpeed = 10; // Lower is faster
     private Timer timer;
 
-    public TickerPanel() {
+    public TickerPanel(StockAPIClient APIClient) {
+        this.APIClient = APIClient;
         initSymbols();
-        setText();
+        setText(APIClient);
 
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(800, 30));
@@ -61,55 +62,21 @@ public class TickerPanel extends JPanel {
 
 
     public void initSymbols() {
-        //List of all stock Symbols
-        this.symbols.add("GOOGL");
-        this.symbols.add("AAPL");
-        this.symbols.add("AVGO");
-        this.symbols.add("JPM");
-        this.symbols.add("JNJ");
-        this.symbols.add("MRK");
-        this.symbols.add("UNH");
-        this.symbols.add("MSFT");
-        this.symbols.add("COST");
-        this.symbols.add("TSLA");
-        this.symbols.add("MA");
-        this.symbols.add("V");
-        this.symbols.add("LLY");
-        this.symbols.add("NFLX");
-        this.symbols.add("NVDA");
-        this.symbols.add("META");
-        this.symbols.add("KO");
-        this.symbols.add("BAC");
-        this.symbols.add("ORCL");
-        this.symbols.add("ABBV");
-        this.symbols.add("DIS");
-        this.symbols.add("MCD");
-        this.symbols.add("XOM");
-        this.symbols.add("PG");
-        this.symbols.add("ADBE");
-        this.symbols.add("PEP");
-        this.symbols.add("HD");
-        this.symbols.add("AMZN");
-        this.symbols.add("WMT");
-        this.symbols.add("CRM");
+        this.symbols = new ArrayList<>(APIClient.getStockDataMap().keySet());
     }
 
-    public void setText() {
+    public void setText(StockAPIClient APIClient) {
         this.text = "     ";
 
         //Stop one before to avoid strange spacing
-        for (int i = 0; i < symbols.size() - 1; ++i) {
+        for (int i = 0; i < symbols.size(); ++i) {
             //First add the symbol and a space for the price
             this.text += symbols.get(i);
             this.text += " - ";
 
-
-            this.APIClient = new StockAPIClient();
-
             //Get the price of the current stock
-            StockData currentData = APIClient.getStockData(symbols.get(i));
+            InvestmentData currentData = APIClient.getStockData(symbols.get(i));
             double stockPrice = currentData.recentPrices.get(0).price;
-
 
             this.text = this.text + stockPrice + "  ";
 
@@ -128,7 +95,7 @@ public class TickerPanel extends JPanel {
     }
 
     public boolean hasGoneUp(StockAPIClient APIClient, String symbol) {
-        StockData currentData = APIClient.getStockData(symbol);
+        InvestmentData currentData = APIClient.getStockData(symbol);
         //Get today's and yesterday's prices
         double currentPrice = currentData.recentPrices.get(0).price;
         double prevPrice = currentData.recentPrices.get(1).price;
@@ -137,5 +104,4 @@ public class TickerPanel extends JPanel {
         if (currentPrice > prevPrice) return true;
         else return false;
     }
-
 }

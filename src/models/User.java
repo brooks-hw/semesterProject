@@ -1,12 +1,15 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private static User instance; // Singleton instance
 
     private String username;
     private String password;
     private String name;
-    private Portfolio portfolio;
+    private List<UserInvestment> portfolio = new ArrayList<>();
     private double balance;
 
     private int totalScore;
@@ -17,7 +20,6 @@ public class User {
         this.name = name;
         this.username = username;
         this.password = password;
-        this.portfolio = new Portfolio();
         this.balance = 0.0;
         this.totalScore = 0;
         this.riskProfile = "";
@@ -41,6 +43,18 @@ public class User {
 
     public static void logOutInstance() {
         instance = null;
+    }
+
+    public void addInvestment(UserInvestment investment) {
+        portfolio.add(investment);
+    }
+
+    public List<UserInvestment> getPortfolio() {
+        return portfolio;
+    }
+
+    public void setPortfolio(List<UserInvestment> portfolio) {
+        this.portfolio = portfolio;
     }
 
     // getters and setters

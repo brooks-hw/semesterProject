@@ -1,5 +1,6 @@
 package ui;
 
+import data.StockAPIClient;
 import models.User;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -22,6 +23,8 @@ public class HomePage extends JPanel {
     private User user;
     private iScreenManager screenManager;
     private DefaultTableModel tableModel;
+    private StockAPIClient APIClient;
+    private boolean usingTemplate;
 
     //Set up a blank HomePage before user is authenticated (in LoginPage)
     public HomePage(iScreenManager screenManager) {
@@ -31,13 +34,14 @@ public class HomePage extends JPanel {
     // Set up HomePage with correct data after user is authenticated (in LoginPage)
     public void setup(User user) {
         this.user = user;
+        this.APIClient = new StockAPIClient();
 
         removeAll(); //removes all components (buttons, panels, charts etc) used to fix TickerPanel
         revalidate(); //forced recalculation of UI
         repaint();
 
         setLayout(new BorderLayout());
-        TickerPanel tickerPanel = new TickerPanel();
+        TickerPanel tickerPanel = new TickerPanel(APIClient);
         add(tickerPanel, BorderLayout.NORTH);
         add(createChartPanel(user), BorderLayout.CENTER);
         add(createRightPanel(), BorderLayout.EAST);
@@ -172,6 +176,14 @@ public class HomePage extends JPanel {
         rightPanel.add(userButtonPanel, BorderLayout.SOUTH);
 
         return rightPanel;
+    }
+
+    public void setUsingTemplate(boolean usingTemplate) {
+        this.usingTemplate = usingTemplate;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     private JFreeChart createDummyChart() {

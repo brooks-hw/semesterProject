@@ -171,7 +171,14 @@ public class ResultsPage extends JPanel {
             }
         });
 
-        // Retake and Import buttons currently unfunctional (can add listeners later)
+        importButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                screenManager.switchTo("Investment Amount Page");
+            }
+        });
+
+        // Import button currently unfunctional (can add listeners later)
     }
 
     @Override

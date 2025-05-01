@@ -5,4 +5,5 @@ package ui;
 
 public interface iScreenManager {
     void switchTo(String screenName);
+    void switchToPortfolioPage(double investmentAmount);
 }
