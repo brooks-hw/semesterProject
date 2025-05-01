@@ -17,6 +17,7 @@ public class TickerPanel extends JPanel {
     private int xPosition;
     private final int scrollSpeed = 10; // Lower is faster
     private Timer timer;
+    private Timer updateTimer;
 
     public TickerPanel(StockAPIClient APIClient) {
         this.APIClient = APIClient;
@@ -111,5 +112,11 @@ public class TickerPanel extends JPanel {
         //Return true if price has gone up
         if (currentPrice > prevPrice) return true;
         else return false;
+    }
+
+    public void stop() {
+        if (updateTimer != null && updateTimer.isRunning()) {
+            updateTimer.stop();
+        }
     }
 }

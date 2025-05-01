@@ -119,6 +119,7 @@ public class AddInvestmentPage extends JPanel {
             UserInvestment newInv = new UserInvestment(symbol, data.type, quantity, latestPrice, "");
             user.addInvestment(newInv);
 
+            user.updateBalance(new StockAPIClient());
             ((MainFrame) screenManager).getHomePage().setup(user);
 
             JOptionPane.showMessageDialog(this, "Investment added successfully!");

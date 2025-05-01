@@ -34,6 +34,7 @@ public class HomePage extends JPanel {
     private iScreenManager screenManager;
     private DefaultTableModel tableModel;
     private StockAPIClient APIClient;
+    private JPanel TickerPanel;
 
     private ChartPanel chartComponent;
     private JFreeChart currentChart;
@@ -53,10 +54,8 @@ public class HomePage extends JPanel {
            PortfolioManager.loadFromTemplate(user);
         }
 
-        /*
-        //Might need to put this back in the future
-        //user.updateBalance(APIClient);
-
+        user.updateBalance(new StockAPIClient()); // ✅ THIS IS CRITICAL
+/*
         //for debugging
         for (UserInvestment investment : user.getPortfolio()) {
             System.out.println("Symbol: " + investment.symbol +
@@ -72,6 +71,8 @@ public class HomePage extends JPanel {
 
         setLayout(new BorderLayout());
         TickerPanel tickerPanel = new TickerPanel(APIClient);
+
+
         add(tickerPanel, BorderLayout.NORTH);
         add(createChartPanel(user), BorderLayout.CENTER);
         add(createRightPanel(), BorderLayout.EAST);
@@ -195,7 +196,7 @@ public class HomePage extends JPanel {
             }
 
             double gain = ((latestPrice - buyPrice) / buyPrice) * 100.0;
-cd 
+
             // FORMAT everything
             String displayQty = type.equalsIgnoreCase("Crypto")
                     ? String.format("%.8f", quantity)
