@@ -10,6 +10,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.Day;
+import org.jfree.data.time.Hour;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 
@@ -229,6 +230,43 @@ public class HomePage extends JPanel {
         TimeSeries series = new TimeSeries("Total Portfolio Value");
 
         Map<String, InvestmentData> dataMap = APIClient.getInvestmentMap();
+
+        if (range.equals("1D")) {
+            // For 1D use today_prices (HH:mm timestamps)
+            Map<Integer, Double> hourToValue = new TreeMap<>();
+
+            for (UserInvestment inv : user.getPortfolio()) {
+                InvestmentData data = dataMap.get(inv.symbol);
+                if (data == null || data.todayPrices == null) continue;
+
+                for (PriceEntry entry : data.todayPrices) {
+                    try {
+                        int hour = Integer.parseInt(entry.timestamp.substring(0, 2));
+                        double value = inv.quantity * entry.price;
+                        hourToValue.put(hour, hourToValue.getOrDefault(hour, 0.0) + value);
+                    } catch (Exception e) {
+                        System.err.println("Invalid timestamp: " + entry.timestamp);
+                    }
+                }
+            }
+
+            for (Map.Entry<Integer, Double> entry : hourToValue.entrySet()) {
+                series.add(new Hour(entry.getKey(), new Day()), entry.getValue());
+            }
+
+            TimeSeriesCollection dataset = new TimeSeriesCollection(series);
+            return ChartFactory.createTimeSeriesChart(
+                    "Portfolio Value (1D)",
+                    "Hour",
+                    "USD",
+                    dataset,
+                    false,
+                    false,
+                    false
+            );
+        }
+
+        // For 1W, 1M, 1Y use daily date-based prices
         Map<LocalDate, Double> dateToValue = new TreeMap<>();
 
         for (UserInvestment inv : user.getPortfolio()) {
@@ -239,19 +277,23 @@ public class HomePage extends JPanel {
                 case "1W" -> data.recentPrices.subList(Math.max(0, data.recentPrices.size() - 7), data.recentPrices.size());
                 case "1M" -> data.recentPrices;
                 case "1Y" -> data.historicalPrices;
-                default -> List.of(); // "1D" handled separately
+                default -> List.of();
             };
 
             for (PriceEntry entry : prices) {
-                LocalDate date = LocalDate.parse(entry.timestamp); // format: yyyy-MM-dd
-                double holdingValue = inv.quantity * entry.price;
-                dateToValue.put(date, dateToValue.getOrDefault(date, 0.0) + holdingValue);
+                try {
+                    LocalDate date = LocalDate.parse(entry.timestamp); // expects yyyy-MM-dd
+                    double value = inv.quantity * entry.price;
+                    dateToValue.put(date, dateToValue.getOrDefault(date, 0.0) + value);
+                } catch (Exception e) {
+                    System.err.println("Invalid date format: " + entry.timestamp);
+                }
             }
         }
 
         for (Map.Entry<LocalDate, Double> entry : dateToValue.entrySet()) {
-            LocalDate localDate = entry.getKey();
-            series.add(new Day(localDate.getDayOfMonth(), localDate.getMonthValue(), localDate.getYear()), entry.getValue());
+            LocalDate date = entry.getKey();
+            series.add(new Day(date.getDayOfMonth(), date.getMonthValue(), date.getYear()), entry.getValue());
         }
 
         TimeSeriesCollection dataset = new TimeSeriesCollection(series);

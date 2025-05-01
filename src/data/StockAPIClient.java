@@ -66,6 +66,8 @@ public class StockAPIClient {
         return map;
     }
 
+    //for debugging
+    //TODO: remove or don't call
     public void printInvestmentDataSummary() {
         for (Map.Entry<String, InvestmentData> entry : investmentMap.entrySet()) {
             String symbol = entry.getKey();
