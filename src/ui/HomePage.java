@@ -195,13 +195,16 @@ public class HomePage extends JPanel {
             }
 
             double gain = ((latestPrice - buyPrice) / buyPrice) * 100.0;
-            gain = Math.round(gain * 100.0) / 100.0;
+cd 
+            // FORMAT everything
+            String displayQty = type.equalsIgnoreCase("Crypto")
+                    ? String.format("%.8f", quantity)
+                    : String.format("%.2f", quantity);
 
-            double displayedQuantity = type.equalsIgnoreCase("Crypto")
-                    ? quantity
-                    : Math.round(quantity * 100.0) / 100.0;
+            String displayPrice = String.format("%.2f", latestPrice);
+            String displayGain = String.format("%.2f", gain);
 
-            tableModel.addRow(new Object[]{symbol, type, displayedQuantity, latestPrice, gain});
+            tableModel.addRow(new Object[]{symbol, type, displayQty, displayPrice, displayGain});
         }
 
         // Buttons
