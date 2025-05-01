@@ -20,7 +20,7 @@ public class FormCongratulations extends JPanel {
         congratsLabel.setFont(new Font("Arial", Font.BOLD, 36));
         congratsLabel.setForeground(new Color(50, 205, 50)); // LimeGreen
 
-        JLabel messageLabel = new JLabel("You’ve completed the Risk Profile Analysis.", SwingConstants.CENTER);
+        JLabel messageLabel = new JLabel("You've completed the Risk Profile Analysis.", SwingConstants.CENTER);
         messageLabel.setFont(new Font("Arial", Font.PLAIN, 24));
         messageLabel.setForeground(Color.WHITE);
 

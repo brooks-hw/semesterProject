@@ -31,7 +31,7 @@ public class PortfolioSuggestionPage extends JPanel {
 
         // Portfolio table
         String[] columnNames = {
-                "Name", "Type", "Current Price", "Num Shares", "Percent of Total Invested"
+                "Name", "Type", "Current Price", "Num Shares", "Total Spent", "Percent of Total Invested"
         };
 
         User user = User.getInstance();
@@ -128,7 +128,7 @@ public class PortfolioSuggestionPage extends JPanel {
             default -> List.of(); // fallback
         };
 
-        Object[][] data = new Object[template.size()][5];
+        Object[][] data = new Object[template.size()][6];
 
         double portion = 1.0 / template.size(); // Even split
 
@@ -137,12 +137,14 @@ public class PortfolioSuggestionPage extends JPanel {
             double price = inv.buyPrice;
             double allocated = totalInvestment * portion;
             double shares = allocated / price;
+            double totalSpent = shares * price;
 
             data[i][0] = inv.symbol;
             data[i][1] = inv.type;
             data[i][2] = price;
             data[i][3] = String.format("%.4f", shares);
-            data[i][4] = String.format("%.2f%%", portion * 100);
+            data[i][4] = String.format("$%.2f", totalSpent);
+            data[i][5] = String.format("%.2f%%", portion * 100);
         }
 
         return data;
