@@ -58,11 +58,5 @@
     "symbol": "US10Y",
     "quantity": 2,
     "type": "Bond"
-  },
-  {
-    "buyPrice": 1605.81896,
-    "symbol": "MA",
-    "quantity": 12,
-    "type": "Stock"
   }
 ]
