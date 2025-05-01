@@ -194,7 +194,8 @@ public class LoginPage extends JPanel{
                             //Only prompt questionnaire if user hasn't done it yet
                             errorLabel.setVisible(false);
                             if(score == -1 && Objects.equals(risk1, "\0")) {
-                                cardLayout.show(loginPanel, "prompt");
+                                screenManager.switchTo("Investment Form");
+                                //cardLayout.show(loginPanel, "prompt");
                             }
                             else {
                                 newUser.setTotalScore(score);
@@ -431,6 +432,7 @@ public class LoginPage extends JPanel{
         JPanel prompt = new JPanel();
         prompt.setLayout(new BoxLayout(prompt, BoxLayout.Y_AXIS));
         prompt.setBackground(new Color(14, 42, 83));
+
 
         //question label
         JLabel promptLabel = new JLabel("<html><div style='text-align: center;'>Would you like to complete the questionnaire or go to your homepage?<html>", JLabel.CENTER);

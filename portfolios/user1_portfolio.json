@@ -1,8 +1,8 @@
 [
   {
-    "buyPrice": 9.0E-4,
+    "buyPrice": 8.998623166716552E-4,
     "symbol": "PEPE",
-    "quantity": 10000,
+    "quantity": 10023,
     "type": "Crypto"
   },
   {
@@ -42,15 +42,9 @@
     "type": "Crypto"
   },
   {
-    "buyPrice": 650.7092666666667,
-    "symbol": "TSLA",
-    "quantity": 12,
-    "type": "Stock"
-  },
-  {
     "buyPrice": 290,
     "symbol": "NVDA",
-    "quantity": 3,
+    "quantity": 2,
     "type": "Stock"
   },
   {

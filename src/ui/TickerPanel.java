@@ -115,7 +115,7 @@ public class TickerPanel extends JPanel {
     }
 
     public void stop() {
-        if (updateTimer != null && updateTimer.isRunning()) {
+        if (updateTimer != null) {
             updateTimer.stop();
         }
     }

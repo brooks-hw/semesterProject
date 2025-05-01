@@ -34,7 +34,7 @@ public class HomePage extends JPanel {
     private iScreenManager screenManager;
     private DefaultTableModel tableModel;
     private StockAPIClient APIClient;
-    private JPanel TickerPanel;
+    private TickerPanel tickerPanel;
 
     private ChartPanel chartComponent;
     private JFreeChart currentChart;
@@ -55,23 +55,13 @@ public class HomePage extends JPanel {
         }
 
         user.updateBalance(new StockAPIClient()); // ✅ THIS IS CRITICAL
-/*
-        //for debugging
-        for (UserInvestment investment : user.getPortfolio()) {
-            System.out.println("Symbol: " + investment.symbol +
-                    ", Type: " + investment.type +
-                    ", Quantity: " + investment.quantity +
-                    ", Buy Price: $" + investment.buyPrice);
-        }
-         */
 
         removeAll(); //removes all components (buttons, panels, charts etc) used to fix TickerPanel
         revalidate(); //forced recalculation of UI
         repaint();
 
         setLayout(new BorderLayout());
-        TickerPanel tickerPanel = new TickerPanel(APIClient);
-
+        tickerPanel = new TickerPanel(APIClient);
 
         add(tickerPanel, BorderLayout.NORTH);
         add(createChartPanel(user), BorderLayout.CENTER);
@@ -79,6 +69,8 @@ public class HomePage extends JPanel {
 
         System.out.println(user.getUsername() + " " +  user.getPassword());
     }
+
+
 
     private JPanel createChartPanel(User user) {
         JPanel leftPanel = new JPanel(new BorderLayout());
