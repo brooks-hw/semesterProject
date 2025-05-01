@@ -1,44 +1,38 @@
 [
   {
-    "buyPrice": 100,
-    "symbol": "US10Y",
-    "quantity": 10,
-    "type": "Bond"
-  },
-  {
-    "buyPrice": 102.5,
-    "symbol": "CORPAA",
-    "quantity": 10,
-    "type": "Bond"
-  },
-  {
-    "buyPrice": 98.75,
-    "symbol": "MUNI",
-    "quantity": 10,
-    "type": "Bond"
-  },
-  {
-    "buyPrice": 99.25,
-    "symbol": "US30Y",
-    "quantity": 10,
-    "type": "Bond"
-  },
-  {
-    "buyPrice": 101,
-    "symbol": "TIPS",
-    "quantity": 10,
-    "type": "Bond"
-  },
-  {
-    "buyPrice": 160,
-    "symbol": "JNJ",
-    "quantity": 5,
+    "buyPrice": 720,
+    "symbol": "TSLA",
+    "quantity": 3,
     "type": "Stock"
   },
   {
-    "buyPrice": 60,
-    "symbol": "KO",
-    "quantity": 5,
+    "buyPrice": 3300,
+    "symbol": "AMZN",
+    "quantity": 1,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 250,
+    "symbol": "META",
+    "quantity": 4,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 290,
+    "symbol": "NVDA",
+    "quantity": 4,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 430,
+    "symbol": "NFLX",
+    "quantity": 2,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 2700,
+    "symbol": "GOOGL",
+    "quantity": 1,
     "type": "Stock"
   },
   {
@@ -48,15 +42,21 @@
     "type": "Crypto"
   },
   {
-    "buyPrice": 1000,
-    "symbol": "CASH",
-    "quantity": 1,
-    "type": "Cash"
+    "buyPrice": 1795,
+    "symbol": "ETH",
+    "quantity": 0.1,
+    "type": "Crypto"
   },
   {
-    "buyPrice": 1000,
-    "symbol": "CASH",
-    "quantity": 1,
-    "type": "Cash"
+    "buyPrice": 0.17,
+    "symbol": "DOGE",
+    "quantity": 100,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 99.25,
+    "symbol": "US30Y",
+    "quantity": 2,
+    "type": "Bond"
   }
 ]

@@ -1,45 +1,39 @@
 [
   {
-    "buyPrice": 180,
-    "symbol": "AAPL",
-    "quantity": 5,
-    "type": "Stock"
+    "buyPrice": 9.0E-4,
+    "symbol": "PEPE",
+    "quantity": 10000,
+    "type": "Crypto"
   },
   {
-    "buyPrice": 2700,
-    "symbol": "GOOGL",
-    "quantity": 1,
-    "type": "Stock"
+    "buyPrice": 0.17,
+    "symbol": "DOGE",
+    "quantity": 500,
+    "type": "Crypto"
   },
   {
-    "buyPrice": 320,
-    "symbol": "MSFT",
-    "quantity": 2,
-    "type": "Stock"
+    "buyPrice": 0.0042,
+    "symbol": "LUNR",
+    "quantity": 1000,
+    "type": "Crypto"
   },
   {
-    "buyPrice": 890,
-    "symbol": "AVGO",
-    "quantity": 1,
-    "type": "Stock"
+    "buyPrice": 0.02,
+    "symbol": "X",
+    "quantity": 1000,
+    "type": "Crypto"
   },
   {
-    "buyPrice": 102.5,
-    "symbol": "CORPAA",
-    "quantity": 5,
-    "type": "Bond"
+    "buyPrice": 5.5,
+    "symbol": "VIBE",
+    "quantity": 100,
+    "type": "Crypto"
   },
   {
-    "buyPrice": 100,
-    "symbol": "US10Y",
-    "quantity": 5,
-    "type": "Bond"
-  },
-  {
-    "buyPrice": 98.75,
-    "symbol": "MUNI",
-    "quantity": 5,
-    "type": "Bond"
+    "buyPrice": 1795,
+    "symbol": "ETH",
+    "quantity": 0.5,
+    "type": "Crypto"
   },
   {
     "buyPrice": 94314,
@@ -48,15 +42,21 @@
     "type": "Crypto"
   },
   {
-    "buyPrice": 1795,
-    "symbol": "ETH",
-    "quantity": 0.1,
-    "type": "Crypto"
+    "buyPrice": 720,
+    "symbol": "TSLA",
+    "quantity": 2,
+    "type": "Stock"
   },
   {
-    "buyPrice": 1000,
-    "symbol": "CASH",
-    "quantity": 1,
-    "type": "Cash"
+    "buyPrice": 290,
+    "symbol": "NVDA",
+    "quantity": 3,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 100,
+    "symbol": "US10Y",
+    "quantity": 2,
+    "type": "Bond"
   }
 ]

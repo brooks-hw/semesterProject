@@ -1,5 +1,7 @@
 jane,doe%,Jane Doe,11,Balanced Investor
 rob,bert!,Rob Bert,10,Balanced Investor
 sally,joe!,Sally Joe,18,Aggressive Investor
-user1,user1!,user1,10,Balanced Investor
-user2,user2!,asdf,0,Conservative Investor
+user1,user1!,asdf,30,Speculative Investor
+user2,user2!,asdf,20,Aggressive Investor
+user3,user3!,asdf,10,Balanced Investor
+user4,user4!,asdf,0,Conservative Investor
