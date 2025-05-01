@@ -259,7 +259,7 @@ public class LoginPage extends JPanel{
         });
 
         login.add(buttonPanel);
-        login.add(testLoginButton);
+        //login.add(testLoginButton);
         return login;
     }
 
