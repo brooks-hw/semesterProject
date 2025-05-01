@@ -1,8 +1,14 @@
 package ui;
 
+import models.User;
+import models.UserInvestment;
+
+import data.PortfolioManager;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
 
 public class PortfolioSuggestionPage extends JPanel {
     private Image backgroundImage;
@@ -27,7 +33,8 @@ public class PortfolioSuggestionPage extends JPanel {
                 "Name", "Type", "Current Price", "Num Shares", "Percent of Total Invested"
         };
 
-        Object[][] rowData = getSuggestedPortfolio(investmentAmount);
+        User user = User.getInstance();
+        Object[][] rowData = getSuggestedPortfolio(user, investmentAmount);
 
         JTable table = new JTable(new DefaultTableModel(rowData, columnNames));
         table.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -65,7 +72,9 @@ public class PortfolioSuggestionPage extends JPanel {
             // Implement logic to finalize portfolio
             JOptionPane.showMessageDialog(this, "Portfolio outline selected!");
             HomePage homePage = ((MainFrame) screenManager).getHomePage();
-            homePage.setUsingTemplate(true);  // or false
+            user.setInvestmentAmount(investmentAmount); // ← pass it in!
+            user.setUsingTemplate(true);  // or false
+            homePage.setup(user);
             screenManager.switchTo("Home Page");
         });
 
@@ -73,32 +82,38 @@ public class PortfolioSuggestionPage extends JPanel {
             // Go to manual investment screen or show form
             JOptionPane.showMessageDialog(this, "Switching to independent investment mode...");
             HomePage homePage = ((MainFrame) screenManager).getHomePage();
-            homePage.setUsingTemplate(false);  // or false
+            user.setUsingTemplate(false);  // or false
+            homePage.setup(user);
             screenManager.switchTo("Home Page");
         });
 
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    private Object[][] getSuggestedPortfolio(double totalInvestment) {
-        // Dummy data: real data would likely come from a backend or calculation
-        Object[][] data = {
-                {"Apple", "Stock", 175.00, 0, 0},
-                {"Tesla", "Stock", 250.00, 0, 0},
-                {"US Bonds", "Bond", 100.00, 0, 0},
-                {"Bitcoin", "Crypto", 30000.00, 0, 0},
+    private Object[][] getSuggestedPortfolio(User user, double totalInvestment) {
+        List<UserInvestment> template = switch (user.getRiskProfile()) {
+            case "Conservative Investor" -> PortfolioManager.getConservativeTemplate();
+            case "Balanced Investor" -> PortfolioManager.getBalancedTemplate();
+            case "Aggressive Investor" -> PortfolioManager.getAggressiveTemplate();
+            case "Speculative Investor" -> PortfolioManager.getSpeculativeTemplate();
+            default -> List.of(); // fallback
         };
 
-        double[] weights = {0.35, 0.25, 0.20, 0.20}; // 35%, 25%, etc.
+        Object[][] data = new Object[template.size()][5];
 
-        for (int i = 0; i < data.length; i++) {
-            double price = (double) data[i][2];
-            double allocated = totalInvestment * weights[i];
-            int numShares = (int) (allocated / price);
-            double percent = weights[i] * 100;
+        double portion = 1.0 / template.size(); // Even split
 
-            data[i][3] = numShares;
-            data[i][4] = String.format("%.2f%%", percent);
+        for (int i = 0; i < template.size(); i++) {
+            UserInvestment inv = template.get(i);
+            double price = inv.buyPrice;
+            double allocated = totalInvestment * portion;
+            double shares = allocated / price;
+
+            data[i][0] = inv.symbol;
+            data[i][1] = inv.type;
+            data[i][2] = price;
+            data[i][3] = String.format("%.4f", shares);
+            data[i][4] = String.format("%.2f%%", portion * 100);
         }
 
         return data;

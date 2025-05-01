@@ -139,6 +139,7 @@ public class ResultsPage extends JPanel {
         importButton.setForeground(Color.BLACK);
         importButton.setFocusPainted(false);
 
+
         centerButtonPanel.add(retakeButton);
         centerButtonPanel.add(importButton);
 

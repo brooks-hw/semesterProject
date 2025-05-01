@@ -1,6 +1,6 @@
 package ui;
 
-import data.PortfolioLoader;
+import data.PortfolioManager;
 import models.User;
 import models.UserInvestment;
 
@@ -13,8 +13,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.List;
+import java.util.Objects;
 
 public class LoginPage extends JPanel{
     private CardLayout cardLayout;
@@ -178,7 +178,7 @@ public class LoginPage extends JPanel{
                             User newUser = User.getInstance(name, user, pass);
 
                             // ✅ Load portfolio from file
-                            List<UserInvestment> savedInvestments = PortfolioLoader.loadFromFile(user); // JSON or CSV
+                            List<UserInvestment> savedInvestments = PortfolioManager.loadFromFile(user); // JSON or CSV
                             //Check if user has a portfolio already
                             if (savedInvestments != null) {
                                 newUser.setPortfolio(savedInvestments);
@@ -191,6 +191,7 @@ public class LoginPage extends JPanel{
                             ((MainFrame) screenManager).getHomePage().setup(newUser);
                             ((MainFrame) screenManager).getHomePage().setUser(newUser);
 
+                            //Only prompt questionnaire if user hasn't done it yet
                             errorLabel.setVisible(false);
                             if(score == -1 && Objects.equals(risk1, "\0")) {
                                 cardLayout.show(loginPanel, "prompt");

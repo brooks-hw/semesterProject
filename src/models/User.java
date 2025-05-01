@@ -1,7 +1,10 @@
 package models;
 
+import data.StockAPIClient;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class User {
     private static User instance; // Singleton instance
@@ -11,6 +14,8 @@ public class User {
     private String name;
     private List<UserInvestment> portfolio = new ArrayList<>();
     private double balance;
+    private double investmentAmount;
+    boolean usingTemplate;
 
     private int totalScore;
     private String riskProfile;
@@ -79,6 +84,26 @@ public class User {
         return this.balance;
     }
 
+    public void updateBalance(StockAPIClient client) {
+        double total = 0.0;
+
+        Map<String, InvestmentData> dataMap = client.getInvestmentMap(); // combine stock/crypto/bond data
+
+        for (UserInvestment inv : portfolio) {
+            InvestmentData data = dataMap.get(inv.symbol);
+            if (data != null && data.recentPrices != null && !data.recentPrices.isEmpty()) {
+                double latestPrice = data.recentPrices.get(data.recentPrices.size() - 1).price;
+                total += inv.quantity * latestPrice;
+            }
+        }
+
+        this.balance = Math.round(total * 100.0) / 100.0; // round to 2 decimals
+    }
+
+    public void setBalance(double amount) {
+        this.balance = amount;
+    }
+
     public String getRiskProfile() {
         return riskProfile;
     }
@@ -89,6 +114,22 @@ public class User {
 
     public void setRiskProfile(String riskProfile) {
         this.riskProfile = riskProfile;
+    }
+
+    public void setInvestmentAmount(double amount) {
+        this.investmentAmount = amount;
+    }
+
+    public double getInvestmentAmount() {
+        return investmentAmount;
+    }
+
+    public void setUsingTemplate(boolean usingTemplate) {
+        this.usingTemplate = usingTemplate;
+    }
+
+    public boolean getUsingTemplate() {
+        return this.usingTemplate;
     }
 
     public void addInvestment() {

@@ -21,85 +21,62 @@ import java.util.Map;
  * Worked through with ChatGPT and formatted by Brooks
  */
 public class StockAPIClient {
+    //Holds all the investments by type and symbol
+    private Map<String, InvestmentData> investmentMap;
 
-    // Holds all parsed stock data, keyed by ticker symbol (e.g., "GOOGL")
-    private Map<String, InvestmentData> stockDataMap;
-    private Map<String, InvestmentData> cryptoDataMap;
-    private Map<String, InvestmentData> bondDataMap;
-
-    /**
-     * Constructor automatically loads stock data from the default file path.
-     */
+    //Constructor automatically loads stock data from the default file path.
     public StockAPIClient() {
-        this.stockDataMap = loadStockDataFromJson("data/stock_data.json");
-        this.cryptoDataMap = loadStockDataFromJson("data/crypto_data.json");
-        this.bondDataMap = loadStockDataFromJson("data/bond_data.json");
+        this.investmentMap = loadInvestmentData("data/investment_data.json");
+        printInvestmentDataSummary();
     }
 
-    /**
-     * Returns the StockData object for a given symbol (e.g., "AAPL").
-     */
-    public InvestmentData getStockData(String symbol) {
-        return stockDataMap.get(symbol);
+    public InvestmentData getDataFromSymbol(String symbol) {
+        return investmentMap.get(symbol);
     }
 
-    public Map<String, InvestmentData> getStockDataMap() {
-        return this.stockDataMap;
+    public Map<String, InvestmentData> getInvestmentMap() {
+        return this.investmentMap;
     }
 
-    public InvestmentData getCryptoData(String symbol) {
-        return cryptoDataMap.get(symbol);
-    }
-
-    public Map<String, InvestmentData> getCryptoDataMap() {
-        return this.cryptoDataMap;
-    }
-
-    public InvestmentData getBondData(String symbol) {
-        return stockDataMap.get(symbol);
-    }
-
-    /**
-     * Loads and parses the stock data JSON file into memory.
-     *
-     * @param filepath Path to the JSON file containing stock data
-     * @return A map of ticker symbols to their parsed StockData
-     */
-    public Map<String, InvestmentData> loadStockDataFromJson(String filepath) {
+    public Map<String, InvestmentData> loadInvestmentData(String filepath) {
         Map<String, InvestmentData> map = new HashMap<>();
 
         try {
             String content = new String(Files.readAllBytes(Paths.get(filepath)));
             JSONObject root = new JSONObject(content);
 
-            for (String ticker : root.keySet()) {
-                try {
-                    JSONObject stockObj = root.getJSONObject(ticker);
-                    String name = stockObj.getString("name");
+            for (String symbol : root.keySet()) {
+                JSONObject obj = root.getJSONObject(symbol);
 
-                    List<PriceEntry> recentPrices = parsePriceArray(stockObj.getJSONArray("recent_prices"), "date");
-                    List<PriceEntry> historicalPrices = parsePriceArray(stockObj.getJSONArray("historical_prices"), "date");
+                String name = obj.getString("name");
+                String type = obj.getString("type");
 
-                    List<PriceEntry> todayPrices = new ArrayList<>();
-                    if (stockObj.has("today_prices")) {
-                        todayPrices = parsePriceArray(stockObj.getJSONArray("today_prices"), "time");
-                    }
+                List<PriceEntry> todayPrices = parsePriceArray(obj.getJSONArray("today_prices"), "time");
+                List<PriceEntry> historicalPrices = parsePriceArray(obj.getJSONArray("historical_prices"), "date");
+                List<PriceEntry> recentPrices = parsePriceArray(obj.getJSONArray("recent_prices"), "date");
 
-                    InvestmentData data = new InvestmentData(name, recentPrices, historicalPrices, todayPrices);
-                    map.put(ticker, data);
-
-                } catch (Exception e) {
-                    System.err.println("❌ Failed to parse data for symbol: " + ticker);
-                    e.printStackTrace(); // Show the real reason
-                }
+                InvestmentData data = new InvestmentData(name, type, todayPrices, recentPrices, historicalPrices);
+                map.put(symbol, data);
             }
 
         } catch (IOException | JSONException e) {
-            System.err.println("❌ Error loading or parsing file: " + filepath);
             e.printStackTrace();
         }
 
         return map;
+    }
+
+    public void printInvestmentDataSummary() {
+        for (Map.Entry<String, InvestmentData> entry : investmentMap.entrySet()) {
+            String symbol = entry.getKey();
+            InvestmentData data = entry.getValue();
+
+            System.out.println("🔹 " + symbol + " (" + data.type + "):");
+            System.out.println("  Recent Prices: " + (data.recentPrices != null ? data.recentPrices.size() : 0));
+            System.out.println("  Historical Prices: " + (data.historicalPrices != null ? data.historicalPrices.size() : 0));
+            System.out.println("  Today Prices: " + (data.todayPrices != null ? data.todayPrices.size() : 0));
+            System.out.println();
+        }
     }
 
     /**
