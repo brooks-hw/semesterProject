@@ -72,7 +72,6 @@ public class MainFrame implements iScreenManager {
         addInvestmentPage.setOpaque(false);
         panelManager.add(addInvestmentPage, "Add Investment");
 
-
         mainFrame.add(panelManager);
         mainFrame.setContentPane(panelManager);
         mainFrame.setVisible(true);
