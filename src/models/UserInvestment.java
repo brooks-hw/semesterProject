@@ -1,5 +1,7 @@
 package models;
 
+// Class to hold information about investments in a user's portfolio
+// Separate from InvestmentData because user investments don't require historical data
 public class UserInvestment {
     public String symbol;
     public String type;

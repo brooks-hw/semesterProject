@@ -1,3 +1,11 @@
+/*
+ * Some portions of this file were generated with the assistance of ChatGPT.
+ * we used ChatGPT to help with refinement, debugging, and specific enhancements such as [e.g., background image, error handling].
+ * The original prompt used for assistance was: "Can you give me a simple panel in Java Swing that asks prompts the user to enter
+ * an amount they'd like to invest"
+ * we then modified and integrated the generated code to fit the needs of the overall project.
+ */
+
 package ui;
 
 import javax.swing.*;

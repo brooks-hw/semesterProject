@@ -2,6 +2,7 @@ package models;
 
 import java.util.List;
 
+// Used by stockAPIClient, holds various data regarding a specific stock, including historical prices
 public class InvestmentData {
     public String name;
     public String type;

@@ -1,3 +1,10 @@
+/*
+ * Some portions of this file were generated with the assistance of ChatGPT.
+ * we used ChatGPT to help with refinement, debugging, and specific enhancements such as [e.g., scrolling behavior, repaint logic, UI layout, etc.].
+ * The original prompt used for assistance was: "Can you help me write a Java Swing panel that scrolls stock ticker text horizontally?"
+ * we then modified and integrated the generated code to fit the needs of the overall project.
+ */
+
 package ui;
 
 import data.StockAPIClient;
@@ -9,42 +16,48 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+// TickerPanel is a custom JPanel that displays a scrolling ticker of stock prices.
 public class TickerPanel extends JPanel {
-    private ArrayList<String> symbols = new ArrayList<>();
-    private String text;
-    private StockAPIClient APIClient;
+    private ArrayList<String> symbols = new ArrayList<>(); // List of stock symbols to display
+    private String text; // The text string shown in the ticker
+    private StockAPIClient APIClient; // Client used to fetch stock price data
 
-    private int xPosition;
-    private final int scrollSpeed = 10; // Lower is faster
-    private Timer timer;
-    private Timer updateTimer;
+    private int xPosition; // X-coordinate for the scrolling text
+    private final int scrollSpeed = 10; // Timer delay; smaller = faster scroll
+    private Timer timer; // Controls the animation (scrolling)
+    private Timer updateTimer; // (Optional) Could be used to periodically refresh prices
 
+    // Constructor initializes the panel, loads data, and starts the animation
     public TickerPanel(StockAPIClient APIClient) {
         this.APIClient = APIClient;
-        initSymbols();
-        setText(APIClient);
+        initSymbols();           // Load stock symbols
+        setText(APIClient);      // Generate the text string to display
 
+        // UI settings for the ticker panel
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(800, 30));
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        xPosition = getWidth();
+        xPosition = getWidth();  // Start ticker text just off the right edge
+
+        // Timer to scroll the ticker text from right to left
         timer = new Timer(scrollSpeed, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                xPosition -= 2;
+                xPosition -= 2; // Move text left
 
-                // Reset xPosition *after* both instances have scrolled off
                 int textWidth = getFontMetrics(getFont()).stringWidth(text);
+                // If both text copies are fully off-screen, reset to start position
                 if (xPosition + textWidth * 2 < 0) {
                     xPosition = getWidth();
                 }
 
-                repaint();
+                repaint(); // Request the panel to repaint with updated position
             }
         });
-        timer.start();
+        timer.start(); // Start scrolling
     }
 
+    // Custom drawing logic for ticker text
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -52,16 +65,16 @@ public class TickerPanel extends JPanel {
         g.setFont(new Font("SansSerif", Font.BOLD, 16));
         int textWidth = g.getFontMetrics().stringWidth(text);
 
-        // Draw the main text
+        // Draw the primary text string
         g.drawString(text, xPosition, 20);
 
-        // If the text has moved far enough to the left, draw a second instance to the right
+        // If the first instance is mostly off-screen, draw another after it for seamless looping
         if (xPosition + textWidth < getWidth()) {
-            g.drawString(text, xPosition + textWidth + 50, 20); // +50 = spacing between repeats
+            g.drawString(text, xPosition + textWidth + 50, 20); // Add a gap between loops
         }
     }
 
-
+    // Hardcoded list of popular stock tickers
     public void initSymbols() {
         this.symbols.add("AAPL");
         this.symbols.add("MSFT");
@@ -74,46 +87,42 @@ public class TickerPanel extends JPanel {
         this.symbols.add("PEP");
     }
 
+    // Builds the ticker text string with stock prices and up/down indicators
     public void setText(StockAPIClient APIClient) {
-        this.text = "     ";
+        this.text = "     "; // Padding before first ticker entry
 
-        //Stop one before to avoid strange spacing
         for (int i = 0; i < symbols.size(); ++i) {
-            //First add the symbol and a space for the price
-            this.text += symbols.get(i);
-            this.text += " - ";
+            this.text += symbols.get(i) + " - ";
 
-            //Get the price of the current stock
+            // Get current price
             InvestmentData currentData = APIClient.getDataFromSymbol(symbols.get(i));
             double stockPrice = currentData.recentPrices.get(0).price;
 
+            // Append price to ticker
             this.text = this.text + stockPrice + "  ";
 
-            //Check if the stock has gone up or down since yesterday
+            // Append ^ or v depending on whether price went up or down
             boolean goneUp = hasGoneUp(APIClient, symbols.get(i));
-            if(goneUp) {
+            if (goneUp) {
                 this.text += " ^    ";
-            }
-            else {
+            } else {
                 this.text += " v    ";
             }
-
         }
 
-        xPosition = getWidth(); // Reset position on new text
+        xPosition = getWidth(); // Reset position when text is updated
     }
 
+    // Helper method to determine if a stock has increased in price since yesterday
     public boolean hasGoneUp(StockAPIClient APIClient, String symbol) {
         InvestmentData currentData = APIClient.getDataFromSymbol(symbol);
-        //Get today's and yesterday's prices
         double currentPrice = currentData.recentPrices.get(0).price;
         double prevPrice = currentData.recentPrices.get(1).price;
 
-        //Return true if price has gone up
-        if (currentPrice > prevPrice) return true;
-        else return false;
+        return currentPrice > prevPrice;
     }
 
+    // Stops the update timer (currently unused but useful if implemented later)
     public void stop() {
         if (updateTimer != null) {
             updateTimer.stop();

@@ -48,9 +48,9 @@
     "type": "Stock"
   },
   {
-    "buyPrice": 100,
-    "symbol": "US10Y",
-    "quantity": 2,
-    "type": "Bond"
+    "buyPrice": 636.85112,
+    "symbol": "TSLA",
+    "quantity": 1.0E7,
+    "type": "Stock"
   }
 ]
