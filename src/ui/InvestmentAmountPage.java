@@ -19,7 +19,7 @@ public class InvestmentAmountPage extends JPanel {
 
     public InvestmentAmountPage(iScreenManager screenManager) {
         this.screenManager = screenManager;
-        this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
+        this.backgroundImage = new ImageIcon(getClass().getResource("/images/image2.jpg")).getImage();
         setOpaque(false);
         setLayout(new BorderLayout());
 

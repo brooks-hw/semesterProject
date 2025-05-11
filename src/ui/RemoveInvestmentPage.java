@@ -26,7 +26,7 @@ public class RemoveInvestmentPage extends JPanel {
     // Constructor sets up the layout and components
     public RemoveInvestmentPage(iScreenManager screenManager) {
         this.screenManager = screenManager;
-        this.backgroundImage = new ImageIcon("images/image2.jpg").getImage(); // Load background image
+        this.backgroundImage = new ImageIcon(getClass().getResource("/images/image2.jpg")).getImage();
         setLayout(new BorderLayout());
         setOpaque(false);
 

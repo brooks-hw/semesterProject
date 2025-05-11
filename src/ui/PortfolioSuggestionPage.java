@@ -17,7 +17,7 @@ public class PortfolioSuggestionPage extends JPanel {
 
     public PortfolioSuggestionPage(double investmentAmount, iScreenManager screenManager) {
         this.screenManager = screenManager;
-        this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
+        this.backgroundImage = new ImageIcon(getClass().getResource("/images/image2.jpg")).getImage();
         setLayout(new BorderLayout());
         setOpaque(false);
 

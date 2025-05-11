@@ -11,7 +11,7 @@ public class FormCongratulations extends JPanel {
 
     public FormCongratulations(iScreenManager screenManager) {
         this.screenManager = screenManager;
-        this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
+        this.backgroundImage = new ImageIcon(getClass().getResource("/images/image2.jpg")).getImage();
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setOpaque(false);

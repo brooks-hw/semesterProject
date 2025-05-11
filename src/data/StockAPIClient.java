@@ -6,9 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +26,12 @@ public class StockAPIClient {
 
     //Constructor automatically loads stock data from the default file path.
     public StockAPIClient() {
-        this.investmentMap = loadInvestmentData("data/investment_data.json");
-        //printInvestmentDataSummary();
+        try (InputStream is = getClass().getResourceAsStream("/historicalData/investment_data.json")) {
+            this.investmentMap = loadInvestmentData(is);
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.investmentMap = new HashMap<>();
+        }
     }
 
     public InvestmentData getDataFromSymbol(String symbol) {
@@ -38,11 +42,14 @@ public class StockAPIClient {
         return this.investmentMap;
     }
 
-    public Map<String, InvestmentData> loadInvestmentData(String filepath) {
+    public Map<String, InvestmentData> loadInvestmentData(InputStream input) {
         Map<String, InvestmentData> map = new HashMap<>();
 
         try {
-            String content = new String(Files.readAllBytes(Paths.get(filepath)));
+            String content = new BufferedReader(new InputStreamReader(input))
+                    .lines()
+                    .reduce("", (a, b) -> a + b);
+
             JSONObject root = new JSONObject(content);
 
             for (String symbol : root.keySet()) {
@@ -59,7 +66,7 @@ public class StockAPIClient {
                 map.put(symbol, data);
             }
 
-        } catch (IOException | JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -67,7 +74,6 @@ public class StockAPIClient {
     }
 
     //for debugging
-    //TODO: remove or don't call
     public void printInvestmentDataSummary() {
         for (Map.Entry<String, InvestmentData> entry : investmentMap.entrySet()) {
             String symbol = entry.getKey();

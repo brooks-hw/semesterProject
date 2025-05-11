@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,22 +54,28 @@ public class PortfolioManager {
             jsonArray.put(obj);
         }
 
-        String filename = "portfolios/" + user.getUsername() + "_portfolio.json";
-        try (FileWriter writer = new FileWriter(filename)) {
-            writer.write(jsonArray.toString(2));
+        try {
+            // Build path: data/portfolios/username_portfolio.json
+            Path dir = Paths.get("data", "portfolios");
+            Files.createDirectories(dir); // make sure the directory exists
+            Path filePath = dir.resolve(user.getUsername() + "_portfolio.json");
+
+            try (FileWriter writer = new FileWriter(filePath.toFile())) {
+                writer.write(jsonArray.toString(2));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static List<UserInvestment> loadFromFile(String username) {
-        String filename = "portfolios/" + username + "_portfolio.json";
-        File file = new File(filename);
+        Path filePath = Paths.get("data", "portfolios", username + "_portfolio.json");
+        File file = filePath.toFile();
         List<UserInvestment> portfolio = new ArrayList<>();
 
         if (!file.exists()) return portfolio;
 
-        try (FileReader reader = new FileReader(filename)) {
+        try (FileReader reader = new FileReader(file)) {
             JSONArray array = new JSONArray(new JSONTokener(reader));
             for (int i = 0; i < array.length(); i++) {
                 JSONObject obj = array.getJSONObject(i);

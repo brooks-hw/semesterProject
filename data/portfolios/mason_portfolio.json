@@ -1,0 +1,62 @@
+[
+  {
+    "buyPrice": 720,
+    "symbol": "TSLA",
+    "quantity": 9.722083333333334,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 3300,
+    "symbol": "AMZN",
+    "quantity": 2.1211818181818183,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 250,
+    "symbol": "META",
+    "quantity": 27.9996,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 290,
+    "symbol": "NVDA",
+    "quantity": 24.137586206896554,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 430,
+    "symbol": "NFLX",
+    "quantity": 16.278837209302328,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 2700,
+    "symbol": "GOOGL",
+    "quantity": 2.5925555555555557,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 94314,
+    "symbol": "BTC",
+    "quantity": 0.07421909790699155,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 1795,
+    "symbol": "ETH",
+    "quantity": 3.89966573816156,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 0.17,
+    "symbol": "DOGE",
+    "quantity": 1175.8823529411748,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 99.25,
+    "symbol": "US30Y",
+    "quantity": 70.527959697733,
+    "type": "Bond"
+  }
+]

@@ -17,7 +17,7 @@ public class ResultsPage extends JPanel {
         User user = User.getInstance(); // Get the singleton User
         String riskProfile = user.getRiskProfile(); // Fetch risk profile
         int totalScore = user.getTotalScore();      // Fetch total score
-        this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
+        this.backgroundImage = new ImageIcon(getClass().getResource("/images/image2.jpg")).getImage();
         setOpaque(false);
         setLayout(new BorderLayout());
 

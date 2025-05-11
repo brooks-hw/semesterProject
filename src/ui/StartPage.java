@@ -12,7 +12,7 @@ public class StartPage extends JPanel {
     StartPage(iScreenManager screenManager) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(150, 0, 0, 0));
-        this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
+        this.backgroundImage = new ImageIcon(getClass().getResource("/images/image2.jpg")).getImage();
         this.screenManager = screenManager;
 
         JPanel leftAlignPanel = createLeftAlignPanel();

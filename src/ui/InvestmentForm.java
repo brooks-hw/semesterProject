@@ -6,10 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -59,7 +59,7 @@ public class InvestmentForm extends JPanel {
         this.totalQuestions = questions.size();
         this.answers = Arrays.asList(new Integer[totalQuestions]);
         this.screenManager = screenManager;
-        this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
+        this.backgroundImage = new ImageIcon(getClass().getResource("/images/image2.jpg")).getImage();
 
         setLayout(new BorderLayout());
         setOpaque(false);
@@ -219,29 +219,22 @@ public class InvestmentForm extends JPanel {
     }
 
     public static void writeData(String filename, int score, String risk) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(filename + ".csv"));
-        StringBuilder input = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
+        Path filePath = Paths.get("data", filename + ".csv");
+
+        List<String> lines = Files.readAllLines(filePath);
+        StringBuilder output = new StringBuilder();
+
+        for (String line : lines) {
             String[] parts = line.split(",");
             User user = User.getInstance();
             if (parts.length >= 3) {
-                if(Objects.equals(user.getUsername(), parts[0]))
-                {
-                    line = parts[0] + "," + parts[1] + "," + parts[2] + "," + score + "," + risk + "\n";
-                    input.append(line);
-                }
-                else
-                {
-                    line = line + "\n";
-                    input.append(line);
+                if (Objects.equals(user.getUsername(), parts[0])) {
+                    line = parts[0] + "," + parts[1] + "," + parts[2] + "," + score + "," + risk;
                 }
             }
+            output.append(line).append("\n");
         }
-        reader.close();
 
-        FileOutputStream writer = new FileOutputStream(filename + ".csv");
-        writer.write(input.toString().getBytes());
-        writer.close();
+        Files.write(filePath, output.toString().getBytes());
     }
 }

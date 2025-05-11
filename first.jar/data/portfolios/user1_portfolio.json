@@ -1,0 +1,56 @@
+[
+  {
+    "buyPrice": 8.998623166716552E-4,
+    "symbol": "PEPE",
+    "quantity": 10023,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 0.17,
+    "symbol": "DOGE",
+    "quantity": 500,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 0.0042,
+    "symbol": "LUNR",
+    "quantity": 1000,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 0.02,
+    "symbol": "X",
+    "quantity": 1000,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 5.5,
+    "symbol": "VIBE",
+    "quantity": 100,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 1795,
+    "symbol": "ETH",
+    "quantity": 0.5,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 94314,
+    "symbol": "BTC",
+    "quantity": 0.01,
+    "type": "Crypto"
+  },
+  {
+    "buyPrice": 290,
+    "symbol": "NVDA",
+    "quantity": 2,
+    "type": "Stock"
+  },
+  {
+    "buyPrice": 636.85112,
+    "symbol": "TSLA",
+    "quantity": 9900000,
+    "type": "Stock"
+  }
+]

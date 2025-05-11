@@ -31,7 +31,7 @@ public class AddInvestmentPage extends JPanel {
     public AddInvestmentPage(iScreenManager screenManager) {
         this.screenManager = screenManager;
         this.apiClient = new StockAPIClient();
-        this.backgroundImage = new ImageIcon("images/image2.jpg").getImage();
+        this.backgroundImage = new ImageIcon(getClass().getResource("/images/image2.jpg")).getImage();
 
         setLayout(new BorderLayout());
         setOpaque(false);

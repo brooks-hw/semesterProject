@@ -9,12 +9,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class LoginPage extends JPanel{
     private CardLayout cardLayout;
@@ -176,8 +177,7 @@ public class LoginPage extends JPanel{
                             int score = scores.get(i);
                             String risk1 = risk.get(i);
                             User newUser = User.getInstance(name, user, pass);
-
-                            // ✅ Load portfolio from file
+                            // Load portfolio from file
                             List<UserInvestment> savedInvestments = PortfolioManager.loadFromFile(user); // JSON or CSV
                             //Check if user has a portfolio already
                             if (savedInvestments != null) {
@@ -193,7 +193,7 @@ public class LoginPage extends JPanel{
 
                             //Only prompt questionnaire if user hasn't done it yet
                             errorLabel.setVisible(false);
-                            if(score == -1 && Objects.equals(risk1, "\0")) {
+                            if(score == -1) {
                                 screenManager.switchTo("Investment Form");
                                 //cardLayout.show(loginPanel, "prompt");
                             }
@@ -498,31 +498,47 @@ public class LoginPage extends JPanel{
     }
 
     public static void saveData(String filename, String user, String pass, String name) throws IOException {
-        FileWriter writer = new FileWriter(filename + ".csv", true);
-        int quesStat = -1;
-        String risk = "\0";
-        writer.write(user + "," + pass + "," + name + "," + quesStat + "," + risk + "\n");
-        writer.close();
+        Path filePath = Paths.get("data", filename + ".csv");
+
+        // Ensure parent directory exists
+        Files.createDirectories(filePath.getParent());
+
+        try (FileWriter writer = new FileWriter(filePath.toFile(), true)) {
+            int quesStat = -1;
+            String risk = ""; // don't use \0, it can mess with CSVs
+            writer.write(user + "," + pass + "," + name + "," + quesStat + "," + risk + "\n");
+        }
     }
 
-    public static void getData(String filename, ArrayList<String> user, ArrayList<String> pass, ArrayList<String> name, ArrayList<Integer> score, ArrayList<String> risk) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(filename + ".csv"));
-        String line;
-        user.clear();
-        pass.clear();
-        name.clear();
-        score.clear();
-        risk.clear();
-        while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(",");
-            if (parts.length >= 5) {
-                user.add(parts[0]);
-                pass.add(parts[1]);
-                name.add(parts[2]);
-                score.add(Integer.parseInt(parts[3]));
-                risk.add(parts[4]);
+    public static void getData(String filename, ArrayList<String> user, ArrayList<String> pass,
+                               ArrayList<String> name, ArrayList<Integer> score, ArrayList<String> risk) throws IOException {
+        Path filePath = Paths.get("data", filename + ".csv");
+
+        try (BufferedReader reader = Files.newBufferedReader(filePath)) {
+            user.clear();
+            pass.clear();
+            name.clear();
+            score.clear();
+            risk.clear();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 5) {
+                    user.add(parts[0]);
+                    pass.add(parts[1]);
+                    name.add(parts[2]);
+                    score.add(Integer.parseInt(parts[3]));
+                    risk.add(parts[4]);
+                }
+                else if (parts.length >= 4) {
+                    user.add(parts[0]);
+                    pass.add(parts[1]);
+                    name.add(parts[2]);
+                    score.add(Integer.parseInt(parts[3]));
+                    risk.add("");
+                }
             }
         }
-        reader.close();
     }
 }
