@@ -5,6 +5,8 @@ import data.StockAPIClient;
 import java.util.ArrayList;
 import java.util.List;
 
+//used ChatGPT to partially develop singleton getInstance(), logOutInstance()
+
 public class User {
     private static User instance; // Singleton instance
 
@@ -29,6 +31,8 @@ public class User {
         this.riskProfile = "";
     }
 
+    // getters and setters
+
     // Public method to get the instance
     public static User getInstance(String name, String username, String password) {
         if (instance == null) {
@@ -45,8 +49,13 @@ public class User {
         return instance;
     }
 
+    //empties instance
     public static void logOutInstance() {
         instance = null;
+    }
+
+    public List<UserInvestment> getPortfolio() {
+        return portfolio;
     }
 
     public void addInvestment(UserInvestment investment) {
@@ -60,7 +69,6 @@ public class User {
                 return;
             }
         }
-
         // If not found, add as new investment
         portfolio.add(investment);
     }
@@ -79,15 +87,9 @@ public class User {
         return false;
     }
 
-    public List<UserInvestment> getPortfolio() {
-        return portfolio;
-    }
-
     public void setPortfolio(List<UserInvestment> portfolio) {
         this.portfolio = new ArrayList<>(portfolio);
     }
-
-    // getters and setters
 
     public String getName() {
         return this.name;
@@ -149,6 +151,5 @@ public class User {
     public boolean getUsingTemplate() {
         return this.usingTemplate;
     }
-
 
 }

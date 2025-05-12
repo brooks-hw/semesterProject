@@ -1,5 +1,10 @@
 package ui;
 
+/*
+ChatGPT assistance in developing UI
+helped with formatting spaces and button positioning
+ */
+
 import javax.swing.*;
 import java.awt.*;
 

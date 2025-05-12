@@ -1,5 +1,11 @@
 package ui;
 
+/*
+ChatGPT assistance in developing UI
+helped with formatting spaces and overall layout of buttons and labels
+helped with HTML format in descriptionLabel
+ */
+
 import org.jfree.chart.ChartPanel;
 import models.*;
 
@@ -21,13 +27,11 @@ public class ResultsPage extends JPanel {
         setOpaque(false);
         setLayout(new BorderLayout());
 
-        // Main vertical container
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setOpaque(false);
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 40, 5, 40)); // Minimal top-bottom padding
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 40, 5, 40));
 
-        // Title
         JLabel titleLabel = new JLabel("Your Results:");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
         titleLabel.setForeground(Color.WHITE);
@@ -36,7 +40,7 @@ public class ResultsPage extends JPanel {
 
         mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Small gap
 
-        // "You are a balanced investor" line
+        //"You are a _____ investor" line
         JPanel resultTextPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
         resultTextPanel.setOpaque(false);
 
@@ -52,7 +56,7 @@ public class ResultsPage extends JPanel {
         resultTextPanel.add(balancedInvestor);
         mainPanel.add(resultTextPanel);
 
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Small gap
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 
         String descriptionText = "";
         switch (riskProfile) {
@@ -71,7 +75,7 @@ public class ResultsPage extends JPanel {
             default:
                 descriptionText = "Investor profile not identified.";
         }
-        // Description text
+
         JLabel descriptionLabel = new JLabel(
                 "<html><div style='text-align: center;'>" + descriptionText + "</div></html>"
         );
@@ -83,7 +87,7 @@ public class ResultsPage extends JPanel {
 
         mainPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Moderate gap
 
-        // Pie Chart
+        //Pie Chart
         PieChartGenerator chartGenerator = new PieChartGenerator();
         ChartPanel pieChartPanel = (ChartPanel) chartGenerator.createPieChart("");
         pieChartPanel.setOpaque(false);
@@ -96,15 +100,14 @@ public class ResultsPage extends JPanel {
 
         mainPanel.add(pieChartContainer);
 
-        // Center the mainPanel
         add(mainPanel, BorderLayout.CENTER);
 
-        // Bottom button panel (transparent background)
+        //Bottom button panel
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.setPreferredSize(new Dimension(0, 60));
         buttonPanel.setOpaque(false); // Transparent background
 
-        // Logout button (left)
+        //Logout button
         JButton logoutButton = new JButton("Logout");
         logoutButton.setFont(new Font("Arial", Font.BOLD, 18));
         logoutButton.setBackground(Color.RED);
@@ -113,7 +116,7 @@ public class ResultsPage extends JPanel {
         logoutButton.setPreferredSize(new Dimension(150, 40));
         buttonPanel.add(logoutButton, BorderLayout.WEST);
 
-        // Homepage button (right)
+        //Homepage button
         JButton homepageButton = new JButton("Homepage");
         homepageButton.setFont(new Font("Arial", Font.BOLD, 18));
         homepageButton.setBackground(new Color(255, 140, 0));
@@ -122,10 +125,9 @@ public class ResultsPage extends JPanel {
         homepageButton.setPreferredSize(new Dimension(150, 40));
         buttonPanel.add(homepageButton, BorderLayout.EAST);
 
-        // Center panel with "Retake Questionnaire" and "Import Results"
         JPanel centerButtonPanel = new JPanel();
         centerButtonPanel.setOpaque(false);
-        centerButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10)); // 30px gap between buttons
+        centerButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10));
 
         JButton retakeButton = new JButton("Retake Questionnaire");
         retakeButton.setFont(new Font("Arial", Font.BOLD, 16));
@@ -145,10 +147,10 @@ public class ResultsPage extends JPanel {
 
         buttonPanel.add(centerButtonPanel, BorderLayout.CENTER);
 
-        // Add button panel to bottom
+        //Add button panel to bottom
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Action Listeners
+        //Action Listeners
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -178,8 +180,6 @@ public class ResultsPage extends JPanel {
                 screenManager.switchTo("Investment Amount Page");
             }
         });
-
-        // Import button currently unfunctional (can add listeners later)
     }
 
     @Override

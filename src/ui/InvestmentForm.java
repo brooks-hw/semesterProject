@@ -1,5 +1,17 @@
 package ui;
 
+/*
+used ChatGPT to generate 50+ unique investment questions
+cherry picked 10 of them and fine-tuned them for the scope of the project
+used ChatGPT to assist with UI and invisible spacers
+used ChatGPT to develop constructor, createQuestionCard(), nextQuestion(), recordAnswer(), resetForm()
+constructor sets up UI layout and cardLayout
+createQuestionCard() creates a panel with a question
+nextQuestion() updates UI and calculates risk profile
+recordAnswer() adds up points depending in risk assessment
+resetForm() clears all answers and scores
+*/
+
 import models.User;
 
 import javax.swing.*;
@@ -64,7 +76,6 @@ public class InvestmentForm extends JPanel {
         setLayout(new BorderLayout());
         setOpaque(false);
 
-        // Small Header (Top Left Corner)
         smallHeader = new JLabel(getHeaderText(), SwingConstants.LEFT);
         smallHeader.setFont(new Font("Arial", Font.PLAIN, 18));
         smallHeader.setForeground(Color.GRAY);
@@ -74,20 +85,20 @@ public class InvestmentForm extends JPanel {
         headerPanel.add(smallHeader);
         add(headerPanel, BorderLayout.NORTH);
 
-        // Question Panel (CardLayout for switching questions)
+        //Question Panel
         cardLayout = new CardLayout();
         questionPanel = new JPanel(cardLayout);
         questionPanel.setOpaque(false);
 
-        // Create question cards
+        //Create question cards
         for (int i = 0; i < totalQuestions; i++) {
             questionPanel.add(createQuestionCard(i), "Q" + i);
         }
 
-        // Add final card (congratulations page)
+        //Add final card (congratulations page)
         questionPanel.add(new FormCongratulations(screenManager), "Q" + totalQuestions);
 
-        // Show first question by default
+        //Show first question by default
         cardLayout.show(questionPanel, "Q0");
         smallHeader.setText(getHeaderText());
 
@@ -103,7 +114,7 @@ public class InvestmentForm extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setOpaque(false);
 
-        // Question Label
+        //Question Label
         JLabel questionLabel = new JLabel(questions.get(questionIndex), SwingConstants.CENTER);
         questionLabel.setFont(new Font("Arial", Font.BOLD, 30));
         questionLabel.setForeground(Color.WHITE);
@@ -116,7 +127,7 @@ public class InvestmentForm extends JPanel {
         panel.add(labelPanel);
         panel.add(Box.createVerticalStrut(50));
 
-        // Options Buttons
+        //Options Buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setOpaque(false);
@@ -204,6 +215,7 @@ public class InvestmentForm extends JPanel {
         }
     }
 
+    //whenever page reloaded, reset form
     @Override
     public void setVisible(boolean aFlag) {
         super.setVisible(aFlag);
@@ -234,7 +246,6 @@ public class InvestmentForm extends JPanel {
             }
             output.append(line).append("\n");
         }
-
         Files.write(filePath, output.toString().getBytes());
     }
 }

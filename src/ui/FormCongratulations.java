@@ -1,5 +1,8 @@
 package ui;
 
+//used ChatGPT assistance to format UI and text optimally within constructor
+//creates labels and button panels
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +12,7 @@ public class FormCongratulations extends JPanel {
     private iScreenManager screenManager;
     private Image backgroundImage;
 
+    //constructor
     public FormCongratulations(iScreenManager screenManager) {
         this.screenManager = screenManager;
         this.backgroundImage = new ImageIcon(getClass().getResource("/images/image2.jpg")).getImage();
@@ -33,7 +37,6 @@ public class FormCongratulations extends JPanel {
         add(labelPanel);
         add(Box.createVerticalGlue());
 
-        //button options
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setOpaque(false);
@@ -74,7 +77,6 @@ public class FormCongratulations extends JPanel {
         buttonPanel.add(Box.createHorizontalStrut(150));
         buttonPanel.add(home);
         buttonPanel.add(Box.createVerticalStrut(300));
-
 
         add(buttonPanel);
     }

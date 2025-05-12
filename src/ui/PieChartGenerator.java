@@ -1,5 +1,11 @@
 package ui;
 
+/*
+used ChatGPT assistance to develop pieChart specifications
+ChatGPT assistance in developing riskProfile cases
+ChatGPT recommended data variation
+ */
+
 import models.User;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
