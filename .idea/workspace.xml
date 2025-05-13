@@ -10,13 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53047e9c-b38a-4944-a451-16c0a27346eb" name="Changes" comment="added scoring system to form">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/FormCongratulations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/FormCongratulations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/InvestmentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InvestmentForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/PieChartGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/PieChartGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ResultsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ResultsPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/StartPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/StartPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/portfolios/user1_portfolio.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/portfolios/user1_portfolio.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/HomePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +43,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -162,8 +158,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.153" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.153" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
       </set>
     </attachedChunks>
   </component>

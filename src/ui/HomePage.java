@@ -1,8 +1,21 @@
 /*
- * Some portions of this file were generated with the assistance of ChatGPT.
- * we used ChatGPT to help with refinement, debugging, and specific enhancements such as [e.g., repainting, user authentication, and graph display].
- * The original prompt used for assistance was complex for this one and tweaked significantly to add specific features
- * We modified and integrated the generated code to fit the needs of the overall project.
+ * This file was developed with help from ChatGPT.
+ * ChatGPT assistance was used for:
+ * - Designing the homepage layout (split chart/table with BorderLayout)
+ * - Creating modular UI components (like createChartPanel and createRightPanel)
+ * - Implementing logout, add/remove buttons, and time filter functionality
+ * - Setting up the JFreeChart time series chart for 1D, 1W, 1M, 1Y
+ * - Building the investment table and formatting values
+ * - Dynamically populating the table based on user.getPortfolio()
+ * - Styling UI components (colors, layout spacing, button fonts)
+ * - Fixing CardLayout switching issues and explaining how iScreenManager works
+ * - Troubleshooting background image setup and commit process in IntelliJ
+ * Prompts used included:
+ * - "How do I split the homepage into chart and table using JSplitPane?"
+ * - "Make the chart show only on the bottom third and keep the welcome label at the top"
+ * - "Add a logout button that switches to the login screen"
+ * - "How can I make the background image show behind the chart and table?"
+* We modified and integrated the generated code to fit the needs of the overall project.
  */
 
 package ui;
